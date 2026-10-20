@@ -32,10 +32,23 @@ for(let x of [-3.5,3.5])for(let z of [-3.5,3.5]){const foot=new THREE.Mesh(new T
 const ledMat=new THREE.MeshStandardMaterial({color:0xc7f9a7,emissive:0x94d868,emissiveIntensity:1.2});block(.7,.045,.035,ledMat,0,.97,4.79,.01);
 // Fine tone-on-tone signature on the front edge.
 function canvasTex(c){const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t;}
-function label(text,w,h,size=52){const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle='#9da89d';ctx.font=`500 ${size}px Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,w/2,h/2);const mat=new THREE.MeshBasicMaterial({map:canvasTex(c),transparent:true,depthWrite:false});return mat;}
+const brandTokens=getComputedStyle(document.documentElement);
+function token(name,fallback){return brandTokens.getPropertyValue(name).trim()||fallback}
+function label(text,w,h,size=52){const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle=token('--mint','#8bebcf');ctx.font=`500 ${size}px Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,w/2,h/2);const mat=new THREE.MeshBasicMaterial({map:canvasTex(c),transparent:true,depthWrite:false});return mat;}
 const frontLogo=new THREE.Mesh(new THREE.PlaneGeometry(1.25,.25),label('Box AI',512,100,66));frontLogo.position.set(-2.7,1.16,4.805);model.add(frontLogo);
 const portLabels=new THREE.Mesh(new THREE.PlaneGeometry(7.5,.27),label('12V       OPTICAL       HDMI        LAN          AV',1500,70,37));portLabels.rotation.y=Math.PI;portLabels.position.set(-.4,1.75,-4.82);model.add(portLabels);
-const bottomLabel=new THREE.Mesh(new THREE.PlaneGeometry(3.6,2),label('BoxAI / CONDLINK',800,400,70));bottomLabel.rotation.x=Math.PI/2;bottomLabel.position.y=.12;model.add(bottomLabel);
+// Underside signature: product name in --paper, maker note in --mint, drawn at device resolution.
+function signature(){const plateWidth=200,plateHeight=30,gap=5,dpr=Math.min(devicePixelRatio||1,3);
+ const c=document.createElement('canvas');c.width=Math.round(plateWidth*dpr);c.height=Math.round(plateHeight*dpr);
+ const ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.textBaseline='middle';ctx.textAlign='left';
+ const nameFont='600 14px Arial',makerFont='400 12px Arial';
+ ctx.font=nameFont;const nameWidth=ctx.measureText('Box AI').width;
+ ctx.font=makerFont;const makerWidth=ctx.measureText('\u00b7 por Condlink').width;
+ let x=(plateWidth-(nameWidth+gap+makerWidth))/2;
+ ctx.font=nameFont;ctx.fillStyle=token('--paper','#f3f5ef');ctx.fillText('Box AI',x,plateHeight/2);
+ ctx.font=makerFont;ctx.fillStyle=token('--mint','#8bebcf');ctx.fillText('\u00b7 por Condlink',x+nameWidth+gap,plateHeight/2);
+ return new THREE.MeshBasicMaterial({map:canvasTex(c),transparent:true,depthWrite:false});}
+const bottomLabel=new THREE.Mesh(new THREE.PlaneGeometry(4.6,.69),signature());bottomLabel.rotation.x=Math.PI/2;bottomLabel.position.y=.12;model.add(bottomLabel);
 const floorMat=new THREE.ShadowMaterial({opacity:.27});const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),floorMat);floor.rotation.x=-Math.PI/2;floor.position.y=-.06;floor.receiveShadow=true;scene.add(floor);
 const textureCanvas=document.createElement('canvas');textureCanvas.width=textureCanvas.height=2048;const ctx=textureCanvas.getContext('2d');ctx.fillStyle='#22564e';ctx.fillRect(0,0,2048,2048);ctx.strokeStyle='#8ac4a1';ctx.lineWidth=2;ctx.globalAlpha=.22;for(let i=0;i<23;i++){ctx.beginPath();ctx.ellipse(1920,100,740+i*27,1000+i*25,-.55,0,Math.PI*2);ctx.stroke();}ctx.globalAlpha=.1;for(let i=0;i<12;i++){ctx.beginPath();ctx.ellipse(-150,2130,500+i*35,700+i*38,.5,0,Math.PI*2);ctx.stroke();}ctx.globalAlpha=1;ctx.save();ctx.translate(420,810);ctx.strokeStyle='#eff5e8';ctx.lineWidth=24;ctx.lineCap='round';ctx.beginPath();ctx.roundRect(0,0,235,160,40);ctx.stroke();ctx.beginPath();ctx.moveTo(80,200);ctx.lineTo(155,200);ctx.stroke();ctx.fillStyle='#8bebcf';ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(170,100,40,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(170,100,23,0,Math.PI*2);ctx.fill();ctx.fillStyle='#eff5e8';ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='bold 246px Arial';ctx.fillText('Box AI',320,80);const brandWidth=ctx.measureText('Box AI').width;ctx.fillStyle='#8bebcf';ctx.beginPath();ctx.arc(320+brandWidth+30,155,16,0,Math.PI*2);ctx.fill();ctx.fillStyle='#c6ded0';ctx.font='80px Arial';ctx.fillText('por Condlink',330,260);ctx.restore();top.map=canvasTex(textureCanvas);top.needsUpdate=true;side.color.set('#22564e');
 const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.065;controls.target.set(0,1.2,0);controls.enableZoom=false;controls.enablePan=false;controls.minPolarAngle=.3;controls.maxPolarAngle=Math.PI*.7;controls.autoRotateSpeed=.55;controls.update();camera.position.set(14.5,15.2,20);controls.update();
@@ -45,4 +58,12 @@ function syncAutoRotation(){controls.autoRotate=phoneView.matches&&!reducedMotio
 phoneView.addEventListener('change',()=>{manuallyPaused=false;syncAutoRotation()});reducedMotion.addEventListener('change',syncAutoRotation);syncAutoRotation();
 const rotate=document.querySelector('#rotate');rotate?.addEventListener('click',()=>{controls.autoRotate=!controls.autoRotate;rotate?.setAttribute('aria-pressed',String(controls.autoRotate));});controls.addEventListener('start',()=>{manuallyPaused=true;controls.autoRotate=false;rotate?.setAttribute('aria-pressed','false')});
 canvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const off=camera.position.clone().sub(controls.target);const sph=new THREE.Spherical().setFromVector3(off);if(e.key==='ArrowLeft')sph.theta-=.15;if(e.key==='ArrowRight')sph.theta+=.15;if(e.key==='ArrowUp')sph.phi=Math.max(.3,sph.phi-.12);if(e.key==='ArrowDown')sph.phi=Math.min(Math.PI*.7,sph.phi+.12);camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(sph));controls.update()});
-function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(canvas);resize();document.querySelector('#loading').remove();let visible=true;new IntersectionObserver(entries=>{visible=entries[0].isIntersecting}).observe(stage);let lastFrame=0;function animate(time=0){requestAnimationFrame(animate);const delta=lastFrame?Math.min((time-lastFrame)/1000,.05):0;lastFrame=time;if(!visible)return;controls.update(delta);renderer.render(scene,camera)}animate();document.body.dataset.ready='true';
+// Nothing in the scene moves, so the shadow map is rendered once instead of on every frame.
+renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;
+// Draw only when the camera actually moves, so an idle Box costs nothing.
+let needsRender=true,visible=true,lastFrame=0;
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();needsRender=true}
+new ResizeObserver(resize).observe(canvas);resize();document.querySelector('#loading').remove();
+new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)needsRender=true}).observe(stage);
+function animate(time=0){requestAnimationFrame(animate);const delta=lastFrame?Math.min((time-lastFrame)/1000,.05):0;lastFrame=time;if(!visible)return;if(controls.update(delta)||needsRender){needsRender=false;renderer.render(scene,camera)}}
+animate();document.body.dataset.ready='true';
