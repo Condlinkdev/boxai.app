@@ -30,8 +30,16 @@ function openEnvironmentTab(segment){
  return true;
 }
 
+// "Preços" aponta hoje para a pergunta de valores do FAQ, que precisa chegar aberta.
+// Quando o id="precos" passar para uma seção de módulos e preços, este trecho segue valendo.
+function openPriceDetails(){
+ const target=document.getElementById('precos');
+ if(target&&target.tagName==='DETAILS')target.open=true;
+}
+
 // Align in-page navigation with the actual section content, not its outer padding.
 function scrollToSection(hash,behavior='smooth'){
+ if(hash==='#precos')openPriceDetails();
  const section=document.getElementById(hash.slice(1));
  if(!section)return;
  const target=section.querySelector('.section-heading')||section;
@@ -49,7 +57,14 @@ document.addEventListener('click',event=>{
 });
 window.addEventListener('popstate',()=>scrollToSection(location.hash||'#inicio','instant'));
 window.addEventListener('hashchange',()=>scrollToSection(location.hash||'#inicio','instant'));
-window.addEventListener('load',()=>{if(location.hash)scrollToSection(location.hash,'instant')});
+// Ao abrir o endereço com um hash o navegador começa a própria rolagem suave até o alvo.
+// Cancelamos esse movimento e miramos a seção, senão a chegada em #precos para fora da pergunta.
+window.addEventListener('load',()=>{
+ if(!location.hash)return;
+ window.scrollTo({top:window.scrollY,behavior:'instant'});
+ scrollToSection(location.hash,'instant');
+ requestAnimationFrame(()=>scrollToSection(location.hash,'instant'));
+});
 
 // On phones, offer the next step immediately after the Box, before the six TVs.
 const compactHero=matchMedia('(max-width: 760px)');
@@ -61,3 +76,37 @@ function positionHeroAction(){
 }
 compactHero.addEventListener('change',positionHeroAction);
 positionHeroAction();
+
+// Menu do cabeçalho: a 1440 px os itens ficam em linha; no celular abrem em painel sob o cabeçalho.
+const menuToggle=document.querySelector('[data-menu-toggle]');
+const siteMenu=document.querySelector('#site-menu');
+const wideHeader=matchMedia('(min-width: 761px)');
+const menuIsOpen=()=>menuToggle?.getAttribute('aria-expanded')==='true';
+function setMenu(open){
+ if(!menuToggle)return;
+ menuToggle.setAttribute('aria-expanded',String(open));
+ menuToggle.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+ document.body.classList.toggle('menu-open',open);
+}
+menuToggle?.addEventListener('click',()=>{
+ const open=!menuIsOpen();
+ setMenu(open);
+ if(open)siteMenu?.querySelector('a[href]')?.focus();
+});
+// Ao escolher um item o painel fecha e o foco volta para o botão, sem sair do cabeçalho.
+siteMenu?.addEventListener('click',event=>{
+ if(!menuIsOpen()||!event.target.closest('a[href]'))return;
+ setMenu(false);
+ menuToggle?.focus({preventScroll:true});
+});
+document.addEventListener('keydown',event=>{
+ if(event.key!=='Escape'||!menuIsOpen())return;
+ setMenu(false);
+ menuToggle?.focus({preventScroll:true});
+});
+document.addEventListener('pointerdown',event=>{
+ if(!menuIsOpen()||event.target.closest('#site-menu, [data-menu-toggle]'))return;
+ setMenu(false);
+});
+wideHeader.addEventListener('change',()=>{if(wideHeader.matches)setMenu(false)});
+setMenu(false);
