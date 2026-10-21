@@ -456,10 +456,26 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 /* Cada foto fica na proporção do próprio arquivo, declarada em width/height no
    HTML, para caber inteira no cartão e não mexer na altura enquanto carrega. */
 .pilot-photo img,.pilot-photo-extra img{display:block;width:100%;height:auto}
-.pilot-photo figcaption{position:absolute;left:10px;bottom:10px;padding:5px 11px;border-radius:20px;background:#0c252ed9;color:var(--paper);font-size:12px;letter-spacing:.3px}
-/* Segunda foto do mesmo piloto: menor, embaixo da principal. */
-.pilot-photo-extra{width:58%;margin:12px 0 0 12px}
+.pilot-photo figcaption,.pilot-video figcaption,.pilot-photo-extra figcaption{position:absolute;left:10px;bottom:10px;padding:5px 11px;border-radius:20px;background:#0c252ed9;color:var(--paper);font-size:12px;letter-spacing:.3px}
+/* Vídeo do piloto: entra no lugar da foto principal, em pé, sobre o fundo
+   escuro do cartão. A altura tem teto para o cartão em pé não desalinhar a
+   grade, e o vídeo aparece inteiro, com faixa escura dos lados quando sobra
+   largura. Os botões de pausar e de som ficam sobre ele, do lado oposto ao
+   crédito. */
+.pilot-video{position:relative;margin:0}
+.pilot-video video{display:block;width:100%;aspect-ratio:9/16;max-height:480px;object-fit:contain;background:var(--ink)}
+.pilot-video-actions{position:absolute;right:10px;bottom:10px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.pilot-video-button{min-height:34px;padding:8px 13px;border:1px solid #ffffff3d;border-radius:20px;background:#0c252ed9;color:var(--paper);font-size:12px;letter-spacing:.3px}
+.pilot-video-button:hover{border-color:#8bebcf80}
+.pilot-video-button:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+/* Com os controles nativos (sem JavaScript ou com menos movimento pedido), o
+   crédito sobe para não encostar na barra do navegador. */
+.pilot-video video[controls]+figcaption{bottom:48px}
+/* Segunda foto do mesmo piloto: menor, embaixo da principal. No cartão com
+   vídeo é a foto do local que fica nesse espaço, com o crédito menor. */
+.pilot-photo-extra{position:relative;width:58%;margin:12px 0 0 12px}
 .pilot-photo-extra img{border-radius:9px}
+.pilot-photo-extra figcaption{left:7px;bottom:7px;padding:4px 9px;font-size:11px}
 .pilot-legend{margin:10px 12px 13px;font-size:12px;line-height:1.45;color:var(--muted-dark)}
 .pilot-empty{display:grid;place-items:center;aspect-ratio:4/3;margin:0;padding:18px;text-align:center;font-size:13px;line-height:1.45;color:var(--muted-dark)}
 .pilot-body{display:flex;flex-direction:column;flex:1;padding:20px 18px 22px}
@@ -474,6 +490,7 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
  .pilots-head>p{font-size:14px}
  .pilots-grid{grid-template-columns:1fr;gap:16px;margin-top:18px}
  .pilot-empty{aspect-ratio:auto;min-height:118px}
+ .pilot-video video{max-height:min(70vh,520px)}
  .pilot-card{border-radius:16px}
  .pilot-body{padding:17px 16px 19px}
  .pilot-top h4{font-size:18px}

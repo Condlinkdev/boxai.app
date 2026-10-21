@@ -43,7 +43,11 @@ window.SITE_CONFIG = {
   // opcionais e, sem eles, valem -400 e -700 em avif e webp, a 700x525.
   // Um piloto com duas fotos usa fotos: [principal, segunda] no lugar de foto;
   // a segunda aparece menor, embaixo da primeira, e o crédito sai da primeira.
-  // legenda é a linha escrita embaixo das fotos, quando houver.
+  // video é a media principal do cartão e empurra a foto para o lugar menor,
+  // embaixo dele: src é o arquivo .mp4, poster a capa mostrada antes de tocar,
+  // alt o nome do vídeo para quem não o vê, fonte o crédito e largura/altura o
+  // tamanho do arquivo. Sem video, o cartão volta a mostrar a foto no lugar
+  // principal. legenda é a linha escrita embaixo da media, quando houver.
   // A ordem da lista é a ordem da tela: lojas autônomas primeiro.
   // Depois de trocar, atualize o ?v= de site-config.js e de prova-social.js no
   // HTML das páginas que os carregam.
@@ -61,6 +65,15 @@ window.SITE_CONFIG = {
         cidade: 'São Carlos (SP)',
         status: 'Em uso',
         texto: 'Box AI na TV da loja, com promoções e conteúdo trocados pelo painel. A porta abre por leitura facial e por QR Code, e a TV recebe o cliente pelo nome desde 18 de outubro de 2026.',
+        legenda: 'Alguém chega, o acesso facial libera a porta e a TV recebe pelo nome.',
+        video: {
+          src: 'assets/pilotos/mercado-do-vila-chegada.mp4',
+          poster: 'assets/pilotos/mercado-do-vila-chegada-poster.webp',
+          largura: 478,
+          altura: 850,
+          alt: 'Vídeo no Mercado do Vila: o cliente chega, o leitor facial abre a porta e a TV da loja diz Olá, Denis e mostra as ofertas',
+          fonte: 'Vídeo: Condlink'
+        },
         foto: {
           src: 'assets/pilotos/mercado-do-vila-fachada',
           alt: 'Fachada do Mercado do Vila: loja em contêiner escuro, com o letreiro Mercado e a entrada de vidro',

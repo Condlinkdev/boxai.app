@@ -4,7 +4,9 @@
 // Aqui o script só confere o config: esconde a seção e o link do menu quando
 // ativo não é true ou quando falta a data da autorização, esconde o cartão que
 // não tiver dados no config e repõe nome, segmento, cidade, status, texto,
-// legenda e fotos de cada um. Depois de trocar os valores, atualize o ?v= de
+// legenda, vídeo e fotos de cada um. O cartão que tem vídeo no config mostra o
+// vídeo no lugar principal e a foto do local embaixo, menor; quem toca o vídeo
+// é video-piloto.js. Depois de trocar os valores, atualize o ?v= de
 // site-config.js e de prova-social.js no HTML das páginas que os carregam.
 (function () {
   const config = (window.SITE_CONFIG && window.SITE_CONFIG.provaSocial) || {};
@@ -22,6 +24,9 @@
   const LARGURAS_PADRAO = [400, 700];
   const LARGURA_PADRAO = 700;
   const ALTURA_PADRAO = 525;
+  // Tamanho do vídeo em pé, usado quando o config não declara largura/altura.
+  const LARGURA_VIDEO = 478;
+  const ALTURA_VIDEO = 850;
 
   function text(value) {
     return typeof value === 'string' ? value.trim() : '';
@@ -47,6 +52,27 @@
     const varias = Array.isArray(dados.fotos) ? dados.fotos : [];
     if (varias.length) return varias.slice(0, 2);
     return dados.foto ? [dados.foto] : [];
+  }
+  // O vídeo do piloto só entra com arquivo e com a descrição de quem não o vê.
+  function videoDoPiloto(dados) {
+    const declarado = dados.video;
+    if (!declarado || !text(declarado.src) || !text(declarado.alt)) return null;
+    return declarado;
+  }
+  // O crédito é a tarja escrita sobre a media, igual à das fotos. Sem texto,
+  // a tarja fica escondida em vez de mostrar um crédito vazio.
+  function aplicarCredito(bloco, texto) {
+    let credito = bloco.querySelector('figcaption');
+    if (!texto) {
+      if (credito) credito.hidden = true;
+      return;
+    }
+    if (!credito) {
+      credito = document.createElement('figcaption');
+      bloco.appendChild(credito);
+    }
+    credito.textContent = texto;
+    credito.hidden = false;
   }
   function escrever(cartao, seletor, valor) {
     const alvo = cartao.querySelector(seletor);
@@ -100,10 +126,50 @@
     return figura;
   }
   function criarSegunda() {
-    const bloco = document.createElement('div');
+    const bloco = document.createElement('figure');
     bloco.className = 'pilot-photo-extra';
     bloco.appendChild(document.createElement('picture'));
     return bloco;
+  }
+  function criarVideo() {
+    const figura = document.createElement('figure');
+    figura.className = 'pilot-video';
+    figura.setAttribute('data-piloto-video', '');
+    const tela = document.createElement('video');
+    // Sem o video-piloto.js ficam os controles nativos, então dá para tocar na
+    // mão; o arquivo só é baixado quando alguém toca.
+    tela.controls = true;
+    tela.muted = true;
+    tela.loop = true;
+    tela.playsInline = true;
+    tela.preload = 'none';
+    tela.setAttribute('muted', '');
+    tela.appendChild(document.createElement('source'));
+    figura.appendChild(tela);
+    figura.appendChild(document.createElement('figcaption'));
+    return figura;
+  }
+  // Repõe o arquivo, a capa e o tamanho do vídeo a partir do config. O endereço
+  // só é trocado quando muda, para não recomeçar o que já estiver tocando.
+  function montarVideo(figura, dados) {
+    const tela = figura.querySelector('video');
+    if (!tela) return;
+    let fonte = tela.querySelector('source');
+    if (!fonte) {
+      fonte = document.createElement('source');
+      tela.appendChild(fonte);
+    }
+    fonte.type = 'video/mp4';
+    const endereco = text(dados.src);
+    if (fonte.getAttribute('src') !== endereco) {
+      fonte.setAttribute('src', endereco);
+      tela.load();
+    }
+    const capa = text(dados.poster);
+    if (tela.getAttribute('poster') !== capa) tela.setAttribute('poster', capa);
+    tela.width = Number(dados.largura) || LARGURA_VIDEO;
+    tela.height = Number(dados.altura) || ALTURA_VIDEO;
+    tela.setAttribute('aria-label', text(dados.alt));
   }
   function criarLegenda() {
     const legenda = document.createElement('p');
@@ -116,16 +182,23 @@
     vazio.textContent = aviso;
     return vazio;
   }
-  // As fotos são montadas a partir de src e alt; sem foto (ou sem alt) fica o
-  // espaço neutro, nunca uma imagem de outro lugar. Quando o HTML já traz as
-  // mesmas fotos, os nós são reaproveitados e nada é baixado de novo.
-  function aplicarFotos(cartao, dados) {
+  // A media de cada cartão é montada a partir do config: o vídeo, quando
+  // houver, fica no lugar principal, e as fotos vêm de src e alt. Sem nada
+  // válido fica o espaço neutro, nunca uma imagem de outro lugar. Quando o HTML
+  // já traz a mesma media, os nós são reaproveitados: nada é baixado de novo,
+  // e o vídeo que já estiver tocando não é trocado nem recomeça.
+  function aplicarMedia(cartao, dados) {
     const media = cartao.querySelector('[data-piloto-media]');
     if (!media) return;
+    const filme = videoDoPiloto(dados);
     const validas = fotos(dados).filter(function (foto) {
       return foto && text(foto.src) && text(foto.alt);
     });
-    if (!validas.length) {
+    // Com vídeo, ele é a media principal e a primeira foto desce para o espaço
+    // menor, o mesmo da segunda foto de quem tem duas.
+    const principal = filme ? null : validas[0];
+    const segundaFoto = filme ? validas[0] : validas[1];
+    if (!filme && !principal) {
       if (!media.querySelector('.pilot-empty')) {
         media.replaceChildren(criarVazio('Foto do local em breve'));
       }
@@ -134,26 +207,42 @@
     const vazio = media.querySelector('.pilot-empty');
     if (vazio) vazio.remove();
 
-    let figura = media.querySelector('.pilot-photo');
-    if (!figura) {
-      figura = criarFigura();
-      media.prepend(figura);
+    let video = media.querySelector('[data-piloto-video]');
+    if (filme) {
+      if (!video) {
+        video = criarVideo();
+        media.prepend(video);
+      }
+      montarVideo(video, filme);
+      aplicarCredito(video, text(filme.fonte));
+    } else if (video) {
+      video.remove();
+      video = null;
     }
-    montarPicture(figura.querySelector('picture'), validas[0], TAMANHOS);
-    const creditoTexto = text(validas[0].fonte);
-    const credito = figura.querySelector('figcaption');
-    if (credito) {
-      credito.textContent = creditoTexto;
-      credito.hidden = !creditoTexto;
+
+    let figura = media.querySelector('.pilot-photo');
+    if (principal) {
+      if (!figura) {
+        figura = criarFigura();
+        media.prepend(figura);
+      }
+      montarPicture(figura.querySelector('picture'), principal, TAMANHOS);
+      aplicarCredito(figura, text(principal.fonte));
+    } else if (figura) {
+      figura.remove();
+      figura = null;
     }
 
     let segunda = media.querySelector('.pilot-photo-extra');
-    if (validas[1]) {
+    if (segundaFoto) {
       if (!segunda) {
         segunda = criarSegunda();
-        figura.after(segunda);
+        const anterior = figura || video;
+        if (anterior) anterior.after(segunda);
+        else media.prepend(segunda);
       }
-      montarPicture(segunda.querySelector('picture'), validas[1], TAMANHOS_SEGUNDA);
+      montarPicture(segunda.querySelector('picture'), segundaFoto, TAMANHOS_SEGUNDA);
+      aplicarCredito(segunda, text(segundaFoto.fonte));
     } else if (segunda) {
       segunda.remove();
     }
@@ -195,7 +284,7 @@
       status.classList.toggle('is-proven', emUso);
       status.classList.toggle('is-pending', !emUso);
     }
-    aplicarFotos(cartao, dados);
+    aplicarMedia(cartao, dados);
     cartao.hidden = false;
     visiveis += 1;
   });

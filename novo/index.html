@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;650;700;750;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/loja-real-400.avif" type="image/avif" fetchpriority="high">
-<link rel="stylesheet" href="style.css?v=20261021-prova-social-final">
+<link rel="stylesheet" href="style.css?v=20261021-video-vila">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head>
 <body>
@@ -193,7 +193,10 @@
        então sem JavaScript a seção aparece igual. O prova-social.js esconde a
        seção e o link do menu quando ativo é false e repõe os textos e a foto a
        partir do config. Sem foto do local fica o espaço neutro, nunca uma
-       imagem de outro lugar. -->
+       imagem de outro lugar. O cartão com vídeo mostra o vídeo no lugar
+       principal e a foto do local embaixo, menor; o vídeo já vem aqui com os
+       controles nativos, e o video-piloto.js os troca pelos botões de pausar e
+       de som quando pode tocar sozinho. -->
   <section class="pilots" id="pilotos" aria-labelledby="pilotos-titulo" data-prova-social>
     <div class="pilots-head">
       <div class="eyebrow dark"><span></span> PROJETOS PILOTO</div>
@@ -203,14 +206,21 @@
     <div class="pilots-grid">
       <article class="pilot-card" data-piloto="mercado-do-vila">
         <div class="pilot-media" data-piloto-media>
-          <figure class="pilot-photo">
+          <figure class="pilot-video" data-piloto-video>
+            <video width="478" height="850" poster="assets/pilotos/mercado-do-vila-chegada-poster.webp" muted loop playsinline preload="none" controls aria-label="Vídeo no Mercado do Vila: o cliente chega, o leitor facial abre a porta e a TV da loja diz Olá, Denis e mostra as ofertas">
+              <source src="assets/pilotos/mercado-do-vila-chegada.mp4" type="video/mp4">
+            </video>
+            <figcaption>Vídeo: Condlink</figcaption>
+          </figure>
+          <figure class="pilot-photo-extra">
             <picture>
-              <source type="image/avif" data-piloto-avif srcset="assets/pilotos/mercado-do-vila-fachada-400.avif 400w, assets/pilotos/mercado-do-vila-fachada-700.avif 700w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px">
-              <source type="image/webp" data-piloto-webp srcset="assets/pilotos/mercado-do-vila-fachada-400.webp 400w, assets/pilotos/mercado-do-vila-fachada-700.webp 700w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px">
-              <img src="assets/pilotos/mercado-do-vila-fachada-700.webp" alt="Fachada do Mercado do Vila: loja em contêiner escuro, com o letreiro Mercado e a entrada de vidro" width="700" height="525" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px" loading="lazy" decoding="async">
+              <source type="image/avif" data-piloto-avif srcset="assets/pilotos/mercado-do-vila-fachada-400.avif 400w, assets/pilotos/mercado-do-vila-fachada-700.avif 700w" sizes="(max-width:760px) calc((100vw - 40px) * 0.58), (max-width:1100px) 25.5vw, 217px">
+              <source type="image/webp" data-piloto-webp srcset="assets/pilotos/mercado-do-vila-fachada-400.webp 400w, assets/pilotos/mercado-do-vila-fachada-700.webp 700w" sizes="(max-width:760px) calc((100vw - 40px) * 0.58), (max-width:1100px) 25.5vw, 217px">
+              <img src="assets/pilotos/mercado-do-vila-fachada-700.webp" alt="Fachada do Mercado do Vila: loja em contêiner escuro, com o letreiro Mercado e a entrada de vidro" width="700" height="525" sizes="(max-width:760px) calc((100vw - 40px) * 0.58), (max-width:1100px) 25.5vw, 217px" loading="lazy" decoding="async">
             </picture>
             <figcaption>Foto: Condlink</figcaption>
           </figure>
+          <p class="pilot-legend">Alguém chega, o acesso facial libera a porta e a TV recebe pelo nome.</p>
         </div>
         <div class="pilot-body">
           <div class="pilot-top"><h4 data-piloto-nome>Mercado do Vila</h4><span class="module-badge is-proven" data-piloto-status>Em uso</span></div>
@@ -400,7 +410,7 @@
 <a class="footer-policy" href="https://www.condlink.com.br/politica-de-privacidade.html" target="_blank" rel="noopener">Política de privacidade<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
 </div>
 </footer>
-<script src="site-config.js?v=20261021-prova-social-final" defer></script><script src="comparativo.js?v=20261020-comparativo" defer></script><script src="prova-social.js?v=20261021-prova-social-onovolab" defer></script><script src="footer.js?v=20261021-rodape-endereco" defer></script><script src="menu.js?v=20261020-hibrido" defer></script><script src="interactions.js?v=20261021-video-e-conversa" defer></script><script src="orbit.js?v=20261020-tvs-funcionalidades" defer></script><script src="funil.js?v=20261020-funil" defer></script><script src="order.js?v=20261021-obrigado" defer></script>
+<script src="site-config.js?v=20261021-video-vila" defer></script><script src="comparativo.js?v=20261020-comparativo" defer></script><script src="prova-social.js?v=20261021-video-vila" defer></script><script src="video-piloto.js?v=20261021-video-vila" defer></script><script src="footer.js?v=20261021-rodape-endereco" defer></script><script src="menu.js?v=20261020-hibrido" defer></script><script src="interactions.js?v=20261021-video-e-conversa" defer></script><script src="orbit.js?v=20261020-tvs-funcionalidades" defer></script><script src="funil.js?v=20261020-funil" defer></script><script src="order.js?v=20261021-obrigado" defer></script>
 <script>
 // Keep the opening paint light: the 3D product starts once the page is loaded and idle,
 // and after three seconds regardless, so a slow third party can never hold the Box back.
