@@ -10,6 +10,10 @@ const orderFailure=document.querySelector('#order-failure');
 const orderSubmit=document.querySelector('#order-submit');
 const orderRetry=document.querySelector('#order-retry');
 const UTM_KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+const SEGMENT_ORIGIN_KEY='boxai:pagina_origem';
+const SEGMENT_NAME_KEY='boxai:segmento_pagina';
+// Apelidos aceitos no ?segmento= das páginas de segmento, no plural da pasta e no singular.
+const SEGMENT_PARAM={'lojas-autonomas':'Lojas autônomas','loja-autonoma':'Lojas autônomas','lojas':'Loja','loja':'Loja','clinicas':'Clínica','clinica':'Clínica','academias':'Academia','academia':'Academia','condominios':'Condomínio','condominio':'Condomínio','empresas':'Empresa','empresa':'Empresa','franquias':'Franquia ou rede','franquia':'Franquia ou rede'};
 const ORDER_FIELDS=['segmento','tvs','locais','nome','empresa','whatsapp','email'];
 const ORDER_FIELD_STEP={segmento:1,tvs:1,locais:1,nome:2,empresa:2,whatsapp:2,email:2};
 const ORDER_MESSAGES={segmento:'Escolha o ambiente de uso.',tvs:'Informe de 1 a 999 TVs.',locais:'Informe a quantidade de locais, entre 1 e o total de TVs.',nome:'Preencha seu nome.',empresa:'Preencha o nome da empresa ou espaço.',whatsapp:'Confira o WhatsApp com DDD. Exemplo: (11) 91234-5678.',email:'Confira o e-mail.'};
@@ -21,6 +25,17 @@ function newRequestId(){const c=globalThis.crypto;if(c&&typeof c.randomUUID==='f
 function requestIdForOrder(){if(!orderRequestId)orderRequestId=newRequestId();return orderRequestId}
 function readUtm(){const params=new URLSearchParams(location.search),utm={};for(const key of UTM_KEYS){const value=params.get(key);if(value)utm[key]=value}return utm}
 
+function readSessionValue(key){try{return sessionStorage.getItem(key)||''}catch{return ''}}
+function foldSegment(text){return text.normalize('NFD').replace(/\p{M}/gu,'').trim().toLowerCase()}
+// Quem chega pelo CTA de uma página de segmento já encontra o passo 1 marcado.
+function applySegmentFromUrl(){
+ const raw=new URLSearchParams(location.search).get('segmento');
+ if(!raw)return;
+ const key=foldSegment(raw);
+ const radios=[...orderForm.querySelectorAll('input[name=segmento]')];
+ const radio=radios.find(r=>r.value===SEGMENT_PARAM[key])||radios.find(r=>foldSegment(r.value)===key);
+ if(radio)radio.checked=true;
+}
 function segmentoLabel(){const checked=orderForm.querySelector('input[name=segmento]:checked');const span=checked&&checked.closest('label').querySelector('span');return span?span.textContent.trim():''}
 function readOrder(){const d=new FormData(orderForm);return{segmento:String(d.get('segmento')||''),tvs:Number(d.get('tvs')),locais:Number(d.get('locais')),nome:String(d.get('nome')||'').trim(),empresa:String(d.get('empresa')||'').trim(),whatsapp:String(d.get('whatsapp')||'').trim(),email:String(d.get('email')||'').trim()}}
 function updateOrderSummary(){const d=readOrder();document.querySelector('#summary-environment').textContent=segmentoLabel();document.querySelector('#summary-tvs').textContent=Number.isInteger(d.tvs)&&d.tvs>0?d.tvs+(d.tvs===1?' TV':' TVs'):'—';document.querySelector('#summary-units').textContent=Number.isInteger(d.locais)&&d.locais>0?d.locais+(d.locais===1?' local':' locais'):'—';}
@@ -48,7 +63,7 @@ function showOrderFailure(){showOrderResult(orderFailure)}
 function setButtonBusy(button,busy,busyLabel,idleLabel){if(!button)return;button.disabled=busy;if(busy)button.setAttribute('aria-busy','true');else button.removeAttribute('aria-busy');const label=button.querySelector('[data-order-label]');if(label)label.textContent=busy?busyLabel:idleLabel}
 function setOrderSending(busy){orderSending=busy;setButtonBusy(orderSubmit,busy,'Enviando…','Peça sua proposta');setButtonBusy(orderRetry,busy,'Enviando…','Tentar de novo')}
 
-function orderPayload(){const d=readOrder();const body={origem:'montador',segmento:d.segmento,tvs:d.tvs,locais:d.locais,nome:d.nome,empresa:d.empresa,whatsapp:d.whatsapp,email:d.email};const jaOpera=orderForm.elements.ja_opera;if(jaOpera)body.ja_opera=jaOpera.type==='checkbox'?jaOpera.checked:jaOpera.value;body.pagina=location.href;Object.assign(body,readUtm());body.request_id=requestIdForOrder();return body}
+function orderPayload(){const d=readOrder();const body={origem:'montador',segmento:d.segmento,tvs:d.tvs,locais:d.locais,nome:d.nome,empresa:d.empresa,whatsapp:d.whatsapp,email:d.email};const jaOpera=orderForm.elements.ja_opera;if(jaOpera)body.ja_opera=jaOpera.type==='checkbox'?jaOpera.checked:jaOpera.value;body.pagina=location.href;const origem=readSessionValue(SEGMENT_ORIGIN_KEY);if(origem)body.pagina_origem=origem;const segmentoPagina=readSessionValue(SEGMENT_NAME_KEY);if(segmentoPagina)body.segmento_pagina=segmentoPagina;Object.assign(body,readUtm());body.request_id=requestIdForOrder();return body}
 async function postOrder(body){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),ORDER_TIMEOUT);try{return await fetch(ORDER_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal})}finally{clearTimeout(timer)}}
 async function readJson(response){try{return await response.json()}catch{return null}}
 
@@ -73,4 +88,5 @@ phoneField.addEventListener('input',event=>{let raw=phoneField.value;const curso
 orderForm.elements.email.addEventListener('input',()=>clearFieldError('email'));
 for(const name of ['nome','empresa']){const field=orderForm.elements[name];field.addEventListener('blur',()=>{field.value=field.value.trim().replace(/\s{2,}/g,' ')});field.addEventListener('input',()=>clearFieldError(name))}
 
+applySegmentFromUrl();
 updateOrderSummary();

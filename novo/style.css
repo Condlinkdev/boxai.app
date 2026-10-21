@@ -273,3 +273,27 @@ footer .brand .brand-logo{width:195px;max-height:none}
  .modules-prices .button{width:100%;min-height:48px;justify-content:space-between;padding:0 22px;font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){.module-link svg{transition:none}}
+/* "Produtos" e "Para quem" no menu: o submenu dos segmentos abre por clique. */
+.menu-group{position:relative;display:flex;align-items:center}
+.menu-group-button{display:inline-flex;align-items:center;gap:7px;padding:0;background:none;border:0;color:inherit;font:400 14px var(--body);line-height:1.2}
+.menu-group-button:hover,.menu-group.open>.menu-group-button{color:var(--mint)}
+.menu-group-button svg{flex-shrink:0;transition:transform .18s ease}
+.menu-group.open>.menu-group-button svg{transform:rotate(180deg)}
+.menu-submenu{display:none;margin:0;padding:0;list-style:none}
+.menu-group.open .menu-submenu{display:block}
+@media(min-width:761px){
+ .header nav.site-menu{gap:clamp(18px,2.2vw,32px)}
+ .menu-submenu{position:absolute;left:-14px;top:calc(100% + 16px);z-index:70;min-width:214px;padding:8px;background:#0d262e;border:1px solid #ffffff1f;border-radius:14px;box-shadow:0 18px 40px #00000066}
+ .menu-submenu a{display:block;padding:10px 12px;border-radius:10px;font-size:14px;color:var(--paper)}
+ .menu-submenu a:hover{background:#ffffff14;color:var(--mint)}
+ .menu-submenu a[aria-current]{color:var(--mint)}
+}
+@media(max-width:760px){
+ .menu-group{display:block}
+ .header nav.site-menu .menu-group-button{width:100%;justify-content:space-between;padding:14px 4px;font-size:16px;color:var(--paper);border-top:1px solid #ffffff14}
+ .menu-submenu{padding:0 0 6px 14px}
+ .header nav.site-menu .menu-submenu a{display:block;padding:12px 4px;font-size:15px;color:var(--muted);border-top:1px solid #ffffff0f}
+}
+/* Cada aba de ambiente leva aos exemplos daquele segmento. */
+.story-page-link{display:inline-flex;align-items:center;gap:10px;margin-top:4px;font:500 13px var(--font);letter-spacing:.3px;color:var(--mint-dark);border-bottom:1px solid #1d6b5a4d;padding-bottom:3px}
+.story-page-link:hover{color:var(--ink);border-bottom-color:var(--ink)}
