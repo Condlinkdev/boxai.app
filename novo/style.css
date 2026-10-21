@@ -101,7 +101,7 @@ footer .brand .brand-logo{width:195px;max-height:none}
 @media(prefers-reduced-motion:reduce){.faq-list summary svg{transition:none}}
 /* Readable floor inside the orbiting screens: the kicker only shows while it still fits at 11px. */
 .satellite{container-type:inline-size}
-@container (max-width:185px){.satellite-kicker{display:none}}
+@container (max-width:118px){.satellite-kicker{display:none}}
 /* Compact phones: the opening call to action fills the row at a comfortable size. */
 @media(max-width:760px){
  .universe .hero-actions{margin-inline:-25px}
@@ -353,3 +353,25 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
  .compare-table tbody td.is-boxai:before{color:#14543f}
  .compare-note{margin-top:14px;font-size:13px}
 }
+
+/* Um link direto para um módulo: título com foco e destaque curto no card. */
+.module-card{scroll-margin-top:90px}
+.module-card h3:focus-visible{outline:2px solid var(--mint-dark);outline-offset:5px}
+.module-card.is-targeted{border-color:#1d6b5a80;box-shadow:0 0 0 3px #1d6b5a26,0 14px 34px #1d6b5a1f}
+
+/* Uma TV por funcionalidade: arte na tela, rótulo e link discreto para o módulo que a prova. */
+.satellite{display:flex;flex-direction:column;align-items:center}
+.satellite-art{position:absolute;inset:0;display:block;width:100%;height:100%;color:var(--mint)}
+.satellite-art .art-halo{fill:none;stroke:currentColor;stroke-width:9;opacity:.1}
+.satellite-art .art-glyph{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.satellite[data-feature=facial] .satellite-shade{background:linear-gradient(90deg,#1d3f52ed,#1d3f5255)}
+.satellite[data-feature=recepcao] .satellite-shade{background:linear-gradient(90deg,#1e4a43ed,#1e4a4355)}
+.satellite[data-feature=midia] .satellite-shade{background:linear-gradient(90deg,#563a21ed,#563a2177)}
+.satellite[data-feature=avisos] .satellite-shade{background:linear-gradient(90deg,#343255ed,#34325577)}
+.satellite-module{display:inline-flex;align-items:center;min-height:30px;margin-top:8px;padding:0 2px;font:500 13px var(--font);letter-spacing:.3px;color:var(--muted);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.satellite-module:hover,.satellite-module:focus-visible{color:var(--mint);border-bottom-color:#8bebcf80}
+@media(max-width:760px){
+ .satellite-module{margin-top:5px;font-size:13px}
+ .satellite:nth-child(5):last-child{grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
+}
+@media(prefers-reduced-motion:reduce){.satellite-module{transition:none}}
