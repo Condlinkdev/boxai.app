@@ -61,7 +61,34 @@ function validOrderStep(){const d=readOrder();const errors=orderStep===1?validat
 function reviewOrder(){const d=readOrder();const entries=[['Ambiente',segmentoLabel()],['TVs e locais',`${d.tvs} ${d.tvs===1?'TV':'TVs'} em ${d.locais} ${d.locais===1?'local':'locais'}`],['Módulos de interesse',d.modulos.join(', ')],['Nome',d.nome],['Empresa ou espaço',d.empresa],['Cidade',d.cidade],['WhatsApp',d.whatsapp],['E-mail',d.email]];const list=document.createElement('dl');for(const [label,value]of entries){const row=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;row.append(dt,dd);list.append(row)}document.querySelector('#order-review').replaceChildren(list);}
 function scrollOrderIntoView(){const top=orderForm.getBoundingClientRect().top;if(top<0)orderForm.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})}
 function focusOrderTitle(container){const title=container.querySelector('h3');if(!title)return;title.tabIndex=-1;title.focus({preventScroll:true})}
-function changeOrderStep(next,focusTitle=true){orderStep=next;orderResults.forEach(el=>el.hidden=true);orderSteps.forEach(e=>e.hidden=Number(e.dataset.orderStep)!==next);orderProgress.forEach((e,i)=>{e.classList.toggle('current',i+1===next);e.classList.toggle('completed',i+1<next);if(i+1===next)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current')});if(next===3)reviewOrder();if(focusTitle)focusOrderTitle(orderSteps[next-1]);scrollOrderIntoView();}
+// Contagem anônima do funil (funil.js): cada passo conta no máximo uma vez por
+// carregamento, então voltar e avançar de novo não repete a contagem. Só o
+// número do passo é enviado; nenhum valor do formulário sai daqui. Sem
+// funil.js carregado o montador funciona do mesmo jeito.
+const FUNNEL_STEP_EVENT={1:'pedido_passo_1',2:'pedido_passo_2',3:'pedido_passo_3'};
+const funnelCountedSteps=new Set();
+function countFunnelStep(step){
+ const evento=FUNNEL_STEP_EVENT[step];
+ if(!evento||funnelCountedSteps.has(step))return;
+ funnelCountedSteps.add(step);
+ const funil=window.boxaiFunil;
+ if(funil&&typeof funil.enviar==='function')funil.enviar(evento);
+}
+// O passo 1 já está na tela desde o começo: conta quando o montador aparece
+// pela primeira vez ou na primeira interação, o que vier antes.
+function watchFunnelFirstStep(){
+ const contar=()=>countFunnelStep(1);
+ for(const tipo of ['focusin','input','change','click'])orderForm.addEventListener(tipo,contar,{once:true});
+ if(typeof IntersectionObserver!=='function')return;
+ const observer=new IntersectionObserver(entries=>{
+  if(!entries.some(entry=>entry.isIntersecting))return;
+  observer.disconnect();
+  contar();
+ });
+ observer.observe(orderForm);
+}
+
+function changeOrderStep(next,focusTitle=true){countFunnelStep(next);orderStep=next;orderResults.forEach(el=>el.hidden=true);orderSteps.forEach(e=>e.hidden=Number(e.dataset.orderStep)!==next);orderProgress.forEach((e,i)=>{e.classList.toggle('current',i+1===next);e.classList.toggle('completed',i+1<next);if(i+1===next)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current')});if(next===3)reviewOrder();if(focusTitle)focusOrderTitle(orderSteps[next-1]);scrollOrderIntoView();}
 function showOrderResult(container){orderSteps.forEach(e=>e.hidden=true);orderResults.forEach(el=>el.hidden=el!==container);focusOrderTitle(container);scrollOrderIntoView();}
 function showOrderSuccess(){orderProgress.forEach(e=>{e.classList.remove('current');e.classList.add('completed');e.removeAttribute('aria-current')});showOrderResult(orderSuccess)}
 function showOrderFailure(){showOrderResult(orderFailure)}
@@ -106,3 +133,4 @@ function applyPrazoResposta(){const alvo=orderSuccess&&orderSuccess.querySelecto
 applySegmentFromUrl();
 applyPrazoResposta();
 updateOrderSummary();
+watchFunnelFirstStep();
