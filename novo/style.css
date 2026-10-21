@@ -392,3 +392,22 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 .faq-chat svg{display:block;flex-shrink:0;color:var(--mint-dark)}
 .faq-chat:focus-visible{outline:2px solid var(--mint-dark);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.hero-action,.faq-chat{transition:none}}
+/* Módulos de interesse no passo 1 do montador: checkboxes em pílula, com a
+   mesma leitura dos cartões de ambiente e um sinal de marcado além da cor. */
+.order-modules{border:0;margin:22px 0 0;padding:23px 0 0;border-top:1px solid #d9e2da}
+.order-modules>legend{float:left;width:100%;padding:0;font-size:14px;color:var(--ink)}
+.order-modules-hint{clear:both;margin-top:7px;font-size:14px;line-height:1.4;color:var(--muted-dark)}
+.order-modules-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:16px}
+.order-modules-grid label{position:relative;cursor:pointer}
+.order-modules-grid input{position:absolute;width:1px;height:1px;opacity:0}
+.order-modules-grid label>span{display:flex;align-items:center;gap:10px;min-height:51px;padding:13px 11px;border:1px solid #d2dfd5;border-radius:10px;font-size:14px;line-height:1.35;overflow-wrap:anywhere;transition:background .2s,border-color .2s}
+.order-modules-grid label>span::before{content:"";flex:0 0 auto;width:18px;height:18px;border:1px solid #b9cdbf;border-radius:5px;background:#fff;transition:background .2s,border-color .2s}
+.order-modules-grid input:checked+span{background:#e1eee4;border-color:#438c71;color:var(--mint-dark)}
+.order-modules-grid input:checked+span::before{border-color:#1b6553;background:#1b6553 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><path d='m5 13 4 4 10-10'/></svg>") center/12px no-repeat}
+.order-modules-grid input:focus-visible+span{outline:2px solid var(--mint-dark);outline-offset:3px}
+.order-modules-grid input[aria-invalid=true]+span{border-color:var(--error)}
+.order-modules-grid small{font-size:12px;color:var(--muted-dark)}
+.order-modules-any{grid-column:1/-1}
+@media(max-width:1000px){.order-modules-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.order-modules{margin-top:21px;padding-top:21px}.order-modules-grid{gap:8px;margin-top:14px}.order-modules-grid label>span{padding:13px 10px}}
+@media(prefers-reduced-motion:reduce){.order-modules-grid label>span,.order-modules-grid label>span::before{transition:none}}

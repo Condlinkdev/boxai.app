@@ -12,6 +12,12 @@ window.SITE_CONFIG = {
     escritorio: 'R. Aquidaban, 1, Sala 1, Centro, São Carlos - SP, 13560-120'
   },
   enderecoExibido: '',
+  // Prazo de resposta do pedido, ainda sem definição da Condlink. Vazio = a
+  // tela de obrigado fica sem prazo; preenchido (ex.: 'um dia útil') a frase
+  // vira "Nossa equipe responde em um dia útil, pelo WhatsApp ou e-mail que
+  // você informou.". Depois de trocar, atualize o ?v= de site-config.js e de
+  // order.js no HTML das páginas que os carregam.
+  prazoResposta: '',
   // Linhas do comparativo que esperam a confirmação da Condlink. Cada linha só
   // aparece com a flag em true; a do número de TVs precisa também do texto em
   // numeroTvsTexto. Depois de trocar, atualize o ?v= de site-config.js e de
