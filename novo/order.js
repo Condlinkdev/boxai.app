@@ -88,9 +88,13 @@ function watchFunnelFirstStep(){
  observer.observe(orderForm);
 }
 
-function changeOrderStep(next,focusTitle=true){countFunnelStep(next);orderStep=next;orderResults.forEach(el=>el.hidden=true);orderSteps.forEach(e=>e.hidden=Number(e.dataset.orderStep)!==next);orderProgress.forEach((e,i)=>{e.classList.toggle('current',i+1===next);e.classList.toggle('completed',i+1<next);if(i+1===next)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current')});if(next===3)reviewOrder();if(focusTitle)focusOrderTitle(orderSteps[next-1]);scrollOrderIntoView();}
+// O check da etapa concluída é só visual: quem usa leitor de tela ouve
+// "concluída" junto do nome da etapa, e o aviso sai quando a etapa deixa de
+// estar concluída (ao voltar ao início, por exemplo).
+function syncOrderStepsDone(){orderProgress.forEach(e=>{const done=e.classList.contains('completed');const aviso=e.querySelector('.order-step-done');if(done&&!aviso){const span=document.createElement('span');span.className='sr-only order-step-done';span.textContent=' concluída';e.append(span)}else if(!done&&aviso)aviso.remove()})}
+function changeOrderStep(next,focusTitle=true){countFunnelStep(next);orderStep=next;orderResults.forEach(el=>el.hidden=true);orderSteps.forEach(e=>e.hidden=Number(e.dataset.orderStep)!==next);orderProgress.forEach((e,i)=>{e.classList.toggle('current',i+1===next);e.classList.toggle('completed',i+1<next);if(i+1===next)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current')});syncOrderStepsDone();if(next===3)reviewOrder();if(focusTitle)focusOrderTitle(orderSteps[next-1]);scrollOrderIntoView();}
 function showOrderResult(container){orderSteps.forEach(e=>e.hidden=true);orderResults.forEach(el=>el.hidden=el!==container);focusOrderTitle(container);scrollOrderIntoView();}
-function showOrderSuccess(){orderProgress.forEach(e=>{e.classList.remove('current');e.classList.add('completed');e.removeAttribute('aria-current')});showOrderResult(orderSuccess)}
+function showOrderSuccess(){orderProgress.forEach(e=>{e.classList.remove('current');e.classList.add('completed');e.removeAttribute('aria-current')});syncOrderStepsDone();showOrderResult(orderSuccess)}
 function showOrderFailure(){showOrderResult(orderFailure)}
 
 function setButtonBusy(button,busy,busyLabel,idleLabel){if(!button)return;button.disabled=busy;if(busy)button.setAttribute('aria-busy','true');else button.removeAttribute('aria-busy');const label=button.querySelector('[data-order-label]');if(label)label.textContent=busy?busyLabel:idleLabel}
