@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;650;700;750;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/loja-real-400.avif" type="image/avif" fetchpriority="high">
-<link rel="stylesheet" href="style.css?v=20261021-botao-proposta">
+<link rel="stylesheet" href="style.css?v=20261021-prova-social-final">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head>
 <body>
@@ -30,7 +30,7 @@
 <li><a href="para-quem/condominios/">Condomínios</a></li>
 </ul>
 </div>
-<a href="#em-cena">Recursos</a><a href="#precos">Preços</a><a href="#pedido">Fale conosco</a>
+<a href="#em-cena">Recursos</a><a href="#pilotos" data-prova-social-link>Onde funciona</a><a href="#precos">Preços</a><a href="#pedido">Fale conosco</a>
 <!-- "App" fica oculto: só aparece quando houver o link oficial de download do aplicativo. -->
 <a class="menu-app" hidden>App</a>
 </nav><a class="nav-cta" href="#pedido">Peça sua proposta <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a><button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu"><span class="menu-toggle-bars" aria-hidden="true"></span></button></header>
@@ -188,6 +188,71 @@
     </table>
     <p class="compare-note">Comparação com soluções comuns de mercado, sem citar empresas. A configuração do seu espaço é confirmada na proposta.</p>
   </div>
+  <!-- Prova social: os pilotos onde a Box AI já está funcionando. Os cartões
+       vêm escritos aqui com os mesmos dados de provaSocial em site-config.js,
+       então sem JavaScript a seção aparece igual. O prova-social.js esconde a
+       seção e o link do menu quando ativo é false e repõe os textos e a foto a
+       partir do config. Sem foto do local fica o espaço neutro, nunca uma
+       imagem de outro lugar. -->
+  <section class="pilots" id="pilotos" aria-labelledby="pilotos-titulo" data-prova-social>
+    <div class="pilots-head">
+      <div class="eyebrow dark"><span></span> PROJETOS PILOTO</div>
+      <h3 id="pilotos-titulo">Onde a Box AI <em>já está funcionando.</em></h3>
+      <p>Projetos piloto em uso real, com autorização de cada local.</p>
+    </div>
+    <div class="pilots-grid">
+      <article class="pilot-card" data-piloto="mercado-do-vila">
+        <div class="pilot-media" data-piloto-media>
+          <figure class="pilot-photo">
+            <picture>
+              <source type="image/avif" data-piloto-avif srcset="assets/pilotos/mercado-do-vila-fachada-400.avif 400w, assets/pilotos/mercado-do-vila-fachada-700.avif 700w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px">
+              <source type="image/webp" data-piloto-webp srcset="assets/pilotos/mercado-do-vila-fachada-400.webp 400w, assets/pilotos/mercado-do-vila-fachada-700.webp 700w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px">
+              <img src="assets/pilotos/mercado-do-vila-fachada-700.webp" alt="Fachada do Mercado do Vila: loja em contêiner escuro, com o letreiro Mercado e a entrada de vidro" width="700" height="525" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Foto: Condlink</figcaption>
+          </figure>
+        </div>
+        <div class="pilot-body">
+          <div class="pilot-top"><h4 data-piloto-nome>Mercado do Vila</h4><span class="module-badge is-proven" data-piloto-status>Em uso</span></div>
+          <p class="pilot-meta" data-piloto-meta>Loja autônoma · São Carlos (SP)</p>
+          <p class="pilot-copy" data-piloto-texto>Box AI na TV da loja, com promoções e conteúdo trocados pelo painel. A porta abre por leitura facial e por QR Code, e a TV recebe o cliente pelo nome desde 18 de outubro de 2026.</p>
+        </div>
+      </article>
+      <article class="pilot-card" data-piloto="damha">
+        <div class="pilot-media" data-piloto-media>
+          <p class="pilot-empty">Foto do local em breve</p>
+        </div>
+        <div class="pilot-body">
+          <div class="pilot-top"><h4 data-piloto-nome>Damha1</h4><span class="module-badge is-pending" data-piloto-status>Em instalação</span></div>
+          <p class="pilot-meta" data-piloto-meta>Condomínio</p>
+          <p class="pilot-copy" data-piloto-texto>Box AI em instalação para levar os avisos e a comunicação com os moradores para a TV.</p>
+        </div>
+      </article>
+      <article class="pilot-card" data-piloto="onovolab">
+        <div class="pilot-media" data-piloto-media>
+          <figure class="pilot-photo">
+            <picture>
+              <source type="image/webp" srcset="assets/pilotos/onovolab-tv-ligada-600.webp 600w, assets/pilotos/onovolab-tv-ligada-1200.webp 1200w" sizes="(max-width:760px) calc(100vw - 40px), (max-width:1100px) 44vw, 374px">
+              <img src="assets/pilotos/onovolab-tv-ligada-1200.webp" alt="oNovoLab, São Carlos: condomínio de empresas e hub de startups, com a Box AI nas TVs e o acesso facial integrado. TV ligada com a chamada “Fique por dentro”, ao lado do auditório." width="1200" height="645" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Foto: Condlink (Vantuir), 21/10/2026</figcaption>
+          </figure>
+          <div class="pilot-photo-extra">
+            <picture>
+              <source type="image/webp" srcset="assets/pilotos/onovolab-tv-membership-600.webp 600w, assets/pilotos/onovolab-tv-membership-1200.webp 1200w" sizes="(max-width:760px) calc((100vw - 40px) * 0.58), (max-width:1100px) 25.5vw, 217px">
+              <img src="assets/pilotos/onovolab-tv-membership-1200.webp" alt="oNovoLab, São Carlos: condomínio de empresas e hub de startups, com a Box AI nas TVs e o acesso facial integrado. Na tela, o convite de membership do oNovoLab com QR Code." width="1200" height="746" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <p class="pilot-legend">oNovoLab, São Carlos: condomínio de empresas e hub de startups, com a Box AI nas TVs e o acesso facial integrado</p>
+        </div>
+        <div class="pilot-body">
+          <div class="pilot-top"><h4 data-piloto-nome>oNovoLab</h4><span class="module-badge is-proven" data-piloto-status>Em uso</span></div>
+          <p class="pilot-meta" data-piloto-meta>Condomínio de empresas e hub de startups · São Carlos (SP)</p>
+          <p class="pilot-copy" data-piloto-texto>Box AI nas TVs do hub, com o conteúdo trocado pelo painel, e o controle de acesso facial integrado. A TV e o acesso já estão funcionando.</p>
+        </div>
+      </article>
+    </div>
+  </section>
   <div class="modules-prices" id="precos">
     <div class="modules-prices-copy">
       <span class="modules-prices-label">PREÇOS</span>
@@ -335,7 +400,7 @@
 <a class="footer-policy" href="https://www.condlink.com.br/politica-de-privacidade.html" target="_blank" rel="noopener">Política de privacidade<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
 </div>
 </footer>
-<script src="site-config.js?v=20261021-rodape-endereco" defer></script><script src="comparativo.js?v=20261020-comparativo" defer></script><script src="footer.js?v=20261021-rodape-endereco" defer></script><script src="menu.js?v=20261020-hibrido" defer></script><script src="interactions.js?v=20261021-video-e-conversa" defer></script><script src="orbit.js?v=20261020-tvs-funcionalidades" defer></script><script src="funil.js?v=20261020-funil" defer></script><script src="order.js?v=20261021-obrigado" defer></script>
+<script src="site-config.js?v=20261021-prova-social-final" defer></script><script src="comparativo.js?v=20261020-comparativo" defer></script><script src="prova-social.js?v=20261021-prova-social-onovolab" defer></script><script src="footer.js?v=20261021-rodape-endereco" defer></script><script src="menu.js?v=20261020-hibrido" defer></script><script src="interactions.js?v=20261021-video-e-conversa" defer></script><script src="orbit.js?v=20261020-tvs-funcionalidades" defer></script><script src="funil.js?v=20261020-funil" defer></script><script src="order.js?v=20261021-obrigado" defer></script>
 <script>
 // Keep the opening paint light: the 3D product starts once the page is loaded and idle,
 // and after three seconds regardless, so a slow third party can never hold the Box back.
