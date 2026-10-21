@@ -49,10 +49,9 @@
 .segment-others a:hover{border-color:#8bebcf80;color:var(--mint)}
 .segment-others [aria-current]{border-color:#8bebcf80;color:var(--mint);background:#8bebcf14}
 
-.segment-footer{max-width:1200px;margin:auto;padding:30px clamp(20px,5vw,64px) 44px;border-top:1px solid #ffffff14;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
-.segment-footer p{margin:0;font-size:13px;color:var(--muted);max-width:52ch}
-.segment-footer .brand-logo{width:150px}
-.segment-footer a:hover{color:var(--mint)}
+/* O rodapé de confiança vem do style.css; aqui ele fica na mesma coluna de 1200px do conteúdo. */
+footer.site-footer{padding:36px clamp(20px,5vw,64px) 34px}
+footer.site-footer .footer-top,footer.site-footer .footer-legal{max-width:calc(1200px - 2*clamp(20px,5vw,64px))}
 
 @media(max-width:900px){
  .segment-hero{grid-template-columns:1fr;gap:26px;align-items:start}
@@ -69,4 +68,5 @@
  .segment-close{padding:22px}
  .segment-close .button{width:100%;justify-content:space-between}
  .segment-others a,.segment-others span{font-size:13px;padding:9px 14px}
+ footer.site-footer{padding:30px clamp(20px,5vw,64px) 26px}
 }
