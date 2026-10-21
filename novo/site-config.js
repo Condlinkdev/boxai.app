@@ -11,5 +11,15 @@ window.SITE_CONFIG = {
     cartaoCnpj: 'Av. Comendador Alfredo Maffei, 1400, Sala B, Jardim São Carlos, São Carlos - SP, 13561-270',
     escritorio: 'R. Aquidaban, 1, Sala 1, Centro, São Carlos - SP, 13560-120'
   },
-  enderecoExibido: ''
+  enderecoExibido: '',
+  // Linhas do comparativo que esperam a confirmação da Condlink. Cada linha só
+  // aparece com a flag em true; a do número de TVs precisa também do texto em
+  // numeroTvsTexto. Depois de trocar, atualize o ?v= de site-config.js e de
+  // comparativo.js no HTML das seis páginas.
+  comparativo: {
+    contaUnica: false,
+    suporteAcesso: false,
+    numeroTvs: false,
+    numeroTvsTexto: ''
+  }
 };
