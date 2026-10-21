@@ -90,3 +90,58 @@ compactHero.addEventListener('change',positionHeroAction);
 positionHeroAction();
 
 // O menu do cabeçalho vive em menu.js, compartilhado com as páginas de segmento.
+
+// O vídeo e a conversa são caminhos diferentes, cada um com o seu botão.
+// "Conversar com a assistente" abre o painel do chat; "Assistir ao vídeo" leva ao vídeo de #em-cena.
+// Nenhum dos dois faz o papel do outro.
+const assistantScript=document.querySelector('script[src*="widget.js"]');
+const demoVideo=document.querySelector('#em-cena-video');
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
+
+function showAssistantPanel(){
+ const api=window.BoxAIAssistant;
+ if(!api||typeof api.open!=='function')return false;
+ api.open();
+ return true;
+}
+// Se o widget estiver bloqueado ou fora do ar, o convite não morre:
+// o montador de pedido assume a conversa, com o foco no primeiro campo.
+function offerOrderInstead(){
+ scrollToSection('#pedido');
+ document.querySelector('#order-form input,#order-form select,#order-form textarea')?.focus({preventScroll:true});
+}
+let waitingForAssistant=false;
+function openAssistant(){
+ if(showAssistantPanel()||waitingForAssistant)return;
+ // O widget entra com defer: pode ainda não ter carregado no primeiro clique.
+ waitingForAssistant=true;
+ const settle=()=>{
+  if(!waitingForAssistant)return;
+  waitingForAssistant=false;
+  clearTimeout(timer);
+  if(!showAssistantPanel())offerOrderInstead();
+ };
+ const timer=setTimeout(settle,5000);
+ assistantScript?.addEventListener('load',settle,{once:true});
+}
+document.querySelectorAll('[data-abrir-conversa]').forEach(button=>button.addEventListener('click',openAssistant));
+
+// O vídeo começa sem som, como sempre: quem quiser ouvir liga pelos controles.
+// Com movimento reduzido só levamos até lá, sem dar play.
+function watchDemoVideo(){
+ if(!demoVideo)return;
+ scrollToSection('#em-cena-video');
+ demoVideo.focus({preventScroll:true});
+ if(reduceMotion.matches)return;
+ demoVideo.play()?.catch(()=>{/* o visitante usa os controles */});
+}
+const videoLink=document.querySelector('[data-assistir-video]');
+if(videoLink){
+ videoLink.addEventListener('click',event=>{event.preventDefault();watchDemoVideo()});
+ // Um link responde ao Enter; a barra de espaço fica por nossa conta.
+ videoLink.addEventListener('keydown',event=>{
+  if(event.key!==' '&&event.key!=='Spacebar')return;
+  event.preventDefault();
+  watchDemoVideo();
+ });
+}

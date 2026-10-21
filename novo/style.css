@@ -375,3 +375,20 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
  .satellite:nth-child(5):last-child{grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
 }
 @media(prefers-reduced-motion:reduce){.satellite-module{transition:none}}
+
+/* Vídeo e conversa são coisas diferentes: duas ações discretas ao lado do convite principal. */
+.hero-secondary{display:flex;align-items:stretch;justify-content:center;gap:14px}
+.hero-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:5px 15px;border:1px solid #ffffff3d;border-radius:24px;background:transparent;color:var(--paper);font:500 13px var(--font);letter-spacing:.2px;line-height:1.25;text-align:center;transition:border-color .2s,color .2s}
+.hero-action:hover,.hero-action:focus-visible{border-color:#8bebcf99;color:var(--mint)}
+.hero-action svg{display:block;flex-shrink:0;color:var(--mint)}
+@media(max-width:760px){
+ .hero-secondary{width:calc(100% - 48px);margin:13px auto 0;gap:10px}
+ .hero-action{flex:1 1 0;min-width:0;padding:5px 11px}
+}
+/* O mesmo convite no FAQ, sobre o fundo claro. */
+.faq-section .section-heading>p{padding-bottom:0}
+.faq-chat{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;margin-top:9px;padding:5px 15px;border:1px solid #0c252e2e;border-radius:24px;background:transparent;color:var(--mint-dark);font:500 13px var(--font);letter-spacing:.2px;line-height:1.25;vertical-align:middle;transition:border-color .2s,background .2s}
+.faq-chat:hover,.faq-chat:focus-visible{border-color:#1d6b5a80;background:#e1eee4}
+.faq-chat svg{display:block;flex-shrink:0;color:var(--mint-dark)}
+.faq-chat:focus-visible{outline:2px solid var(--mint-dark);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.hero-action,.faq-chat{transition:none}}
