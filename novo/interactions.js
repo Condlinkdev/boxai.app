@@ -30,8 +30,8 @@ function openEnvironmentTab(segment){
  return true;
 }
 
-// "Preços" aponta hoje para a pergunta de valores do FAQ, que precisa chegar aberta.
-// Quando o id="precos" passar para uma seção de módulos e preços, este trecho segue valendo.
+// "Preços" aponta para o bloco de preços dentro da seção de módulos, que não é um details.
+// A abertura segue aqui para o caso de o id="precos" voltar a cair sobre uma pergunta do FAQ.
 function openPriceDetails(){
  const target=document.getElementById('precos');
  if(target&&target.tagName==='DETAILS')target.open=true;

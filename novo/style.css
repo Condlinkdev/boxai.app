@@ -211,3 +211,65 @@ footer .brand .brand-logo{width:195px;max-height:none}
  .header nav.site-menu a{padding:14px 4px;font-size:16px;color:var(--paper);border-top:1px solid #ffffff14}
  .header nav.site-menu a:first-of-type{border-top:0}
 }
+
+/* Os seis módulos da Box AI: o que cada um faz e o que vai instalado. */
+.modules{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 90px}
+.modules h2 em{color:var(--mint-dark)}
+.modules .section-heading{border-top:1px solid #d3dfd6;padding-top:60px}
+.modules-lead,.modules-energy{max-width:1200px;margin:32px auto 0;display:flex;gap:16px;align-items:flex-start;padding:20px 24px;border:1px solid #0c252e1f;border-radius:14px;background:#fff}
+.modules-lead-icon,.modules-energy-icon{width:36px;height:36px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#1d6b5a12;color:var(--mint-dark)}
+.modules-lead-icon svg,.modules-energy-icon svg{width:19px;height:19px}
+.modules-lead strong,.modules-energy strong{display:block;font:500 16px/1.4 var(--font);color:var(--ink)}
+.modules-lead span,.modules-energy span{display:block;margin-top:6px;font-size:15px;line-height:1.55;color:var(--muted-dark)}
+.modules-grid{max-width:1200px;margin:22px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.module-card{position:relative;min-width:0;display:flex;flex-direction:column;background:#fff;border:1px solid #0c252e14;border-radius:20px;padding:26px 25px 24px}
+.module-card.is-featured{border-color:#1d6b5a55;box-shadow:0 14px 34px #1d6b5a1a}
+.module-flag{position:absolute;top:-13px;left:24px;display:inline-flex;padding:7px 13px;border-radius:20px;background:var(--ink);color:var(--paper);font:500 12px/1.2 var(--font);letter-spacing:.6px}
+.module-head{display:flex;align-items:center;gap:12px}
+.module-icon{width:40px;height:40px;flex-shrink:0;border-radius:11px;display:grid;place-items:center;background:#1d6b5a0f;border:1px solid #1d6b5a24;color:var(--mint-dark)}
+.module-icon svg{width:21px;height:21px}
+.module-index{font:500 12px var(--font);letter-spacing:1.4px;color:var(--muted-dark)}
+.module-card h3{font-size:21px;font-weight:500;letter-spacing:-.6px;line-height:1.2;margin:19px 0 11px}
+.module-copy{font-size:15px;line-height:1.55;color:var(--muted-dark)}
+.module-kit{margin-top:19px;padding-top:17px;border-top:1px solid #e3eae3}
+.module-kit-title{display:block;font:500 12px var(--font);letter-spacing:1.3px;color:var(--mint-dark);margin-bottom:11px}
+.module-kit ul{display:flex;flex-wrap:wrap;gap:7px;margin:0;padding:0;list-style:none}
+.module-kit li{padding:5px 11px;border-radius:20px;border:1px solid #dfe8e1;background:#f7f9f5;color:var(--muted-dark);font-size:14px;line-height:1.3}
+.module-aside{margin-top:15px;font-size:14px;line-height:1.5;color:var(--muted-dark)}
+.module-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:20px}
+.module-badge{display:inline-flex;align-items:center;padding:6px 12px;border-radius:20px;border:1px solid #cfdcd3;font:500 12px/1.3 var(--font);letter-spacing:.4px;color:var(--muted-dark)}
+.module-badge.is-proven{background:#e6f3ec;border-color:#b2d9c5;color:#14543f}
+.module-badge.is-pending{border-style:dashed;border-color:#b9c7bd}
+.module-badge.is-price{background:var(--paper)}
+.module-link{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font:500 14px var(--font);color:var(--mint-dark)}
+.module-link svg{flex-shrink:0;transition:transform .2s}
+.module-link:hover svg{transform:translateX(4px)}
+.module-link:focus-visible{outline:2px solid var(--mint-dark);outline-offset:4px;border-radius:4px}
+.modules-prices{max-width:1200px;margin:20px auto 0;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:28px 30px;border-radius:20px;background:var(--ink);color:var(--paper);scroll-margin-top:24px}
+.modules-prices-label{display:block;font:500 12px var(--font);letter-spacing:1.5px;color:var(--mint)}
+.modules-prices-main{margin-top:13px;font:500 clamp(19px,2vw,24px)/1.3 var(--font);letter-spacing:-.6px;max-width:620px}
+.modules-prices-totem{margin-top:11px;font-size:15px;line-height:1.55;color:var(--muted)}
+.modules-prices .button{gap:18px;flex-shrink:0}
+.modules-prices .button:focus-visible{outline:2px solid var(--mint);outline-offset:4px}
+@media(max-width:1000px){.modules-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .modules{padding:0 20px 55px}
+ .modules .section-heading{padding-top:42px}
+ .modules .section-heading>p{font-size:15px}
+ .modules-lead,.modules-energy{margin-top:24px;padding:18px 17px;gap:12px;border-radius:14px}
+ .modules-lead strong,.modules-energy strong{font-size:15px}
+ .modules-lead span,.modules-energy span{font-size:14px}
+ .modules-grid{grid-template-columns:1fr;gap:20px;margin-top:18px}
+ .module-card{padding:22px 20px;border-radius:17px}
+ .module-flag{left:20px}
+ .module-card h3{font-size:20px;margin:16px 0 10px}
+ .module-copy{font-size:14px}
+ .module-kit li,.module-aside{font-size:13px}
+ .module-badges{padding-top:17px}
+ .module-link{min-height:44px;align-items:center}
+ .modules-prices{padding:22px 20px;gap:18px;border-radius:17px}
+ .modules-prices-main{font-size:19px}
+ .modules-prices-totem{font-size:14px}
+ .modules-prices .button{width:100%;min-height:48px;justify-content:space-between;padding:0 22px;font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){.module-link svg{transition:none}}
