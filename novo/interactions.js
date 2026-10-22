@@ -57,6 +57,15 @@ function focusModuleCard(hash){
  clearTimeout(focusModuleCard.timer);
  focusModuleCard.timer=setTimeout(()=>card.classList.remove('is-targeted'),3000);
 }
+// O clique em link interno roda por aqui, com preventDefault, e por isso o
+// navegador não move mais o ponto de partida do Tab. Para o "Pular para o
+// conteúdo" isso esvazia o atalho: a página rolava, mas o próximo Tab voltava
+// para o topo. O foco vai para o <main>, que leva tabindex="-1" no HTML.
+function entregarFocoDoAtalho(hash){
+ if(hash!=='#principal')return;
+ const principal=document.getElementById('principal');
+ if(principal)principal.focus({preventScroll:true});
+}
 document.addEventListener('click',event=>{
  const link=event.target.closest('a[href^="#"]');
  if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
@@ -66,6 +75,7 @@ document.addEventListener('click',event=>{
  if(location.hash!==hash)history.pushState(null,'',hash);
  scrollToSection(hash);
  focusModuleCard(hash);
+ entregarFocoDoAtalho(hash);
 });
 window.addEventListener('popstate',()=>scrollToSection(location.hash||'#inicio','instant'));
 window.addEventListener('hashchange',()=>scrollToSection(location.hash||'#inicio','instant'));
@@ -145,3 +155,14 @@ if(videoLink){
   watchDemoVideo();
  });
 }
+
+// Os acordeões do FAQ são <details> nativos: Chrome, Firefox e Safari atuais
+// já anunciam o estado. O aria-expanded fica em dia pelo evento toggle para
+// quem usa leitor de tela ou navegador antigo, que não lê o estado nativo.
+document.querySelectorAll('.faq-list details').forEach(details=>{
+ const resumo=details.querySelector('summary');
+ if(!resumo)return;
+ const sincronizar=()=>resumo.setAttribute('aria-expanded',String(details.open));
+ sincronizar();
+ details.addEventListener('toggle',sincronizar);
+});

@@ -70,3 +70,8 @@ footer.site-footer .footer-top,footer.site-footer .footer-legal{max-width:calc(1
  .segment-others a,.segment-others span{font-size:13px;padding:9px 14px}
  footer.site-footer{padding:30px clamp(20px,5vw,64px) 26px}
 }
+
+/* Alvo de toque da trilha: a área clicável chega a 24 px por um
+   pseudo-elemento transparente, sem mexer na linha de texto. */
+.segment-trail a{position:relative}
+.segment-trail a::after{content:"";position:absolute;left:0;right:0;top:50%;height:24px;transform:translateY(-50%)}

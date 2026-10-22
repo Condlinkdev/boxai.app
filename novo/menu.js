@@ -46,5 +46,23 @@ document.addEventListener('pointerdown',event=>{
  if(!menuIsOpen()||event.target.closest('#site-menu, [data-menu-toggle]'))return;
  setMenu(false);
 });
+// No celular o painel abre por cima do conteúdo. Sem isto, o Tab depois do
+// botão do menu seguia para links escondidos atrás do painel: o foco sumia da
+// tela. Enquanto o painel está aberto, o Tab dá a volta dentro do cabeçalho,
+// que é a parte visível; Esc continua fechando e devolvendo o foco ao botão.
+const cabecalho=menuToggle?menuToggle.closest('header'):null;
+function focaveisDoCabecalho(){
+ if(!cabecalho)return[];
+ return[...cabecalho.querySelectorAll('a[href],button')].filter(node=>!node.hidden&&node.offsetParent!==null);
+}
+document.addEventListener('keydown',event=>{
+ if(event.key!=='Tab'||!menuIsOpen())return;
+ const itens=focaveisDoCabecalho();
+ if(itens.length<2)return;
+ const atual=itens.indexOf(document.activeElement);
+ if(atual===-1)return;
+ if(!event.shiftKey&&atual===itens.length-1){event.preventDefault();itens[0].focus()}
+ else if(event.shiftKey&&atual===0){event.preventDefault();itens[itens.length-1].focus()}
+});
 wideHeader.addEventListener('change',()=>{if(wideHeader.matches)setMenu(false)});
 setMenu(false);
