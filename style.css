@@ -384,6 +384,11 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 .satellite-art{position:absolute;inset:0;display:block;width:100%;height:100%;color:var(--mint)}
 .satellite-art .art-halo{fill:none;stroke:currentColor;stroke-width:9;opacity:.1}
 .satellite-art .art-glyph{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+/* O ícone do ambiente encostava no texto da tela: 10% menor no computador e 22% no celular, encolhendo
+   sempre para o canto inferior esquerdo da arte (14,9 86,3 na viewBox) para manter a borda esquerda e a
+   linha de base do ícone da TV no canto. O translate/scale repetido aqui é o do atributo no HTML, que a
+   propriedade transform substitui. */
+.satellite-art .art-glyph{transform-box:view-box;transform-origin:0 0;transform:translate(14.9px,86.3px) scale(.9) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
 .satellite[data-feature=facial] .satellite-shade{background:linear-gradient(90deg,#1d3f52ed,#1d3f5255)}
 .satellite[data-feature=recepcao] .satellite-shade{background:linear-gradient(90deg,#1e4a43ed,#1e4a4355)}
 .satellite[data-feature=midia] .satellite-shade{background:linear-gradient(90deg,#314228ed,#31422855)}
@@ -393,6 +398,7 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 @media(max-width:760px){
  .satellite-module{margin-top:5px;font-size:13px}
  .satellite:nth-child(5):last-child{grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
+ .satellite-art .art-glyph{transform:translate(14.9px,86.3px) scale(.78) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
 }
 @media(prefers-reduced-motion:reduce){.satellite-module{transition:none}}
 
