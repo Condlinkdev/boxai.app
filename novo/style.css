@@ -266,7 +266,7 @@ footer .brand .brand-logo{width:195px;max-height:none}
 .modules-prices{max-width:1200px;margin:20px auto 0;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:28px 30px;border-radius:20px;background:var(--ink);color:var(--paper);scroll-margin-top:24px}
 .modules-prices-label{display:block;font:500 12px var(--font);letter-spacing:1.5px;color:var(--mint)}
 .modules-prices-main{margin-top:13px;font:500 clamp(19px,2vw,24px)/1.3 var(--font);letter-spacing:-.6px;max-width:620px}
-.modules-prices-totem{margin-top:11px;font-size:15px;line-height:1.55;color:var(--muted)}
+.modules-prices-totem,.modules-prices-note{margin-top:11px;font-size:15px;line-height:1.55;color:var(--muted)}.modules-prices-note{max-width:620px}
 .modules-prices .button{gap:18px;flex-shrink:0}
 .modules-prices .button:not(.cta-proposta):focus-visible{outline:2px solid var(--mint);outline-offset:4px}
 @media(max-width:1000px){.modules-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -287,7 +287,7 @@ footer .brand .brand-logo{width:195px;max-height:none}
  .module-link{min-height:44px;align-items:center}
  .modules-prices{padding:22px 20px;gap:18px;border-radius:17px}
  .modules-prices-main{font-size:19px}
- .modules-prices-totem{font-size:14px}
+ .modules-prices-totem,.modules-prices-note{font-size:14px}
  .modules-prices .button{width:100%;min-height:48px;justify-content:space-between;padding:0 22px;font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){.module-link svg{transition:none}}
