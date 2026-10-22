@@ -386,8 +386,8 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 .satellite-art .art-glyph{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
 .satellite[data-feature=facial] .satellite-shade{background:linear-gradient(90deg,#1d3f52ed,#1d3f5255)}
 .satellite[data-feature=recepcao] .satellite-shade{background:linear-gradient(90deg,#1e4a43ed,#1e4a4355)}
-.satellite[data-feature=midia] .satellite-shade{background:linear-gradient(90deg,#563a21ed,#563a2177)}
-.satellite[data-feature=avisos] .satellite-shade{background:linear-gradient(90deg,#343255ed,#34325577)}
+.satellite[data-feature=midia] .satellite-shade{background:linear-gradient(90deg,#314228ed,#31422855)}
+.satellite[data-feature=avisos] .satellite-shade{background:linear-gradient(90deg,#343255ed,#34325555)}
 .satellite-module{display:inline-flex;align-items:center;min-height:30px;margin-top:8px;padding:0 2px;font:500 13px var(--font);letter-spacing:.3px;color:var(--muted);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
 .satellite-module:hover,.satellite-module:focus-visible{color:var(--mint);border-bottom-color:#8bebcf80}
 @media(max-width:760px){
