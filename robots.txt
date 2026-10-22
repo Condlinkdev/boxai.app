@@ -1,0 +1,10 @@
+# boxai.app
+
+User-agent: *
+Allow: /
+
+# /blue/, /labs/, /email/ ficam de fora de qualquer Disallow de propósito: essas páginas saem do
+# índice pela meta robots noindex delas, e o Google só enxerga o noindex se puder
+# rastrear a página. Bloquear no robots.txt deixaria a página presa no índice.
+
+Sitemap: https://boxai.app/sitemap.xml
