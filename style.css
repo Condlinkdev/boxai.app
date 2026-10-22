@@ -522,3 +522,67 @@ main:focus,main:focus-visible{outline:none}
 .story-page-link,.text-link,.module-link,.faq-list details>div>a{position:relative}
 .story-page-link::after,.text-link::after,.module-link::after,.faq-list details>div>a::after{
  content:"";position:absolute;left:0;right:0;top:50%;height:24px;transform:translateY(-50%)}
+
+/* O painel por dentro: as telas do painel online, os quatro níveis de
+   interação da TV e o vídeo gravado em uma loja. Fica no fundo escuro, logo
+   depois de "Da unidade à rede", para alternar com o claro das perguntas. As
+   capturas têm proporções diferentes, então cada uma entra inteira num quadro
+   de mesma altura, sem corte. */
+.panel-tour{background:#102d35;color:var(--paper);padding:88px max(6vw,24px) 92px}
+.panel-tour .section-heading>p{color:var(--muted)}
+.panel-tour h2 em{color:var(--mint)}
+.panel-shots{max-width:1200px;margin:44px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.panel-shot{display:flex;flex-direction:column;margin:0;overflow:hidden;border:1px solid #ffffff1f;border-radius:18px;background:#0c252e}
+.panel-shot-frame{aspect-ratio:16/9;padding:14px;background:#e4eae6;overflow:hidden}
+.panel-shot-frame picture{display:block;width:100%;height:100%}
+.panel-shot-frame img{display:block;width:100%;height:100%;object-fit:contain}
+.panel-shot figcaption{padding:18px 20px 21px;border-top:1px solid #ffffff14}
+.panel-shot figcaption>span{display:block;font:500 12px var(--font);letter-spacing:1.5px;color:var(--mint)}
+.panel-shot figcaption>p{margin:9px 0 0;font-size:15px;line-height:1.5;color:var(--paper)}
+/* A tela de vídeos é a sétima e ficaria sozinha na última fileira, com um
+   vazio ao lado. Ela ocupa as duas colunas, e o quadro usa a proporção da
+   própria captura, que é bem mais larga: assim a imagem preenche o quadro
+   sem sobrar fundo em cima e embaixo. */
+.panel-shot-larga{grid-column:1/-1}
+.panel-shot-larga .panel-shot-frame{aspect-ratio:1573/727}
+.panel-levels{max-width:1200px;margin:34px auto 0;display:grid;grid-template-columns:1.25fr 1fr;gap:34px;align-items:start}
+.panel-levels-copy h3{margin:0;font:500 clamp(25px,2.6vw,32px)/1.18 var(--font);letter-spacing:-1.2px}
+.panel-levels-copy h3 em{color:var(--mint)}
+.panel-levels-copy>p{margin:13px 0 0;font-size:15px;line-height:1.55;color:var(--muted)}
+.panel-levels-list{counter-reset:nivel;list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
+.panel-levels-list li{counter-increment:nivel;display:grid;grid-template-columns:34px 1fr;column-gap:15px;row-gap:0;padding:16px 18px;border:1px solid #ffffff1f;border-radius:14px;background:#0c252e}
+.panel-levels-list li::before{content:counter(nivel);display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#8bebcf14;border:1px solid #8bebcf2e;color:var(--mint);font:500 15px var(--font)}
+.panel-levels-list strong{align-self:center;font:500 17px/1.25 var(--font);letter-spacing:-.4px}
+.panel-levels-list p{grid-column:2;margin:7px 0 0;font-size:14px;line-height:1.55;color:var(--muted)}
+.panel-video{margin:0;max-width:326px;justify-self:center;border:1px solid #ffffff1f;border-radius:18px;overflow:hidden;background:#0c252e}
+.panel-video video{display:block;width:100%;aspect-ratio:478/850;max-height:560px;object-fit:contain;background:var(--ink)}
+.panel-video figcaption{padding:16px 18px 18px}
+.panel-video figcaption>span{display:block;font:500 12px var(--font);letter-spacing:1.5px;color:var(--mint)}
+.panel-video figcaption>p{margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--paper)}
+.panel-video-descricao{margin:11px 0 0;font-size:13px;line-height:1.55;color:var(--muted)}
+@media(max-width:1000px){
+ .panel-levels{grid-template-columns:1fr;gap:28px}
+ .panel-video{max-width:330px}
+}
+@media(max-width:760px){
+ .panel-tour{padding:56px 20px 58px}
+ .panel-shots{grid-template-columns:1fr;gap:16px;margin-top:26px}
+ .panel-shot{border-radius:16px}
+ .panel-shot-frame{padding:11px}
+ .panel-shot figcaption{padding:16px 16px 18px}
+ .panel-shot figcaption>p{font-size:14px}
+ .panel-levels{margin-top:28px;gap:24px}
+ .panel-levels-copy h3{font-size:26px;letter-spacing:-1px}
+ .panel-levels-copy h3 br{display:none}
+ .panel-levels-list li{padding:14px 15px;column-gap:12px}
+ .panel-video{max-width:none}
+ .panel-video video{max-height:min(70vh,520px)}
+}
+/* O item "Painel" é o sétimo do cabeçalho. Abaixo de 1141 px ele não cabe sem
+   encostar no botão de proposta, e a 761 px chega a empurrar a página para o
+   lado: nessa faixa ele sai do topo, como já acontece com o item dos pilotos.
+   A seção continua na rolagem e no rodapé, e no celular volta no painel do
+   menu. */
+@media(min-width:761px) and (max-width:1140px){
+ .header nav.site-menu a[href="#painel"]{display:none}
+}

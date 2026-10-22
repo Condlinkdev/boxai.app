@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;650;700;750;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/loja-real-400.avif" type="image/avif" fetchpriority="high">
-<link rel="stylesheet" href="style.css?v=20261022-tvs-icones">
+<link rel="stylesheet" href="style.css?v=20261022-painel">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head>
 <body>
@@ -42,7 +42,7 @@
 <li><a href="para-quem/condominios/">Condomínios</a></li>
 </ul>
 </div>
-<a href="#em-cena">Recursos</a><a href="#pilotos" data-prova-social-link>Onde funciona</a><a href="#precos">Preços</a><a href="#pedido">Fale conosco</a>
+<a href="#em-cena">Recursos</a><a href="#painel">Painel</a><a href="#pilotos" data-prova-social-link>Onde funciona</a><a href="#precos">Preços</a><a href="#pedido">Fale conosco</a>
 <!-- "App" fica oculto: só aparece quando houver o link oficial de download do aplicativo. -->
 <a class="menu-app" hidden>App</a>
 </nav><a class="nav-cta" href="#pedido">Peça sua proposta <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a><button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu"><span class="menu-toggle-bars" aria-hidden="true"></span></button></header>
@@ -318,6 +318,65 @@
   <div class="how-update"><span class="how-update-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M19 8a8 8 0 0 0-13-2L3 9m0-5v5h5m-3 7a8 8 0 0 0 13 2l3-3m0 5v-5h-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Mudou a campanha? Mude pelo painel.</strong><span>Atualize o conteúdo à distância, sem levar um pen-drive até a TV.</span></p><span class="how-update-label">MAIS PRATICIDADE NO DIA A DIA</span></div>
 </section>
 <section class="network"><div class="network-art" aria-hidden="true"><div class="network-center"><img src="assets/boxai-logo-light.svg" alt="" width="500" height="175" loading="lazy" decoding="async"><small>PAINEL ONLINE</small></div><span class="network-node n1">▣ <small>UNIDADE 01</small></span><span class="network-node n2">▣ <small>UNIDADE 02</small></span><span class="network-node n3">▣ <small>UNIDADE 03</small></span><svg viewBox="0 0 500 310"><path d="M250 155 L100 70 M250 155 L400 70 M250 155 L250 280"/></svg></div><div><div class="eyebrow dark">DA UNIDADE À REDE</div><h2>Cada lugar tem<br> algo a <em>comunicar.</em></h2><p>Organize suas TVs e unidades em um painel online. Dê espaço às campanhas da marca e às mensagens que fazem sentido em cada lugar.</p><a class="text-link dark" href="https://admin.boxai.app" target="_blank" rel="noopener">Já tem uma Box? Acesse o painel <span>↗</span></a></div></section>
+<!-- O painel online por dentro. Entra logo depois de "Da unidade à rede", que
+     promete o painel e leva para ele: aqui vêm as telas de verdade, os quatro
+     níveis de interação da TV e o vídeo gravado em uma loja. Todas as imagens
+     são capturas do painel com os dados de quem usa borrados antes de entrar
+     no repositório. O vídeo não tem áudio e nunca toca sozinho: só com os
+     controles, por isso não precisa de exceção para quem pede menos
+     movimento. -->
+<section class="panel-tour" id="painel" aria-labelledby="painel-titulo">
+  <div class="section-heading">
+    <div><div class="eyebrow"><span></span> O PAINEL ONLINE</div><h2 id="painel-titulo">O painel por dentro.<br> <em>As telas de verdade.</em></h2></div>
+    <p>Capturas do painel da Box AI.<br>Os dados de quem usa aparecem borrados.</p>
+  </div>
+  <div class="panel-shots">
+    <figure class="panel-shot">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-dashboard-700.avif 700w, assets/painel/painel-dashboard-1358.avif 1358w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><source type="image/webp" srcset="assets/painel/painel-dashboard-700.webp 700w, assets/painel/painel-dashboard-1358.webp 1358w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><img src="assets/painel/painel-dashboard.jpg" alt="Tela inicial do painel, com os totais de Boxes online, franquias, franqueados e vídeos e a lista de Boxes aguardando configuração" width="1358" height="588" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>01 / DASHBOARD</span><p>Todas as suas TVs num só painel.</p></figcaption>
+    </figure>
+    <figure class="panel-shot">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-tv-boxes-700.avif 700w, assets/painel/painel-tv-boxes-1350.avif 1350w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><source type="image/webp" srcset="assets/painel/painel-tv-boxes-700.webp 700w, assets/painel/painel-tv-boxes-1350.webp 1350w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><img src="assets/painel/painel-tv-boxes.jpg" alt="Tela de TV Boxes, com um cartão por TV mostrando se está online e qual é o nível de interação" width="1350" height="556" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>02 / TV BOXES</span><p>Veja cada TV, se está online e o que está tocando.</p></figcaption>
+    </figure>
+    <figure class="panel-shot">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-nivel-455.avif 455w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 455px"><source type="image/webp" srcset="assets/painel/painel-nivel-455.webp 455w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 455px"><img src="assets/painel/painel-nivel.jpg" alt="Janela de interação da TV, com os quatro níveis para escolher e o nível 2, Multimídia, marcado" width="455" height="356" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>03 / NÍVEL DE INTERAÇÃO</span><p>Escolha seu nível de inteligência.</p></figcaption>
+    </figure>
+    <figure class="panel-shot">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-modelos-700.avif 700w, assets/painel/painel-modelos-1175.avif 1175w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><source type="image/webp" srcset="assets/painel/painel-modelos-700.webp 700w, assets/painel/painel-modelos-1175.webp 1175w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><img src="assets/painel/painel-modelos.jpg" alt="Tela de modelos de mensagem, com três exemplos prontos para ir à TV" width="1175" height="357" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>04 / MODELOS</span><p>Crie seus modelos de mensagem.</p></figcaption>
+    </figure>
+    <figure class="panel-shot">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-enviar-tv-700.avif 700w, assets/painel/painel-enviar-tv-1355.avif 1355w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><source type="image/webp" srcset="assets/painel/painel-enviar-tv-700.webp 700w, assets/painel/painel-enviar-tv-1355.webp 1355w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><img src="assets/painel/painel-enviar-tv.jpg" alt="Aba Enviar agora, da tela de mensagens na TV, com os modelos prontos para mandar à TV" width="1355" height="593" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>05 / ENVIAR AGORA</span><p>Envie para a TV quando quiser ou programe.</p></figcaption>
+    </figure>
+    <figure class="panel-shot">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-quando-alguem-chega-700.avif 700w, assets/painel/painel-quando-alguem-chega-1365.avif 1365w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><source type="image/webp" srcset="assets/painel/painel-quando-alguem-chega-700.webp 700w, assets/painel/painel-quando-alguem-chega-1365.webp 1365w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(46vw - 28px), 561px"><img src="assets/painel/painel-quando-alguem-chega.jpg" alt="Aba Quando alguém chegar, com a sequência de saudação e duas promoções e a prévia do que a TV mostra" width="1365" height="599" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>06 / QUANDO ALGUÉM CHEGA</span><p>Quando alguém chega, o que acontece? Você pode escolher.</p></figcaption>
+    </figure>
+    <figure class="panel-shot panel-shot-larga">
+      <div class="panel-shot-frame"><picture><source type="image/avif" srcset="assets/painel/painel-videos-700.avif 700w, assets/painel/painel-videos-1573.avif 1573w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(92vw - 28px), 1172px"><source type="image/webp" srcset="assets/painel/painel-videos-700.webp 700w, assets/painel/painel-videos-1573.webp 1573w" sizes="(max-width:760px) calc(100vw - 68px), (max-width:1280px) calc(92vw - 28px), 1172px"><img src="assets/painel/painel-videos.jpg" alt="Tela de vídeos, com a lista dos vídeos do sistema, em quais Boxes cada um está, a data de criação e a situação da sincronização" width="1573" height="727" loading="lazy" decoding="async"></picture></div>
+      <figcaption><span>07 / VÍDEOS</span><p>Envie vídeos para uma TV, um grupo ou todas, e veja quais já sincronizaram.</p></figcaption>
+    </figure>
+  </div>
+  <div class="panel-levels">
+    <div class="panel-levels-copy">
+      <h3 id="painel-niveis-titulo">Quatro níveis.<br> Você escolhe <em>até onde a TV vai.</em></h3>
+      <p>O nível é escolhido no painel, TV por TV.</p>
+      <ol class="panel-levels-list" aria-labelledby="painel-niveis-titulo">
+        <li><strong>Somente acesso</strong><p>A Box só faz o controle de acesso. A TV não recebe vídeos nem mensagens.</p></li>
+        <li><strong>Multimídia</strong><p>Vídeos na TV, sem mensagens e sem voz.</p></li>
+        <li><strong>Multimídia com fala</strong><p>Vídeos, saudação e até 2 promoções faladas. A assistente não conversa.</p></li>
+        <li><strong>Multimídia interativa</strong><p>Tudo do nível 3 e a conversa com a assistente, inclusive pelo “Ana, me ajuda”.</p></li>
+      </ol>
+    </div>
+    <figure class="panel-video">
+      <video src="assets/painel/vila-verde-fala.mp4" poster="assets/painel/vila-verde-fala-poster.webp" muted loop playsinline preload="none" controls aria-label="Vídeo sem som da TV no nível 3, em uma loja, 25 segundos" aria-describedby="painel-video-descricao"></video>
+      <figcaption><span>NÍVEL 3 · MULTIMÍDIA COM FALA</span><p>Gravado em uma loja em funcionamento. Vídeo sem som.</p><p class="panel-video-descricao" id="painel-video-descricao">No vídeo, uma pessoa passa pelo terminal de leitura facial na entrada. A TV responde com “Olá, Luiz.” e logo depois mostra uma promoção de Coca-Cola a R$ 12,99 e outra promoção do próprio mercado.</p></figcaption>
+    </figure>
+  </div>
+</section>
 <section class="faq-section" id="perguntas"><div class="section-heading"><div><div class="eyebrow dark"><span></span> ANTES DE DAR O PRÓXIMO PASSO</div><h2>Boas perguntas.<br><em>Respostas diretas.</em></h2></div><p>Entenda o essencial sobre a Box AI.<br>Se quiser conversar, a assistente está por aqui. <button class="faq-chat" type="button" data-abrir-conversa><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>Conversar com a assistente</button></p></div><div class="faq-list">
 <details name="boxai-faq"><summary>O que é a Box AI?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div><p>A Box AI é uma solução da Condlink que conecta um equipamento à sua TV e permite gerenciar o conteúdo pelo painel online. Você escolhe os vídeos, avisos e campanhas que quer mostrar.</p></div></details>
 <details name="boxai-faq"><summary>Preciso ir até a TV para trocar o conteúdo?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div><p>Você atualiza o conteúdo pelo painel online, de onde estiver. A Box precisa estar conectada à internet para receber as atualizações.</p></div></details>
@@ -401,6 +460,7 @@
 <div><h2>Navegue</h2><ul>
 <li><a href="#modulos">Produtos</a></li>
 <li><a href="#em-cena">Recursos</a></li>
+<li><a href="#painel">Painel</a></li>
 <li><a href="#precos">Preços</a></li>
 <li><a href="#perguntas">Perguntas</a></li>
 <li><a href="#pedido">Fale conosco</a></li>
