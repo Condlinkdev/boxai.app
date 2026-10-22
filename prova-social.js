@@ -137,12 +137,14 @@
     figura.setAttribute('data-piloto-video', '');
     const tela = document.createElement('video');
     // Sem o video-piloto.js ficam os controles nativos, então dá para tocar na
-    // mão; o arquivo só é baixado quando alguém toca.
+    // mão; o autoplay sem som também funciona sem o script de controles.
     tela.controls = true;
     tela.muted = true;
     tela.loop = true;
     tela.playsInline = true;
-    tela.preload = 'none';
+    tela.preload = 'auto';
+    tela.autoplay = true;
+    tela.defaultMuted = true;
     tela.setAttribute('muted', '');
     tela.appendChild(document.createElement('source'));
     figura.appendChild(tela);

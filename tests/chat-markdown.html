@@ -1,0 +1,34 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Verificação do Markdown do chat</title>
+<style>body{background:#0b2229;color:#f3f5ef;font:15px/1.5 system-ui;margin:20px}.bubble{max-width:310px;padding:15px;border:1px solid #8bebcf35;border-radius:18px;background:#12323b}#results{white-space:pre-wrap;color:#8bebcf}.user{display:none}</style>
+<h1>Verificação do Markdown</h1><pre id="results">Executando…</pre><div id="log"></div>
+<script type="module">
+import { markdownFragment, enhanceMarkdown } from '../chat-markdown.js';
+const results = document.querySelector('#results');
+const log = document.querySelector('#log');
+const passed=[];
+function check(name, condition){if(!condition)throw new Error(name);passed.push(name)}
+const nextDraw = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+try{
+ const doc=markdownFragment('# Título\n\n**Destaque** e *ênfase* com `código`.\n\n- Primeiro\n- Segundo\n\n1. Passo\n2. Outro\n\n> Citação\n\n```js\nconst box = true;\n```\n\n| Plano | Valor |\n| --- | --- |\n| TV | 149 |\n\n[Site](https://boxai.app)');
+ check('Títulos, negrito e itálico',!!doc.querySelector('h1')&&!!doc.querySelector('strong')&&!!doc.querySelector('em'));
+ check('Listas, citação e código',doc.querySelectorAll('ul li').length===2&&doc.querySelectorAll('ol li').length===2&&!!doc.querySelector('blockquote')&&!!doc.querySelector('pre code'));
+ check('Tabela com rolagem própria',!!doc.querySelector('.markdown-table table'));
+ check('Links HTTP abrem isolados',doc.querySelector('a').target==='_blank'&&doc.querySelector('a').rel.includes('noopener'));
+ const attack=markdownFragment('[Perigoso](javascript:alert(1))\n\n[Outro](data:text/html,hello)\n\n<script>alert(1)<\/script><img src="https://example.com/tracker" onerror="alert(1)">');
+ check('Bloqueia scripts, imagens e links executáveis',!attack.querySelector('script,img,iframe')&&!Array.from(attack.querySelectorAll('a')).some(a=>!/^(http:|https:)/.test(a.protocol)));
+ const bubble=document.createElement('p');bubble.className='bubble assistant';log.append(bubble);
+ const user=document.createElement('p');user.className='bubble user';user.textContent='**literal do usuário**';log.append(user);
+ const stop=enhanceMarkdown(log);
+ let raw='## Sua Box\n\n**Multimídia';bubble.textContent=raw;await nextDraw();
+ check('Mantém Markdown incompleto durante streaming',bubble.textContent===raw);
+ raw+='** custa R$ 149.\n\n- Uma TV\n- Troca online\n\n[Saiba mais](https://boxai.app)';
+ // Mesma acumulação usada pelo widget original em appendText().
+ bubble.textContent=bubble.textContent+'** custa R$ 149.\n\n- Uma TV\n- Troca online\n\n[Saiba mais](https://boxai.app)';await nextDraw();
+ check('Histórico preserva o texto exato e a URL',bubble.textContent===raw);
+ check('Mensagem formatada no shadow DOM',!!bubble.querySelector('[data-markdown-view]').shadowRoot.querySelector('strong'));
+ check('Texto do usuário permanece literal',user.textContent==='**literal do usuário**'&&!user.querySelector('[data-markdown-view]'));
+ bubble.textContent=bubble.textContent+'\n\nMais um trecho.';await nextDraw();
+ check('Deltas posteriores não duplicam a resposta',bubble.textContent===raw+'\n\nMais um trecho.');
+ stop();results.textContent=passed.length+' verificações passaram:\n'+passed.map(s=>'✓ '+s).join('\n');document.body.dataset.result='passed';
+}catch(error){results.textContent='FALHOU: '+error.message;document.body.dataset.result='failed';throw error}
+</script></html>

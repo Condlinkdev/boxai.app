@@ -1,6 +1,6 @@
 // Vídeo dos cartões de piloto, na seção "Onde a Box AI já está funcionando".
-// O vídeo já vem no HTML com os controles nativos e com preload="none", então
-// sem JavaScript dá para tocar na mão e nada é baixado antes disso.
+// O vídeo já vem no HTML com autoplay, muted, playsinline e preload="auto".
+// O script mantém a reprodução sem som e pausa quando o cartão sai da tela.
 // Quando o navegador tem IntersectionObserver e o sistema não pede menos
 // movimento, este script troca os controles nativos por dois botões escritos
 // (pausar/reproduzir e ligar/desligar o som) e toca o vídeo sem som só
@@ -14,10 +14,16 @@
   const menosMovimento = window.matchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
     : null;
-  // Sem IntersectionObserver, ou com menos movimento pedido no sistema, nada
-  // toca sozinho: ficam os controles nativos que já estão no HTML.
+  // A preferência por menos movimento desliga também o autoplay do HTML.
+  if (menosMovimento && menosMovimento.matches) {
+    figuras.forEach(function (figura) {
+      const video = figura.querySelector('video');
+      if (video) { video.autoplay = false; video.pause(); }
+    });
+    return;
+  }
+  // Sem o observador, ficam o autoplay e os controles nativos do HTML.
   if (!('IntersectionObserver' in window)) return;
-  if (menosMovimento && menosMovimento.matches) return;
 
   figuras.forEach(function (figura) {
     const video = figura.querySelector('video');
@@ -35,7 +41,11 @@
     acoes.appendChild(botaoTocar);
     acoes.appendChild(botaoSom);
     figura.appendChild(acoes);
+    video.defaultMuted = true;
     video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    video.autoplay = true;
     video.controls = false;
 
     function atualizarBotoes() {
@@ -79,18 +89,18 @@
     video.addEventListener('pause', atualizarBotoes);
     video.addEventListener('volumechange', atualizarBotoes);
 
-    // Metade do vídeo na tela já basta para tocar; ao sair, ele para.
+    // Um quarto do vídeo visível já basta para tocar; ao sair, ele para.
     const observador = new IntersectionObserver(
       function (entradas) {
         entradas.forEach(function (entrada) {
-          if (entrada.isIntersecting) {
+          if (entrada.isIntersecting && entrada.intersectionRatio >= 0.25) {
             if (!pausadoPelaPessoa && video.paused) tocar();
           } else if (!video.paused) {
             video.pause();
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: [0, 0.25] }
     );
     observador.observe(video);
     atualizarBotoes();

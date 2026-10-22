@@ -238,7 +238,7 @@ footer .brand .brand-logo{width:195px;max-height:none}
 .modules-lead-icon,.modules-energy-icon{width:36px;height:36px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#1d6b5a12;color:var(--mint-dark)}
 .modules-lead-icon svg,.modules-energy-icon svg{width:19px;height:19px}
 .modules-lead strong,.modules-energy strong{display:block;font:500 16px/1.4 var(--font);color:var(--ink)}
-.modules-lead span,.modules-energy span{display:block;margin-top:6px;font-size:15px;line-height:1.55;color:var(--muted-dark)}
+.modules-lead>p>span,.modules-energy>p>span{display:block;margin-top:6px;font-size:15px;line-height:1.55;color:var(--muted-dark)}
 .modules-grid{max-width:1200px;margin:22px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .module-card{position:relative;min-width:0;display:flex;flex-direction:column;background:#fff;border:1px solid #0c252e14;border-radius:20px;padding:26px 25px 24px}
 .module-card.is-featured{border-color:#1d6b5a55;box-shadow:0 14px 34px #1d6b5a1a}
@@ -276,7 +276,7 @@ footer .brand .brand-logo{width:195px;max-height:none}
  .modules .section-heading>p{font-size:15px}
  .modules-lead,.modules-energy{margin-top:24px;padding:18px 17px;gap:12px;border-radius:14px}
  .modules-lead strong,.modules-energy strong{font-size:15px}
- .modules-lead span,.modules-energy span{font-size:14px}
+ .modules-lead>p>span,.modules-energy>p>span{font-size:14px}
  .modules-grid{grid-template-columns:1fr;gap:20px;margin-top:18px}
  .module-card{padding:22px 20px;border-radius:17px}
  .module-flag{left:20px}
@@ -384,11 +384,9 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 .satellite-art{position:absolute;inset:0;display:block;width:100%;height:100%;color:var(--mint)}
 .satellite-art .art-halo{fill:none;stroke:currentColor;stroke-width:9;opacity:.1}
 .satellite-art .art-glyph{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
-/* O ícone do ambiente encostava no texto da tela: 10% menor no computador e 22% no celular, encolhendo
-   sempre para o canto inferior esquerdo da arte (14,9 86,3 na viewBox) para manter a borda esquerda e a
-   linha de base do ícone da TV no canto. O translate/scale repetido aqui é o do atributo no HTML, que a
-   propriedade transform substitui. */
-.satellite-art .art-glyph{transform-box:view-box;transform-origin:0 0;transform:translate(14.9px,86.3px) scale(.9) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
+/* Ícones menores sob o texto, preservando o alinhamento inferior esquerdo da arte.
+   O translate/scale final reproduz o atributo SVG, substituído pelo transform do CSS. */
+.satellite-art .art-glyph{transform-box:view-box;transform-origin:0 0;transform:translate(14.9px,86.3px) scale(.68) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
 .satellite[data-feature=facial] .satellite-shade{background:linear-gradient(90deg,#1d3f52ed,#1d3f5255)}
 .satellite[data-feature=recepcao] .satellite-shade{background:linear-gradient(90deg,#1e4a43ed,#1e4a4355)}
 .satellite[data-feature=midia] .satellite-shade{background:linear-gradient(90deg,#314228ed,#31422855)}
@@ -398,7 +396,7 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 @media(max-width:760px){
  .satellite-module{margin-top:5px;font-size:13px}
  .satellite:nth-child(5):last-child{grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
- .satellite-art .art-glyph{transform:translate(14.9px,86.3px) scale(.78) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
+ .satellite-art .art-glyph{transform:translate(14.9px,86.3px) scale(.6) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
 }
 @media(prefers-reduced-motion:reduce){.satellite-module{transition:none}}
 
@@ -585,4 +583,78 @@ main:focus,main:focus-visible{outline:none}
    menu. */
 @media(min-width:761px) and (max-width:1140px){
  .header nav.site-menu a[href="#painel"]{display:none}
+}
+
+/* Pilotos: destaque para o vídeo e dois cartões horizontais, sem esticar os textos. */
+.pilots-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);align-items:start;gap:20px}
+.pilot-card{min-width:0}
+.pilot-body{flex:initial;min-width:0}
+.pilot-card:first-child{grid-row:span 2}
+.pilot-card:first-child .pilot-media{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:12px;padding:12px;align-items:start;grid-template-rows:100px 1fr}
+.pilot-card:first-child .pilot-video{grid-row:span 2;overflow:hidden;border-radius:10px}
+.pilot-card:first-child .pilot-video video{height:350px;max-height:none;aspect-ratio:auto}
+.pilot-card:first-child .pilot-photo-extra{width:100%;margin:0}
+.pilot-card:first-child .pilot-photo-extra img{aspect-ratio:4/3;object-fit:cover}
+.pilot-card:first-child .pilot-photo-extra figcaption{position:static;background:none;padding:6px 0 0;color:var(--muted-dark);font-size:10px}
+.pilot-card:first-child .pilot-legend{margin:0;font-size:12px}
+.pilot-card:not(:first-child){display:grid;grid-template-columns:43% minmax(0,1fr)}
+.pilot-card:not(:first-child) .pilot-media{height:100%;min-height:230px;border-bottom:0;border-right:1px solid #0c252e14;display:flex;flex-direction:column}
+.pilot-card:not(:first-child) .pilot-photo{flex:1;min-height:160px}
+.pilot-card:not(:first-child) .pilot-photo picture{display:block;height:100%}
+.pilot-card:not(:first-child) .pilot-photo img{width:100%;height:100%;min-height:160px;object-fit:cover}
+.pilot-card:not(:first-child) .pilot-photo figcaption{left:8px;bottom:8px;right:8px;font-size:10px;line-height:1.3;padding:5px 8px}
+.pilot-card:not(:first-child) .pilot-photo-extra{width:calc(100% - 20px);margin:10px}
+.pilot-card:not(:first-child) .pilot-photo-extra img{height:88px;object-fit:cover}
+.pilot-card:not(:first-child) .pilot-legend{display:none}
+.pilot-card:not(:first-child) .pilot-body{padding:22px 20px;justify-content:center}
+@media(max-width:1000px) and (min-width:761px){
+ .pilots-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px}
+ .pilot-card:first-child .pilot-media{grid-template-columns:minmax(0,1fr) 90px;gap:8px;padding:8px}
+ .pilot-card:not(:first-child){grid-template-columns:38% minmax(0,1fr)}
+ .pilot-card:not(:first-child) .pilot-body{padding:18px 15px}
+}
+@media(max-width:760px){
+ .pilots-grid{grid-template-columns:1fr;gap:16px}
+ .pilot-card:first-child{grid-row:auto}
+ .pilot-card:first-child .pilot-video video{height:330px}
+ .pilot-card:not(:first-child){display:flex}
+ .pilot-card:not(:first-child) .pilot-media{min-height:0;border-right:0;border-bottom:1px solid #0c252e14}
+ .pilot-card:not(:first-child) .pilot-photo{flex:initial}
+ .pilot-card:not(:first-child) .pilot-photo img{height:auto;max-height:260px;object-fit:cover}
+ .pilot-card:not(:first-child) .pilot-photo-extra{width:38%;margin:10px}
+ .pilot-card:not(:first-child) .pilot-body{padding:20px}
+}
+/* Fluxo de conteúdo entre o painel e cada unidade. */
+.network-art{isolation:isolate}
+.network-art .network-link{stroke:#669d8c;stroke-width:1.2;stroke-dasharray:3 6}
+.network-art .network-flow{stroke:var(--mint-dark);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:9 91;filter:drop-shadow(0 0 4px #58c8a799)}
+.network-art .network-node-icon{width:34px;height:34px;position:static;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.network-center:after{content:'';position:absolute;inset:-7px;border:1px solid #1d6b5a26;border-radius:22px;pointer-events:none}
+@media(prefers-reduced-motion:no-preference){
+ .network-art .network-flow{animation:network-flow 3.8s linear infinite}
+ .network-art .network-flow:nth-of-type(5){animation-delay:-1.25s}
+ .network-art .network-flow:nth-of-type(6){animation-delay:-2.5s}
+ .network-center:after{animation:network-halo 3.8s ease-out infinite}
+ .network-node{animation:network-node-glow 3.8s ease-in-out infinite}
+ .network-node.n2{animation-delay:1.25s}.network-node.n3{animation-delay:2.5s}
+ @keyframes network-flow{to{stroke-dashoffset:-100}}
+ @keyframes network-halo{0%{opacity:.8;transform:scale(.98)}75%,100%{opacity:0;transform:scale(1.16)}}
+ @keyframes network-node-glow{0%,70%,100%{filter:none}25%{filter:drop-shadow(0 0 7px #1d6b5a60)}}
+}
+@media(prefers-reduced-motion:reduce){.network-art .network-flow{stroke-dasharray:none;opacity:.3}}
+
+@media(max-width:760px){
+ /* Crédito acima da imagem; ações abaixo, sem disputar a largura estreita do vídeo. */
+ .pilot-video figcaption,.pilot-video video[controls]+figcaption{top:10px;bottom:auto;left:8px;padding:4px 7px;font-size:10px;max-width:calc(100% - 16px)}
+ .pilot-video-actions{left:8px;right:8px;bottom:9px;gap:5px}
+ .pilot-video-button{flex:1;min-height:36px;padding:7px 6px;font-size:11px;letter-spacing:0;white-space:nowrap}
+}
+@media(max-width:760px){
+ .pilot-card:first-child .pilot-media{grid-template-columns:90px minmax(0,1fr);grid-template-rows:auto auto}
+ .pilot-card:first-child .pilot-video{grid-column:1/-1;grid-row:1}
+ .pilot-card:first-child .pilot-photo-extra{grid-column:1;grid-row:2}
+ .pilot-card:first-child .pilot-legend{grid-column:2;grid-row:2;align-self:center}
+ .order-layout{grid-template-columns:minmax(0,1fr)}
+ .order-form,.order-summary{min-width:0}
+ .order-environments label>span{overflow-wrap:anywhere}
 }

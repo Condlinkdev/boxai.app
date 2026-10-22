@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;650;700;750;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/loja-real-400.avif" type="image/avif" fetchpriority="high">
-<link rel="stylesheet" href="style.css?v=20261022-painel">
+<link rel="stylesheet" href="style.css?v=20261022-mobile-markdown-2">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head>
 <body>
@@ -52,7 +52,7 @@
 <div class="universe" id="universo">
 <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
 <svg class="connectors" viewBox="0 0 1200 440" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="line"><stop stop-color="#5bddbd" stop-opacity="0"/><stop offset=".5" stop-color="#5bddbd" stop-opacity=".55"/><stop offset="1" stop-color="#5bddbd" stop-opacity=".08"/></linearGradient></defs><path d="M240 65 Q400 65 580 215 M155 210 L580 215 M245 345 Q410 345 580 215 M960 65 Q800 65 620 215 M1045 210 L620 215 M955 345 Q790 345 620 215"/></svg>
-<div id="stage" class="product-stage"><div class="product-glow"></div><canvas id="scene" tabindex="0" role="img" aria-label="Modelo 3D da Box AI envelopada. Arraste para girar. Setas do teclado também giram o produto."></canvas><div id="loading">Preparando sua Box…</div><div class="product-caption"><span class="status-dot"></span> Box AI · por Condlink <span class="caption-line"></span> CONECTADA ÀS POSSIBILIDADES</div></div>
+<div id="stage" class="product-stage"><div class="product-glow"></div><canvas id="scene" tabindex="0" role="img" aria-label="Modelo 3D da Box AI com ícone de cérebro na tampa, o centro que conecta os módulos. Arraste para girar. Setas do teclado também giram o produto."></canvas><div id="loading">Preparando sua Box…</div><div class="product-caption"><span class="status-dot"></span> Box AI · por Condlink <span class="caption-line"></span> CONECTADA ÀS POSSIBILIDADES</div></div>
 <div class="satellites" role="group" aria-label="Funcionalidades da Box AI">
 <div class="satellite" data-feature="qrcode"><button class="satellite-button" type="button" data-satellite="qrcode" aria-describedby="satelite-qrcode-descricao" aria-pressed="true"><span class="satellite-tv"><span class="satellite-shade"></span><svg class="satellite-art" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="art-halo" cx="139" cy="24" r="25"/><g class="art-glyph" transform="translate(11 59) scale(1.3)"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3"/><path d="M21 14v7h-7"/></g></svg><span class="satellite-kicker">LOJAS AUTÔNOMAS</span><strong>A porta abre<br>pelo QR Code.</strong><span class="satellite-logo" aria-hidden="true"></span></span><span class="satellite-stand"></span><span class="satellite-label"><span class="satellite-label-text">ACESSO POR<br>QR CODE</span><span aria-hidden="true">↗</span></span></button><span class="sr-only" id="satelite-qrcode-descricao">A porta abre pela leitura do QR Code do aplicativo parceiro, em uso em lojas autônomas. Abre a aba Lojas autônomas.</span><a class="satellite-module" href="#modulo-acesso-facial" aria-label="Ver módulo Acesso Facial, que faz o acesso por QR Code">Ver módulo</a></div>
 <div class="satellite" data-feature="facial"><button class="satellite-button" type="button" data-satellite="facial" aria-describedby="satelite-facial-descricao" aria-pressed="false"><span class="satellite-tv"><span class="satellite-shade"></span><svg class="satellite-art" viewBox="0 0 160 100" aria-hidden="true" focusable="false"><circle class="art-halo" cx="139" cy="24" r="25"/><g class="art-glyph" transform="translate(11 59) scale(1.3)"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></g></svg><span class="satellite-kicker">CONDOMÍNIOS</span><strong>A entrada reconhece<br>quem é cadastrado.</strong><span class="satellite-logo" aria-hidden="true"></span></span><span class="satellite-stand"></span><span class="satellite-label"><span class="satellite-label-text">ACESSO POR<br>LEITURA FACIAL</span><span aria-hidden="true">↗</span></span></button><span class="sr-only" id="satelite-facial-descricao">O terminal facial reconhece quem está cadastrado e libera a entrada, na portaria de um condomínio. Abre a aba Condomínios.</span><a class="satellite-module" href="#modulo-acesso-facial-multimidia" aria-label="Ver módulo Acesso Facial Multimídia, que faz o acesso por reconhecimento facial">Ver módulo</a></div>
@@ -219,7 +219,7 @@
       <article class="pilot-card" data-piloto="mercado-do-vila">
         <div class="pilot-media" data-piloto-media>
           <figure class="pilot-video" data-piloto-video>
-            <video width="478" height="850" poster="assets/pilotos/mercado-do-vila-chegada-poster.webp" muted loop playsinline preload="none" controls aria-label="Vídeo no Mercado do Vila: o cliente chega, o leitor facial abre a porta e a TV da loja diz Olá, Denis e mostra as ofertas">
+            <video width="478" height="850" poster="assets/pilotos/mercado-do-vila-chegada-poster.webp" autoplay muted loop playsinline preload="auto" controls aria-label="Vídeo no Mercado do Vila: o cliente chega, o leitor facial abre a porta e a TV da loja diz Olá, Denis e mostra as ofertas">
               <source src="assets/pilotos/mercado-do-vila-chegada.mp4" type="video/mp4">
             </video>
             <figcaption>Vídeo: Condlink</figcaption>
@@ -238,16 +238,6 @@
           <div class="pilot-top"><h4 data-piloto-nome>Mercado do Vila</h4><span class="module-badge is-proven" data-piloto-status>Em uso</span></div>
           <p class="pilot-meta" data-piloto-meta>Loja autônoma · São Carlos (SP)</p>
           <p class="pilot-copy" data-piloto-texto>Box AI na TV da loja, com promoções e conteúdo trocados pelo painel. A porta abre por leitura facial e por QR Code, e a TV recebe o cliente pelo nome desde 18 de outubro de 2026.</p>
-        </div>
-      </article>
-      <article class="pilot-card" data-piloto="damha">
-        <div class="pilot-media" data-piloto-media>
-          <p class="pilot-empty">Foto do local em breve</p>
-        </div>
-        <div class="pilot-body">
-          <div class="pilot-top"><h4 data-piloto-nome>Damha1</h4><span class="module-badge is-pending" data-piloto-status>Em instalação</span></div>
-          <p class="pilot-meta" data-piloto-meta>Condomínio</p>
-          <p class="pilot-copy" data-piloto-texto>Box AI em instalação para levar os avisos e a comunicação com os moradores para a TV.</p>
         </div>
       </article>
       <article class="pilot-card" data-piloto="onovolab">
@@ -271,6 +261,21 @@
           <div class="pilot-top"><h4 data-piloto-nome>oNovoLab</h4><span class="module-badge is-proven" data-piloto-status>Em uso</span></div>
           <p class="pilot-meta" data-piloto-meta>Condomínio de empresas e hub de startups · São Carlos (SP)</p>
           <p class="pilot-copy" data-piloto-texto>Box AI nas TVs do hub, com o conteúdo trocado pelo painel, e o controle de acesso facial integrado. A TV e o acesso já estão funcionando.</p>
+        </div>
+      </article>
+      <article class="pilot-card" data-piloto="damha">
+        <div class="pilot-media" data-piloto-media>
+          <figure class="pilot-photo">
+            <picture>
+              <source type="image/webp" srcset="assets/pilotos/damha-ilustracao-400.webp 400w, assets/pilotos/damha-ilustracao-700.webp 700w" sizes="(max-width:760px) calc(100vw - 40px), 250px">
+              <img src="assets/pilotos/damha-ilustracao-700.webp" alt="Ilustração de uma recepção de condomínio com TV de avisos e uma Box. Imagem conceitual, não é uma foto do Damha1." width="700" height="467" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+        </div>
+        <div class="pilot-body">
+          <div class="pilot-top"><h4 data-piloto-nome>Damha1</h4><span class="module-badge is-pending" data-piloto-status>Em instalação</span></div>
+          <p class="pilot-meta" data-piloto-meta>Condomínio</p>
+          <p class="pilot-copy" data-piloto-texto>Box AI em instalação para levar os avisos e a comunicação com os moradores para a TV.</p>
         </div>
       </article>
     </div>
@@ -317,7 +322,7 @@
   </div>
   <div class="how-update"><span class="how-update-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M19 8a8 8 0 0 0-13-2L3 9m0-5v5h5m-3 7a8 8 0 0 0 13 2l3-3m0 5v-5h-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Mudou a campanha? Mude pelo painel.</strong><span>Atualize o conteúdo à distância, sem levar um pen-drive até a TV.</span></p><span class="how-update-label">MAIS PRATICIDADE NO DIA A DIA</span></div>
 </section>
-<section class="network"><div class="network-art" aria-hidden="true"><div class="network-center"><img src="assets/boxai-logo-light.svg" alt="" width="500" height="175" loading="lazy" decoding="async"><small>PAINEL ONLINE</small></div><span class="network-node n1">▣ <small>UNIDADE 01</small></span><span class="network-node n2">▣ <small>UNIDADE 02</small></span><span class="network-node n3">▣ <small>UNIDADE 03</small></span><svg viewBox="0 0 500 310"><path d="M250 155 L100 70 M250 155 L400 70 M250 155 L250 280"/></svg></div><div><div class="eyebrow dark">DA UNIDADE À REDE</div><h2>Cada lugar tem<br> algo a <em>comunicar.</em></h2><p>Organize suas TVs e unidades em um painel online. Dê espaço às campanhas da marca e às mensagens que fazem sentido em cada lugar.</p><a class="text-link dark" href="https://admin.boxai.app" target="_blank" rel="noopener">Já tem uma Box? Acesse o painel <span>↗</span></a></div></section>
+<section class="network"><div class="network-art" aria-hidden="true"><div class="network-center"><img src="assets/boxai-logo-light.svg" alt="" width="500" height="175" loading="lazy" decoding="async"><small>PAINEL ONLINE</small></div><span class="network-node n1"><svg class="network-node-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m10 8 5 3-5 3z"/></svg><small>UNIDADE 01</small></span><span class="network-node n2"><svg class="network-node-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m10 8 5 3-5 3z"/></svg><small>UNIDADE 02</small></span><span class="network-node n3"><svg class="network-node-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m10 8 5 3-5 3z"/></svg><small>UNIDADE 03</small></span><svg viewBox="0 0 500 310" preserveAspectRatio="none"><path class="network-link" d="M250 155 L100 70"/><path class="network-link" d="M250 155 L400 70"/><path class="network-link" d="M250 155 L250 280"/><path class="network-flow" pathLength="100" d="M250 155 L100 70"/><path class="network-flow" pathLength="100" d="M250 155 L400 70"/><path class="network-flow" pathLength="100" d="M250 155 L250 280"/></svg></div><div><div class="eyebrow dark">DA UNIDADE À REDE</div><h2>Cada lugar tem<br> algo a <em>comunicar.</em></h2><p>Organize suas TVs e unidades em um painel online. Dê espaço às campanhas da marca e às mensagens que fazem sentido em cada lugar.</p><a class="text-link dark" href="https://admin.boxai.app" target="_blank" rel="noopener">Já tem uma Box? Acesse o painel <span>↗</span></a></div></section>
 <!-- O painel online por dentro. Entra logo depois de "Da unidade à rede", que
      promete o painel e leva para ele: aqui vêm as telas de verdade, os quatro
      níveis de interação da TV e o vídeo gravado em uma loja. Todas as imagens
@@ -483,16 +488,17 @@
 <a class="footer-policy" href="https://www.condlink.com.br/politica-de-privacidade.html" target="_blank" rel="noopener">Política de privacidade<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
 </div>
 </footer>
-<script src="site-config.js?v=20261021-video-vila" defer></script><script src="comparativo.js?v=20261020-comparativo" defer></script><script src="prova-social.js?v=20261021-video-vila" defer></script><script src="video-piloto.js?v=20261021-video-vila" defer></script><script src="footer.js?v=20261021-rodape-endereco" defer></script><script src="menu.js?v=20261021-a11y2" defer></script><script src="interactions.js?v=20261022-tvs-segmentos" defer></script><script src="orbit.js?v=20261020-tvs-funcionalidades" defer></script><script src="funil.js?v=20261020-funil" defer></script><script src="order.js?v=20261021-obrigado" defer></script>
+<script src="site-config.js?v=20261022-pilotos-ordem" defer></script><script src="comparativo.js?v=20261020-comparativo" defer></script><script src="prova-social.js?v=20261022-mobile-autoplay" defer></script><script src="video-piloto.js?v=20261022-mobile-autoplay" defer></script><script src="footer.js?v=20261021-rodape-endereco" defer></script><script src="menu.js?v=20261021-a11y2" defer></script><script src="interactions.js?v=20261022-tvs-segmentos" defer></script><script src="orbit.js?v=20261020-tvs-funcionalidades" defer></script><script src="funil.js?v=20261020-funil" defer></script><script src="order.js?v=20261021-obrigado" defer></script>
 <script>
 // Keep the opening paint light: the 3D product starts once the page is loaded and idle,
 // and after three seconds regardless, so a slow third party can never hold the Box back.
 (function(){var started=false;
- function start(){if(started)return;started=true;import('./product.js?v=20261020-tvs-clique')}
+ function start(){if(started)return;started=true;import('./product.js?v=20261022-brain-centered')}
  function schedule(){window.requestIdleCallback?requestIdleCallback(start,{timeout:1200}):setTimeout(start,120)}
  if(document.readyState==='complete')schedule();else addEventListener('load',schedule);
  setTimeout(start,3000);
 })();
 </script>
+<script src="chat-polish.js?v=20261022-mobile-markdown" defer></script>
 <script src="https://assistente-site.condlink.com.br/widget.js" defer></script>
 </body></html>

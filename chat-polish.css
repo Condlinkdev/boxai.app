@@ -1,0 +1,48 @@
+:host{--line:rgba(139,235,207,.19);--card-shadow:0 24px 80px #03171d45,0 6px 22px #03171d26}
+.panel{background:linear-gradient(160deg,#102f37,#0b2229 55%);border-color:#8bebcf38;transform-origin:bottom right}
+@media(min-width:721px){.panel{width:400px;height:620px;max-height:calc(100dvh - 48px - var(--boxai-offset,0px));border-radius:24px}}
+header{height:76px;flex-basis:76px;padding:0 12px 0 18px;background:#0b2229a6;border-bottom:1px solid #8bebcf12}
+.head-photo{width:36px;height:36px;flex-basis:36px;box-shadow:0 0 0 3px #8bebcf12}
+h2{font-size:15px;line-height:1.25}
+.chat-state{display:flex;align-items:center;gap:6px;margin-top:5px;font:400 12px/1.2 "Atkinson Hyperlegible",sans-serif;color:var(--muted)}
+.chat-state:before{content:'';width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px #8bebcf45}
+.head-actions{gap:0}.icon-btn{border-radius:50%}
+.log{padding:20px 18px 18px;gap:14px;scrollbar-width:thin;scrollbar-color:#8bebcf38 transparent;background:radial-gradient(ellipse at 100% 0,#8bebcf06,transparent 65%)}
+.msg{max-width:94%;gap:9px}.msg.follow{padding-left:33px}
+.bubble{padding:13px 15px;font-size:15px;line-height:1.55}
+.bubble.assistant{background:linear-gradient(140deg,#173b43,#102e36);border-color:#8bebcf1c;border-radius:19px 19px 19px 5px;box-shadow:0 3px 12px #0000000c}
+.bubble.user{background:linear-gradient(135deg,#a1f0d7,#8bebcf);border-radius:19px 19px 5px 19px;box-shadow:0 4px 16px #00000012}
+.avatar{box-shadow:0 0 0 2px #8bebcf12}
+.chips{gap:8px;padding-left:33px}.chips button{min-height:40px;padding:10px 13px;border-radius:13px;font-size:13px;background:#8bebcf04}
+.chips button:hover{background:#8bebcf12;border-color:#8bebcf70;box-shadow:0 4px 14px #00000012}
+.chips button:active,.field-btn:active{transform:scale(.96)}
+.icon-btn:hover{background:#8bebcf12}.icon-btn:active{background:#8bebcf22}
+.composer{padding:12px 16px 10px;background:linear-gradient(0deg,#0b2229 75%,transparent)}
+textarea{border-radius:19px;background:#f3f5ef04;padding-left:16px;caret-color:var(--mint)}
+textarea:focus{outline:none;border-color:#8bebcf99;box-shadow:0 0 0 3px #8bebcf0e;background:#f3f5ef06}
+textarea:focus-visible{outline:2px solid #8bebcf65;outline-offset:3px}
+.field-btn{right:8px;bottom:8px;border:1px solid #8bebcf10;box-shadow:0 3px 10px #00000012}
+.field-btn[data-mode=send]{box-shadow:0 3px 18px #8bebcf20}
+.dots{padding:7px 4px;gap:6px}.dots i{width:6px;height:6px;background:var(--mint)}
+footer{padding:4px 19px calc(14px + env(safe-area-inset-bottom,0px));font-size:11px;color:#a3b6b899}
+@media(prefers-reduced-motion:no-preference){
+ .panel{transition:opacity .22s ease,transform .32s cubic-bezier(.2,.8,.2,1),display .32s allow-discrete,bottom .2s ease}
+ .panel[hidden]{opacity:0;transform:translateY(18px) scale(.96)}
+ @starting-style{.panel:not([hidden]){opacity:0;transform:translateY(18px) scale(.96)}}
+ .msg,.log>.bubble,.handoff{animation:chat-message-in .35s cubic-bezier(.2,.8,.2,1) both}
+ .msg.user{animation-name:chat-user-in}
+ .chips button{animation:chat-chip-in .36s ease both;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
+ .chips button:nth-child(1){animation-delay:.08s}.chips button:nth-child(2){animation-delay:.15s}.chips button:nth-child(3){animation-delay:.22s}
+ .icon-btn,.field-btn{transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+ textarea{transition:height .15s,border-color .2s,background .2s,box-shadow .2s}
+ .log{scroll-behavior:smooth}
+ .dots i{animation:chat-thinking 1.2s ease-in-out infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+ :host([data-chat-busy]) .chat-state:before{animation:chat-status 1.4s ease-in-out infinite}
+ @keyframes chat-message-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+ @keyframes chat-user-in{from{opacity:0;transform:translateY(7px) scale(.98)}to{opacity:1;transform:none}}
+ @keyframes chat-chip-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+ @keyframes chat-thinking{0%,70%,100%{transform:translateY(0);opacity:.4}35%{transform:translateY(-4px);opacity:1}}
+ @keyframes chat-status{50%{opacity:.4;box-shadow:0 0 0 4px #8bebcf10}}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:720px){header{height:70px;flex-basis:70px;padding-left:16px}.panel{border-radius:24px 24px 0 0}.log{padding:18px 16px}.chips{padding-left:0}.msg{max-width:96%}}

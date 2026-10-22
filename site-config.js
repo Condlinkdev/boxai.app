@@ -81,15 +81,6 @@ window.SITE_CONFIG = {
         }
       },
       {
-        id: 'damha',
-        nome: 'Damha1',
-        segmento: 'Condomínio',
-        cidade: '',
-        status: 'Em instalação',
-        texto: 'Box AI em instalação para levar os avisos e a comunicação com os moradores para a TV.',
-        foto: null
-      },
-      {
         id: 'onovolab',
         nome: 'oNovoLab',
         segmento: 'Condomínio de empresas e hub de startups',
@@ -116,6 +107,23 @@ window.SITE_CONFIG = {
             alt: 'oNovoLab, São Carlos: condomínio de empresas e hub de startups, com a Box AI nas TVs e o acesso facial integrado. Na tela, o convite de membership do oNovoLab com QR Code.'
           }
         ]
+      },
+      {
+        id: 'damha',
+        nome: 'Damha1',
+        segmento: 'Condomínio',
+        cidade: '',
+        status: 'Em instalação',
+        texto: 'Box AI em instalação para levar os avisos e a comunicação com os moradores para a TV.',
+        foto: {
+          src: 'assets/pilotos/damha-ilustracao',
+          tipos: ['webp'],
+          tamanhos: [400, 700],
+          largura: 700,
+          altura: 467,
+          alt: 'Ilustração de uma recepção de condomínio com TV de avisos e uma Box. Imagem conceitual, não é uma foto do Damha1.',
+          fonte: ''
+        }
       }
     ]
   }
