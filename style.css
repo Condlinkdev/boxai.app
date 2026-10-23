@@ -398,10 +398,9 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 /* Ícones menores sob o texto, preservando o alinhamento inferior esquerdo da arte.
    O translate/scale final reproduz o atributo SVG, substituído pelo transform do CSS. */
 .satellite-art .art-glyph{transform-box:view-box;transform-origin:0 0;transform:translate(14.9px,86.3px) scale(.68) translate(-14.9px,-86.3px) translate(11px,59px) scale(1.3)}
-.satellite[data-feature=facial] .satellite-shade{background:linear-gradient(90deg,#1d3f52ed,#1d3f5255)}
-.satellite[data-feature=recepcao] .satellite-shade{background:linear-gradient(90deg,#1e4a43ed,#1e4a4355)}
-.satellite[data-feature=midia] .satellite-shade{background:linear-gradient(90deg,#314228ed,#31422855)}
-.satellite[data-feature=avisos] .satellite-shade{background:linear-gradient(90deg,#343255ed,#34325555)}
+.satellite[data-feature=condominio] .satellite-shade{background:linear-gradient(90deg,#1d3f52ed,#1d3f5255)}
+.satellite[data-feature=clinica] .satellite-shade{background:linear-gradient(90deg,#1e4a43ed,#1e4a4355)}
+.satellite[data-feature=academia] .satellite-shade{background:linear-gradient(90deg,#314228ed,#31422855)}
 .satellite-module{display:inline-flex;align-items:center;min-height:30px;margin-top:8px;padding:0 2px;font:500 13px var(--font);letter-spacing:.3px;color:var(--muted);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
 .satellite-module:hover,.satellite-module:focus-visible{color:var(--mint);border-bottom-color:#8bebcf80}
 @media(max-width:760px){
@@ -715,3 +714,186 @@ main:focus,main:focus-visible{outline:none}
  .order-form,.order-summary{min-width:0}
  .order-environments label>span{overflow-wrap:anywhere}
 }
+/* ===== Home em 3 camadas (copy final 23/10): atrativo → TV corporativa → fases do uau ===== */
+/* Placeholder visível do que ainda espera confirmação. Nunca some sozinho: sai quando o texto oficial chegar. */
+.confirmar{display:inline-block;font:500 12px/1.35 var(--font);letter-spacing:.3px;color:#7a4f00;background:#fff4d6;border:1px dashed #c98a12;border-radius:6px;padding:2px 7px;vertical-align:middle;white-space:nowrap}
+.site-footer .confirmar{color:#f5d08a;background:#f5b83d14;border-color:#f5b83d88}
+/* Cabeçalho: o CTA forte da primeira dobra é o do topo; o do cabeçalho fica em contorno. */
+.nav-cta.nav-cta-contato{background:transparent;color:var(--paper);border:1px solid #ffffff4d;box-shadow:none}
+.nav-cta.nav-cta-contato:hover{background:#ffffff12;color:var(--mint);border-color:#8bebcf99}
+.nav-cta.nav-cta-contato:active{background:#ffffff1f}
+.nav-cta.nav-cta-contato:focus-visible{outline:2px solid var(--mint);outline-offset:3px;box-shadow:none}
+/* Topo: um CTA e, ao lado, o link menor de quem é associação ou franquia. */
+.hero-actions{flex-wrap:wrap;column-gap:26px}
+.hero-rede{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 2px;font:500 14px var(--font);letter-spacing:.1px;color:var(--muted);border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.hero-rede:hover,.hero-rede:focus-visible{color:var(--mint);border-bottom-color:#8bebcf80}
+.hero-rede svg{flex-shrink:0;color:var(--mint)}
+@media(max-width:760px){.hero-actions{flex-direction:column;row-gap:6px}.hero-rede{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.hero-rede{transition:none}}
+/* TVs do topo: a linha do nicho na tela e o nome do nicho no rótulo embaixo; sem link de módulo. */
+.satellite-label .satellite-label-text{text-transform:uppercase;text-align:center}
+.satellite-tv strong{top:13%;right:8%;font-size:15px;line-height:1.15;letter-spacing:-.35px}
+@media(min-width:761px){.satellite-tv strong{top:13%;right:6%;font-size:clamp(12px,1.55svh,15px)}}
+@media(max-width:760px){.satellite-tv strong{top:12%;font-size:13px;line-height:1.15}.satellite-label .satellite-label-text{font-size:13px}}
+@media(min-width:761px){.hero-actions .button{font-size:14px;padding:13px 22px;gap:16px}}
+/* Como funciona: as artes ficam sem rótulos; o texto é o dos três passos. */
+ol.how-flow{list-style:none;padding:0}
+.how-refresh .how-demo{padding-bottom:0}
+.how-file-line{display:block;height:6px;width:86px;border-radius:3px;background:#143e3240}
+small.how-file-line{width:58px;height:5px;margin:7px 0 12px;background:#526d5f33}
+.how-screen .how-remote{position:absolute;right:12px;bottom:10px;left:auto;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#0c252ee6;border:1px solid #8bebcf55;color:var(--mint);box-shadow:0 6px 18px #0006}
+.how-screen .how-remote svg{width:20px;height:20px}
+/* Pra quem: quatro cartões; no celular, empilhados com a foto ao lado. */
+.nichos h2,.fases h2,.rede h2,.fecha h2{text-wrap:balance}
+.nichos{background:var(--paper);color:var(--ink);padding:95px max(6vw,24px) 80px}
+.nichos .section-heading>p{max-width:320px}
+.nichos-lista{list-style:none;padding:0;margin:42px auto 0;max-width:1200px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.nicho{position:relative;display:flex;flex-direction:column;background:white;border:1px solid #0c252e12;border-radius:18px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+.nicho:hover{border-color:#1d6b5a55;box-shadow:0 12px 30px #0c252e14;transform:translateY(-2px)}
+.nicho.is-targeted{border-color:var(--mint-dark);box-shadow:0 0 0 3px #1d6b5a33}
+.nicho:has(a:focus-visible){outline:2px solid var(--mint-dark);outline-offset:3px}
+.nicho-foto{display:block;aspect-ratio:4/3;overflow:hidden;background:#c4d2ce}
+.nicho-foto img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.8)}
+.nicho-texto{padding:20px 20px 24px}
+.nicho h3{font-size:20px;font-weight:500;letter-spacing:-.5px;line-height:1.2}
+.nicho h3 a{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.nicho h3 a:after{content:'';position:absolute;inset:0}
+.nicho h3 a:focus-visible{outline:none}
+.nicho h3 svg{flex-shrink:0;margin-top:3px;color:var(--mint-dark)}
+.nicho p{margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted-dark)}
+@media(max-width:1000px){.nichos-lista{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .nichos{padding:55px 20px 50px}
+ .nichos .section-heading>p{font-size:15px;margin-top:14px}
+ .nichos-lista{grid-template-columns:1fr;gap:12px;margin-top:27px}
+ .nicho{flex-direction:row;align-items:stretch;min-height:112px}
+ .nicho-foto{flex:0 0 112px;aspect-ratio:auto}
+ .nicho-texto{padding:16px 16px 18px;min-width:0}
+ .nicho h3{font-size:18px}
+ .nicho p{margin-top:6px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.nicho{transition:none}.nicho:hover{transform:none}}
+/* Sua TV corporativa: cartão próprio, escuro sobre o papel, com 3 benefícios e o CTA B2B. */
+.rede{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 95px}
+.rede-card{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding:56px;border-radius:24px;background:radial-gradient(ellipse at 78% 50%,#1b4b4a99,transparent 60%),var(--ink);color:var(--paper);overflow:hidden}
+.rede h2{margin-top:0}
+.rede-sub{max-width:470px;margin-top:18px;font-size:17px;line-height:1.55;color:var(--muted)}
+.rede-beneficios{list-style:none;padding:0;margin:30px 0 34px;max-width:500px;counter-reset:beneficio}
+.rede-beneficios li{counter-increment:beneficio;display:flex;align-items:baseline;gap:16px;padding:15px 0;border-top:1px solid #ffffff1a;font:500 17px/1.4 var(--font);letter-spacing:-.2px}
+.rede-beneficios li:last-child{border-bottom:1px solid #ffffff1a}
+.rede-beneficios li:before{content:counter(beneficio,decimal-leading-zero);min-width:22px;font:500 12px var(--font);letter-spacing:1.2px;color:var(--mint)}
+.rede-cta{gap:14px;border:0;background:var(--mint);color:var(--ink);font-weight:600}
+.rede-cta:hover{background:#b3f5e1}
+.rede-cta:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.rede-cta svg{flex-shrink:0}
+.rede-art{position:relative;height:320px}
+.rede-linhas{position:absolute;inset:0;width:100%;height:100%}
+.rede-linhas path{fill:none;stroke:url(#rede-fio);stroke-width:1.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.rede-centro{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:150px;height:92px;border-radius:18px;background:#12343c;border:1px solid #8bebcf33;box-shadow:0 12px 40px #0006}
+.rede-centro img{width:104px;height:auto}
+.rede-tv{position:absolute;z-index:1;width:86px;height:54px;transform:translate(-50%,-50%);border:3px solid #507a75;border-bottom-width:5px;border-radius:8px;background:linear-gradient(135deg,#1a4747,#0d2930)}
+.rede-tv:after{content:'';position:absolute;right:8px;bottom:6px;width:5px;height:5px;border-radius:50%;background:var(--mint)}
+.rede-tv.t1{left:18%;top:19.4%}.rede-tv.t2{left:82%;top:19.4%}.rede-tv.t3{left:18%;top:81.9%}.rede-tv.t4{left:82%;top:81.9%}
+@media(max-width:1000px){.rede-card{grid-template-columns:1fr;padding:40px 36px;gap:8px}.rede-art{order:-1;height:220px}}
+@media(max-width:760px){
+ .rede{padding:0 20px 55px}
+ .rede-card{grid-template-columns:1fr;gap:6px;padding:30px 22px 26px;border-radius:20px}
+ .rede-art{order:-1;height:170px;margin:0 -6px}
+ .rede-centro{width:112px;height:70px;border-radius:14px}.rede-centro img{width:80px}
+ .rede-tv{width:62px;height:40px;border-width:2px;border-bottom-width:4px}
+ .rede-sub{font-size:15px;margin-top:14px}
+ .rede-beneficios{margin:22px 0 26px}
+ .rede-beneficios li{font-size:16px;gap:12px;padding:13px 0}
+ .rede-cta{width:100%;justify-content:center;padding:15px 18px;font-size:14px;text-align:center}
+}
+/* Também pode ir além: dois degraus verticais, o segundo mais recuado; nada de colunas iguais. */
+.fases{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 90px}
+.fases .section-heading>p{max-width:300px}
+.fases-degraus{position:relative;list-style:none;margin:44px auto 0;max-width:1200px;padding:0 0 0 34px;display:grid;gap:18px}
+.degrau{--recuo:0px;position:relative;display:flex;align-items:flex-start;gap:20px;max-width:640px;margin-left:var(--recuo);padding:28px 30px;background:white;border:1px solid #0c252e12;border-radius:18px}
+.degrau+.degrau{--recuo:clamp(0px,12vw,160px);border-color:#1d6b5a40}
+.degrau:before{content:'';position:absolute;top:38px;left:calc(-34px - var(--recuo));width:13px;height:13px;border-radius:50%;background:var(--paper);border:2px solid var(--mint-dark);z-index:1}
+/* Cotovelo do trilho: o traço até o cartão e, menos no último, a descida até o próximo marcador (18px de vão + 44px). */
+.degrau:after{content:'';position:absolute;top:44px;bottom:-62px;left:calc(-28px - var(--recuo));width:calc(28px + var(--recuo));border-top:1px solid #1d6b5a66;border-left:1px solid #1d6b5a66}
+.degrau:last-child:after{bottom:auto;height:0;border-left:0}
+.degrau-icone{flex-shrink:0;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#e1eee4;color:var(--mint-dark)}
+.degrau h3{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:24px;font-weight:500;letter-spacing:-.7px;line-height:1.2}
+.degrau p{max-width:470px;margin-top:10px;font-size:16px;line-height:1.55;color:var(--muted-dark)}
+@media(max-width:760px){
+ .fases{padding:0 20px 50px}
+ .fases .section-heading>p{font-size:15px;margin-top:14px}
+ .fases-degraus{margin-top:27px;padding-left:26px;gap:12px}
+ .degrau,.degrau+.degrau{--recuo:0px}
+ .degrau{flex-direction:column;gap:14px;padding:22px 20px}
+ .degrau:before{left:-26px;top:32px;width:11px;height:11px}
+ .degrau:after{left:-20px;top:37px;bottom:-49px;width:20px}
+ .degrau:last-child:after{bottom:auto}
+ .degrau-icone{width:42px;height:42px}
+ .degrau h3{font-size:21px}
+ .degrau p{font-size:15px}
+}
+/* Prova leve: lista simples, sem grade de três nem número inventado. */
+.prova{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 95px}
+.prova-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-top:56px;border-top:1px solid #0c252e1a}
+.prova h2{text-wrap:balance;margin-top:0;font-size:clamp(30px,3.2vw,44px);letter-spacing:-1.8px}
+.prova-lista{list-style:none;padding:0;margin:0}
+.prova-lista li{display:flex;align-items:flex-start;gap:14px;padding:18px 0;border-bottom:1px solid #0c252e14;font-size:18px;line-height:1.45}
+.prova-lista li:first-child{padding-top:4px}
+.prova-lista li:before{content:'';flex-shrink:0;width:24px;height:24px;margin-top:1px;border-radius:50%;background:#e1eee4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d6b5a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+@media(max-width:760px){
+ .prova{padding:0 20px 55px}
+ .prova-inner{grid-template-columns:1fr;gap:20px;padding-top:40px}
+ .prova h2{font-size:30px;letter-spacing:-1.2px}
+ .prova-lista li{font-size:16px;padding:15px 0}
+}
+/* Fecha: nome, WhatsApp, cidade e o que pediu; aviso de dados só com Box AI. */
+.fecha{padding:90px max(6vw,24px);background:radial-gradient(ellipse at 80% 60%,#1b4b4a44,transparent 65%),var(--night);scroll-margin-top:24px}
+.fecha-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
+.fecha h2{margin-top:0}
+.fecha-texto p{max-width:380px;margin-top:18px;font-size:17px;line-height:1.55;color:var(--muted)}
+.contato-form{background:var(--paper);color:var(--ink);border-radius:21px;padding:32px;scroll-margin-top:24px}
+.contato-etapa[hidden],.contato-resultado[hidden]{display:none}
+.contato-campos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.contato-campos label{display:flex;flex-direction:column;gap:7px;font:500 14px var(--font);color:var(--ink)}
+.contato-campos label:first-child{grid-column:1/-1}
+.contato-campos input{width:100%;min-height:48px;padding:12px 14px;border:1px solid #c9d9cd;border-radius:10px;background:white;color:var(--ink);font:400 16px var(--body)}
+.contato-campos input::placeholder{color:#7d8f87}
+.contato-campos input:focus-visible{outline:2px solid var(--mint-dark);outline-offset:2px;border-color:var(--mint-dark)}
+.contato-campos input[aria-invalid=true]{border-color:var(--error)}
+.contato-pedido{margin:24px 0 0;padding:0;border:0;min-width:0}
+.contato-pedido legend{padding:0;margin-bottom:10px;font:500 14px var(--font)}
+.contato-opcoes{display:flex;flex-wrap:wrap;gap:8px}
+.contato-opcoes label{position:relative;cursor:pointer}
+.contato-opcoes input{position:absolute;width:1px;height:1px;opacity:0}
+.contato-opcoes span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid #d2dfd5;border-radius:24px;font-size:15px;transition:background .2s,border-color .2s}
+.contato-opcoes input:checked+span{background:#e1eee4;border-color:#438c71;color:var(--mint-dark)}
+.contato-opcoes input:checked+span:before{content:'';width:7px;height:7px;margin-right:9px;border-radius:50%;background:var(--mint-dark)}
+.contato-opcoes input:focus-visible+span{outline:2px solid var(--mint-dark);outline-offset:3px}
+.contato-opcoes input[aria-invalid=true]+span{border-color:var(--error)}
+.contato-erro{display:block;font:400 14px/1.4 var(--body);color:#a03832}
+.contato-erro[hidden]{display:none}
+.contato-opcoes+.contato-erro{margin-top:8px}
+.contato-lgpd{margin-top:24px;padding-top:20px;border-top:1px solid #d4e0d5;font-size:13px;line-height:1.6;color:var(--muted-dark)}
+.contato-enviar{margin-top:22px;gap:14px;padding:15px 22px;border:0;background:#1b6553;color:var(--paper);font-size:15px}
+.contato-enviar:hover{background:#277b63}
+.contato-enviar:focus-visible{outline:2px solid var(--mint-dark);outline-offset:3px}
+.contato-enviar[disabled]{opacity:.7;cursor:progress;transform:none}
+.contato-resultado h3{font-size:28px;line-height:1.15;letter-spacing:-1px;font-weight:500;outline:none}
+.contato-resultado h3:focus-visible{outline:2px solid var(--mint-dark);outline-offset:5px}
+.contato-resultado p{margin-top:12px;font-size:15px;line-height:1.5;color:var(--muted-dark)}
+.contato-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:24px}
+.contato-acoes .button{border:0;background:#1b6553;color:var(--paper);font-size:14px;padding:13px 20px}
+.contato-acoes .button:hover{background:#277b63}
+.contato-copiar{padding:8px 0;border:0;background:none;color:var(--mint-dark);font:500 14px var(--font);text-decoration:underline;text-underline-offset:3px}
+.contato-copia-status textarea{width:100%;min-height:130px;margin-top:6px;padding:10px;border:1px solid #c9d9cd;border-radius:8px;font:400 14px/1.4 var(--body)}
+@media(max-width:1000px){.fecha-inner{grid-template-columns:1fr;gap:28px}}
+@media(max-width:760px){
+ .fecha{padding:55px 20px}
+ .fecha-texto p{font-size:15px;margin-top:14px}
+ .contato-form{padding:22px 18px;border-radius:18px}
+ .contato-campos{grid-template-columns:1fr;gap:14px}
+ .contato-enviar{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.contato-opcoes span{transition:none}}
+/* Rodapé: sem assinatura nem dados de outra empresa; a política espera a URL. */
+.footer-policy.footer-policy-pendente{flex-wrap:wrap;gap:8px;margin:0;border-bottom:0;color:var(--muted);font-size:14px}

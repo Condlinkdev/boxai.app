@@ -37,16 +37,11 @@ function token(name,fallback){return brandTokens.getPropertyValue(name).trim()||
 function label(text,w,h,size=52){const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle=token('--mint','#8bebcf');ctx.font=`500 ${size}px Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,w/2,h/2);const mat=new THREE.MeshBasicMaterial({map:canvasTex(c),transparent:true,depthWrite:false});return mat;}
 const frontLogo=new THREE.Mesh(new THREE.PlaneGeometry(1.25,.25),label('Box AI',512,100,66));frontLogo.position.set(-2.7,1.16,4.805);model.add(frontLogo);
 const portLabels=new THREE.Mesh(new THREE.PlaneGeometry(7.5,.27),label('12V       OPTICAL       HDMI        LAN          AV',1500,70,37));portLabels.rotation.y=Math.PI;portLabels.position.set(-.4,1.75,-4.82);model.add(portLabels);
-// Underside signature: product name in --paper, maker note in --mint, drawn at device resolution.
-function signature(){const plateWidth=200,plateHeight=30,gap=5,dpr=Math.min(devicePixelRatio||1,3);
+// Underside signature: only the product name, in --paper, drawn at device resolution.
+function signature(){const plateWidth=200,plateHeight=30,dpr=Math.min(devicePixelRatio||1,3);
  const c=document.createElement('canvas');c.width=Math.round(plateWidth*dpr);c.height=Math.round(plateHeight*dpr);
  const ctx=c.getContext('2d');ctx.scale(dpr,dpr);ctx.textBaseline='middle';ctx.textAlign='left';
- const nameFont='600 14px Arial',makerFont='400 12px Arial';
- ctx.font=nameFont;const nameWidth=ctx.measureText('Box AI').width;
- ctx.font=makerFont;const makerWidth=ctx.measureText('\u00b7 por Condlink').width;
- let x=(plateWidth-(nameWidth+gap+makerWidth))/2;
- ctx.font=nameFont;ctx.fillStyle=token('--paper','#f3f5ef');ctx.fillText('Box AI',x,plateHeight/2);
- ctx.font=makerFont;ctx.fillStyle=token('--mint','#8bebcf');ctx.fillText('\u00b7 por Condlink',x+nameWidth+gap,plateHeight/2);
+ ctx.font='600 14px Arial';ctx.fillStyle=token('--paper','#f3f5ef');ctx.textAlign='center';ctx.fillText('Box AI',plateWidth/2,plateHeight/2);
  return new THREE.MeshBasicMaterial({map:canvasTex(c),transparent:true,depthWrite:false});}
 const bottomLabel=new THREE.Mesh(new THREE.PlaneGeometry(4.6,.69),signature());bottomLabel.rotation.x=Math.PI/2;bottomLabel.position.y=.12;model.add(bottomLabel);
 const floorMat=new THREE.ShadowMaterial({opacity:.27});const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),floorMat);floor.rotation.x=-Math.PI/2;floor.position.y=-.06;floor.receiveShadow=true;scene.add(floor);
@@ -55,7 +50,7 @@ const textureCanvas=document.createElement('canvas');textureCanvas.width=texture
 ctx.font='bold 246px Arial';
 const brandWidth=ctx.measureText('Box AI').width;
 const brandLeft=-12,brandRight=320+brandWidth+46;
-ctx.save();ctx.translate(textureCanvas.width/2-(brandLeft+brandRight)/2,1175);ctx.strokeStyle='#eff5e8';ctx.lineWidth=24;ctx.lineCap='round';ctx.beginPath();ctx.roundRect(0,0,235,160,40);ctx.stroke();ctx.beginPath();ctx.moveTo(80,200);ctx.lineTo(155,200);ctx.stroke();ctx.fillStyle='#8bebcf';ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(170,100,40,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(170,100,23,0,Math.PI*2);ctx.fill();ctx.fillStyle='#eff5e8';ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='bold 246px Arial';ctx.fillText('Box AI',320,80);ctx.fillStyle='#8bebcf';ctx.beginPath();ctx.arc(320+brandWidth+30,155,16,0,Math.PI*2);ctx.fill();ctx.fillStyle='#c6ded0';ctx.font='80px Arial';ctx.fillText('por Condlink',330,260);ctx.restore();
+ctx.save();ctx.translate(textureCanvas.width/2-(brandLeft+brandRight)/2,1175);ctx.strokeStyle='#eff5e8';ctx.lineWidth=24;ctx.lineCap='round';ctx.beginPath();ctx.roundRect(0,0,235,160,40);ctx.stroke();ctx.beginPath();ctx.moveTo(80,200);ctx.lineTo(155,200);ctx.stroke();ctx.fillStyle='#8bebcf';ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(170,100,40,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.beginPath();ctx.arc(170,100,23,0,Math.PI*2);ctx.fill();ctx.fillStyle='#eff5e8';ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='bold 246px Arial';ctx.fillText('Box AI',320,80);ctx.fillStyle='#8bebcf';ctx.beginPath();ctx.arc(320+brandWidth+30,155,16,0,Math.PI*2);ctx.fill();ctx.restore();
 // Cérebro impresso na tampa: a Box é o centro que conecta os módulos.
 // O espaço livre entre o cérebro e a marca mantém os dois símbolos bem definidos.
 ctx.save();ctx.translate(textureCanvas.width/2-240,535);ctx.scale(20,20);
