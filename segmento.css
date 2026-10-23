@@ -75,3 +75,6 @@ footer.site-footer .footer-top,footer.site-footer .footer-legal{max-width:calc(1
    pseudo-elemento transparente, sem mexer na linha de texto. */
 .segment-trail a{position:relative}
 .segment-trail a::after{content:"";position:absolute;left:0;right:0;top:50%;height:24px;transform:translateY(-50%)}
+/* Links dentro das notas dos cartões (preços e Interativa, na home). */
+.segment-note a{color:var(--mint);text-decoration:underline;text-underline-offset:3px}
+.segment-note a:hover{color:var(--paper)}

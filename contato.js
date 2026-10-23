@@ -70,8 +70,8 @@ async function enviarContato(){
 }
 
 // Os CTAs da página já dizem o que a pessoa pediu: o do topo marca "só Box AI",
-// o da TV corporativa marca "TV corporativa" e os do upgrade marcam "Interativa",
-// "acesso" ou "ambos". Ela pode trocar no formulário.
+// o da TV corporativa marca "TV corporativa", o da Interativa marca "Interativa" e o do
+// controle de acesso marca "acesso". Ela pode trocar no formulário.
 function marcarPedido(valor){const opcao=opcoesDoPedido().find(input=>input.value===valor);if(!opcao)return;opcao.checked=true;limparErro('o_que_pediu')}
 document.querySelectorAll('a[data-pedido]').forEach(link=>link.addEventListener('click',()=>marcarPedido(link.dataset.pedido)));
 
@@ -97,5 +97,5 @@ foneCampo.addEventListener('input',event=>{let bruto=foneCampo.value;const curso
 for(const nome of ['nome','cidade']){const field=contatoForm.elements[nome];field.addEventListener('blur',()=>{field.value=field.value.trim().replace(/\s{2,}/g,' ')});field.addEventListener('input',()=>limparErro(nome))}
 
 // O prazo de resposta vem de site-config.js; vazio deixa a frase sem prazo.
-function aplicarPrazo(){const alvo=contatoSucesso.querySelector('[data-contato-prazo]');if(!alvo)return;const config=window.SITE_CONFIG||{};const prazo=typeof config.prazoResposta==='string'?config.prazoResposta.trim():'';alvo.textContent=prazo?'Nossa equipe responde em '+prazo+', pelo WhatsApp que você informou.':'Nossa equipe responde pelo WhatsApp que você informou.'}
+function aplicarPrazo(){const alvo=contatoSucesso.querySelector('[data-contato-prazo]');if(!alvo)return;const config=window.SITE_CONFIG||{};const prazo=typeof config.prazoResposta==='string'?config.prazoResposta.trim():'';alvo.textContent=prazo?'Alguém da Box AI retorna em '+prazo+', pelo WhatsApp que você informou.':'Em breve alguém da Box AI retorna pelo WhatsApp que você informou.'}
 aplicarPrazo();

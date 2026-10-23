@@ -22,7 +22,7 @@ function block(w,h,d,mat,x,y,z,r=.04){const m=new THREE.Mesh(new RoundedBoxGeome
 // Port apertures are illustrative surface recesses; no dimensional tooling is implied.
 const backPanel=block(7.95,1.32,.035,black,0,1.15,-4.786,.025);
 function backPort(x,w,h,name){const shell=block(w,h,.07,metal,x,1.1,-4.82);block(w-.12,h-.12,.09,dark,x,1.1,-4.88);return shell;}
-backPort(-1.22,1.24,.5,'HDMI');backPort(.58,1.05,.83,'LAN');backPort(-2.65,.7,.7,'OPTICAL');
+backPort(-1.22,1.24,.5,'VIDEO');backPort(.58,1.05,.83,'LAN');backPort(-2.65,.7,.7,'OPTICAL');
 function socket(x){const ring=new THREE.Mesh(new THREE.CylinderGeometry(.29,.29,.09,32),metal);ring.rotation.x=Math.PI/2;ring.position.set(x,1.1,-4.85);model.add(ring);const hole=new THREE.Mesh(new THREE.CylinderGeometry(.19,.19,.1,32),dark);hole.rotation.x=Math.PI/2;hole.position.set(x,1.1,-4.91);model.add(hole);}
 socket(-3.58);socket(2.63);
 for(let i=0;i<8;i++)block(.045,.26,.1,metal,.25+i*.09,1.3,-4.94,.005);
@@ -36,7 +36,7 @@ const brandTokens=getComputedStyle(document.documentElement);
 function token(name,fallback){return brandTokens.getPropertyValue(name).trim()||fallback}
 function label(text,w,h,size=52){const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle=token('--mint','#8bebcf');ctx.font=`500 ${size}px Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,w/2,h/2);const mat=new THREE.MeshBasicMaterial({map:canvasTex(c),transparent:true,depthWrite:false});return mat;}
 const frontLogo=new THREE.Mesh(new THREE.PlaneGeometry(1.25,.25),label('Box AI',512,100,66));frontLogo.position.set(-2.7,1.16,4.805);model.add(frontLogo);
-const portLabels=new THREE.Mesh(new THREE.PlaneGeometry(7.5,.27),label('12V       OPTICAL       HDMI        LAN          AV',1500,70,37));portLabels.rotation.y=Math.PI;portLabels.position.set(-.4,1.75,-4.82);model.add(portLabels);
+const portLabels=new THREE.Mesh(new THREE.PlaneGeometry(7.5,.27),label('12V       OPTICAL                   LAN          AV',1500,70,37));portLabels.rotation.y=Math.PI;portLabels.position.set(-.4,1.75,-4.82);model.add(portLabels);
 // Underside signature: only the product name, in --paper, drawn at device resolution.
 function signature(){const plateWidth=200,plateHeight=30,dpr=Math.min(devicePixelRatio||1,3);
  const c=document.createElement('canvas');c.width=Math.round(plateWidth*dpr);c.height=Math.round(plateHeight*dpr);
