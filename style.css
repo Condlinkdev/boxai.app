@@ -51,16 +51,27 @@ html{scroll-padding-top:24px}
 footer .brand .brand-logo{width:195px;max-height:none}
 @media(max-width:760px){.brand .brand-logo{width:146px;max-height:58px}footer .brand .brand-logo{width:165px}}
 .mini-box{background:none;box-shadow:none;transform:none;width:38px;height:38px}.mini-box img{display:block;width:38px;height:38px}.network-center>img{width:100px;height:35px;object-fit:contain}.network-center>small{margin-top:3px}
-/* Animated connections follow each orbiting screen, underneath the Box and TVs. */
+/* Animated connections follow each orbiting screen, underneath the Box and TVs: soft arcs with a slow beam of light, no dashes or blinking. */
 .energy-network{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
-.energy-ray path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.ray-glow{stroke:#65e5ca;stroke-width:5;opacity:.09;filter:blur(2px)}
-.ray-line{stroke:#6be7ce;stroke-width:1;opacity:.32;transition:opacity .7s}
-.ray-pulse{stroke:#b6ffe9;stroke-width:1.8;stroke-dasharray:9 91;stroke-dashoffset:0;opacity:.85;filter:drop-shadow(0 0 3px #8bebcf);animation:box-energy 3s linear infinite}
-.energy-ray.active .ray-glow{opacity:.2;stroke-width:7}.energy-ray.active .ray-line{opacity:.65}.energy-ray.active .ray-pulse{stroke-width:2.2;stroke:#e2fff4}
-@keyframes box-energy{0%{stroke-dashoffset:9;opacity:0}12%{opacity:.9}85%{opacity:.9}100%{stroke-dashoffset:-100;opacity:0}}
+/* Rays to the screens behind the Box recede with them; the highlighted one always reads in full. */
+.energy-ray{opacity:var(--ray-depth,1)}.energy-ray.active{opacity:1}
+.energy-ray path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:opacity .9s ease}
+.energy-ray stop{stop-color:#8bebcf;stop-opacity:0}
+.ray-fade stop:nth-child(2){stop-opacity:.5}.ray-fade stop:nth-child(3){stop-opacity:.14}
+.ray-light stop:nth-child(2){stop-color:#c9fbeb;stop-opacity:1}
+.ray-line{stroke-width:1;opacity:.55}
+.ray-glow{stroke-width:6;opacity:.1}
+.ray-beam{stroke-width:1.5;opacity:.5}
+.energy-ray.active .ray-line{opacity:1}.energy-ray.active .ray-glow{opacity:.22}.energy-ray.active .ray-beam{opacity:.95}
 @media(max-width:760px){.energy-network{display:none}}
-@media(prefers-reduced-motion:reduce){.ray-pulse{animation:none;display:none}.ray-glow{filter:none}}
+@media(prefers-reduced-motion:reduce){.ray-glow,.ray-beam{display:none}}
+/* Orbits: a hairline ring with a soft light drifting slowly around it, instead of a dashed outline. */
+@property --orbit-light{syntax:'<angle>';inherits:false;initial-value:0deg}
+.orbit{border:0;padding:1px;background:conic-gradient(from var(--orbit-light),#8bebcf08,#8bebcf42 16%,#8bebcf12 34%,#8bebcf06 52%,#8bebcf2a 74%,#8bebcf08);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:orbit-light 60s linear infinite}
+.orbit-two{opacity:.6;animation-duration:90s;animation-direction:reverse}
+.orbit-dot{box-shadow:0 0 8px 1px #8bebcf55}
+@keyframes orbit-light{to{--orbit-light:360deg}}
+@media(prefers-reduced-motion:reduce){.orbit{animation:none}}
 .hero-actions .button{padding:11px 19px;font-size:11px;gap:22px}.hero-actions .button>span{font-size:15px}
 @media(max-width:760px){.hero-actions{gap:0;padding:19px 0 25px}.hero-actions .button{padding:12px 19px;font-size:11px}}
 .hero-actions .cta-chevron{display:block;flex-shrink:0;transition:transform .2s}.hero-actions .button:hover .cta-chevron{transform:translateY(2px)}
