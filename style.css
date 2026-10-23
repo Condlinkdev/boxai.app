@@ -411,7 +411,7 @@ footer.site-footer{display:block;padding:44px 6vw 34px;border-top:1px solid #fff
 }
 @media(prefers-reduced-motion:reduce){.satellite-module{transition:none}}
 
-/* Vídeo e conversa são coisas diferentes: duas ações discretas ao lado do convite principal. */
+/* Conversa e suporte são coisas diferentes: duas ações discretas ao lado do convite principal. */
 .hero-secondary{display:flex;align-items:stretch;justify-content:center;gap:14px}
 .hero-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:5px 15px;border:1px solid #ffffff3d;border-radius:24px;background:transparent;color:var(--paper);font:500 13px var(--font);letter-spacing:.2px;line-height:1.25;text-align:center;transition:border-color .2s,color .2s}
 .hero-action:hover,.hero-action:focus-visible{border-color:#8bebcf99;color:var(--mint)}

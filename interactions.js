@@ -103,12 +103,9 @@ positionHeroAction();
 
 // O menu do cabeçalho vive em menu.js, compartilhado com as páginas de segmento.
 
-// O vídeo e a conversa são caminhos diferentes, cada um com o seu botão.
-// "Conversar com a assistente" abre o painel do chat; "Assistir ao vídeo" leva ao vídeo de #em-cena.
-// Nenhum dos dois faz o papel do outro.
+// "Conversar com a assistente" abre o painel do chat. Ao lado dele, "Suporte 24h"
+// é um link comum para o login do painel (admin.boxai.app), sem JavaScript.
 const assistantScript=document.querySelector('script[src*="widget.js"]');
-const demoVideo=document.querySelector('#em-cena-video');
-const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 
 function showAssistantPanel(){
  const api=window.BoxAIAssistant;
@@ -137,26 +134,6 @@ function openAssistant(){
  assistantScript?.addEventListener('load',settle,{once:true});
 }
 document.querySelectorAll('[data-abrir-conversa]').forEach(button=>button.addEventListener('click',openAssistant));
-
-// O vídeo começa sem som, como sempre: quem quiser ouvir liga pelos controles.
-// Com movimento reduzido só levamos até lá, sem dar play.
-function watchDemoVideo(){
- if(!demoVideo)return;
- scrollToSection('#em-cena-video');
- demoVideo.focus({preventScroll:true});
- if(reduceMotion.matches)return;
- demoVideo.play()?.catch(()=>{/* o visitante usa os controles */});
-}
-const videoLink=document.querySelector('[data-assistir-video]');
-if(videoLink){
- videoLink.addEventListener('click',event=>{event.preventDefault();watchDemoVideo()});
- // Um link responde ao Enter; a barra de espaço fica por nossa conta.
- videoLink.addEventListener('keydown',event=>{
-  if(event.key!==' '&&event.key!=='Spacebar')return;
-  event.preventDefault();
-  watchDemoVideo();
- });
-}
 
 // Os acordeões do FAQ são <details> nativos: Chrome, Firefox e Safari atuais
 // já anunciam o estado. O aria-expanded fica em dia pelo evento toggle para
