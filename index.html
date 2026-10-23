@@ -493,7 +493,7 @@
 // Keep the opening paint light: the 3D product starts once the page is loaded and idle,
 // and after three seconds regardless, so a slow third party can never hold the Box back.
 (function(){var started=false;
- function start(){if(started)return;started=true;import('./product.js?v=20261022-brain-centered')}
+ function start(){if(started)return;started=true;import('./product.js?v=20261023-scroll-mobile')}
  function schedule(){window.requestIdleCallback?requestIdleCallback(start,{timeout:1200}):setTimeout(start,120)}
  if(document.readyState==='complete')schedule();else addEventListener('load',schedule);
  setTimeout(start,3000);

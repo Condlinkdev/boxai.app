@@ -65,10 +65,12 @@ const brainFolds=new Path2D('M6 5C6 8 9 9 9 6M3 10C6 9 8 12 6 14M5 16C8 16 9 18 
 ctx.stroke(brainOutline);ctx.stroke(brainFolds);ctx.restore();
 top.map=canvasTex(textureCanvas);top.needsUpdate=true;side.color.set('#22564e');
 const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.065;controls.target.set(0,1.2,0);controls.enableZoom=false;controls.enablePan=false;controls.minPolarAngle=.3;controls.maxPolarAngle=Math.PI*.7;controls.autoRotateSpeed=.55;controls.update();camera.position.set(14.5,15.2,20);controls.update();
-const phoneView=matchMedia('(max-width: 760px)'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+const touchView=matchMedia('(max-width: 760px), (pointer: coarse)'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 let manuallyPaused=false;
-function syncAutoRotation(){controls.autoRotate=phoneView.matches&&!reducedMotion.matches&&!manuallyPaused;}
-phoneView.addEventListener('change',()=>{manuallyPaused=false;syncAutoRotation()});reducedMotion.addEventListener('change',syncAutoRotation);syncAutoRotation();
+// OrbitControls sets touch-action:none on the canvas, which traps the page's vertical scroll. On touch screens the Box only auto-rotates and the canvas hands vertical pans back to the page.
+function syncTouchInput(){controls.enableRotate=!touchView.matches;canvas.style.touchAction=touchView.matches?'pan-y':'none';}
+function syncAutoRotation(){controls.autoRotate=touchView.matches&&!reducedMotion.matches&&!manuallyPaused;}
+touchView.addEventListener('change',()=>{manuallyPaused=false;syncTouchInput();syncAutoRotation()});reducedMotion.addEventListener('change',syncAutoRotation);syncTouchInput();syncAutoRotation();
 const rotate=document.querySelector('#rotate');rotate?.addEventListener('click',()=>{controls.autoRotate=!controls.autoRotate;rotate?.setAttribute('aria-pressed',String(controls.autoRotate));});controls.addEventListener('start',()=>{manuallyPaused=true;controls.autoRotate=false;rotate?.setAttribute('aria-pressed','false')});
 canvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const off=camera.position.clone().sub(controls.target);const sph=new THREE.Spherical().setFromVector3(off);if(e.key==='ArrowLeft')sph.theta-=.15;if(e.key==='ArrowRight')sph.theta+=.15;if(e.key==='ArrowUp')sph.phi=Math.max(.3,sph.phi-.12);if(e.key==='ArrowDown')sph.phi=Math.min(Math.PI*.7,sph.phi+.12);camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(sph));controls.update()});
 // Nothing in the scene moves, so the shadow map is rendered once instead of on every frame.
