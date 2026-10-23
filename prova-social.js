@@ -137,9 +137,10 @@
     figura.setAttribute('data-piloto-video', '');
     const tela = document.createElement('video');
     // Sem o video-piloto.js ficam os controles nativos, então dá para tocar na
-    // mão; o arquivo só é baixado quando alguém toca.
+    // mão; quem decide quando baixar e tocar sozinho é o video-piloto.js.
     tela.controls = true;
     tela.muted = true;
+    tela.defaultMuted = true;
     tela.loop = true;
     tela.playsInline = true;
     tela.preload = 'none';
