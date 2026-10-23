@@ -63,8 +63,13 @@ footer .brand .brand-logo{width:195px;max-height:none}
 .ray-glow{stroke-width:6;opacity:.1}
 .ray-beam{stroke-width:1.5;opacity:.5}
 .energy-ray.active .ray-line{opacity:1}.energy-ray.active .ray-glow{opacity:.22}.energy-ray.active .ray-beam{opacity:.95}
+/* Contact points: a 3.5 px mint dot where the line meets the Box and the TV, in a halo that stays within 8 px. */
+.ray-contact{opacity:.85;transition:opacity .9s ease}.energy-ray.active .ray-contact{opacity:1}
+.contact-core{fill:var(--mint)}
+.contact-glow stop{stop-color:var(--mint);stop-opacity:.4}.contact-glow stop:last-child{stop-opacity:0}
 @media(max-width:760px){.energy-network{display:none}}
-@media(prefers-reduced-motion:reduce){.ray-glow,.ray-beam{display:none}}
+/* Reduced motion: no flowing light; the lines stand still at a fixed .4 and don't brighten with the highlighted TV. */
+@media(prefers-reduced-motion:reduce){.ray-glow,.ray-beam{display:none}.energy-ray,.energy-ray.active{opacity:1}.energy-ray path,.ray-contact{transition:none}.ray-line,.energy-ray.active .ray-line{opacity:.4}.ray-fade stop:nth-child(n){stop-opacity:1}.ray-contact,.energy-ray.active .ray-contact{opacity:.8}}
 /* Orbits: a hairline ring with a soft light drifting slowly around it, instead of a dashed outline. */
 @property --orbit-light{syntax:'<angle>';inherits:false;initial-value:0deg}
 .orbit{border:0;padding:1px;background:conic-gradient(from var(--orbit-light),#8bebcf08,#8bebcf42 16%,#8bebcf12 34%,#8bebcf06 52%,#8bebcf2a 74%,#8bebcf08);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:orbit-light 60s linear infinite}

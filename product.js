@@ -75,5 +75,11 @@ let needsRender=true,visible=true,lastFrame=0;
 function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();needsRender=true}
 new ResizeObserver(resize).observe(canvas);resize();document.querySelector('#loading').remove();
 new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)needsRender=true}).observe(stage);
-function animate(time=0){requestAnimationFrame(animate);const delta=lastFrame?Math.min((time-lastFrame)/1000,.05):0;lastFrame=time;if(!visible)return;if(controls.update(delta)||needsRender){needsRender=false;renderer.render(scene,camera)}}
+// The Box outline on screen, for orbit.js to land the lines' contact dot on its edge. Corners are pulled in a little to match the rounded body.
+const outlineCorners=[];for(const x of [-4.62,4.62])for(const y of [.15,2.3])for(const z of [-4.62,4.62])outlineCorners.push(new THREE.Vector3(x,y,z));
+function turn(o,a,b){return(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0])}
+function half(points){const hull=[];for(const p of points){while(hull.length>1&&turn(hull[hull.length-2],hull[hull.length-1],p)<=0)hull.pop();hull.push(p)}hull.pop();return hull}
+function publishOutline(){const points=outlineCorners.map(corner=>{const p=corner.clone().applyMatrix4(model.matrixWorld).project(camera);return[(p.x+1)/2,(1-p.y)/2]}).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+ stage.dispatchEvent(new CustomEvent('box-outline',{detail:[...half(points),...half(points.reverse())]}))}
+function animate(time=0){requestAnimationFrame(animate);const delta=lastFrame?Math.min((time-lastFrame)/1000,.05):0;lastFrame=time;if(!visible)return;if(controls.update(delta)||needsRender){needsRender=false;renderer.render(scene,camera);publishOutline()}}
 animate();document.body.dataset.ready='true';
