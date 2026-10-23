@@ -741,52 +741,82 @@ main:focus,main:focus-visible{outline:none}
 @media(min-width:761px){.satellite-tv strong{top:13%;right:6%;font-size:clamp(12px,1.55svh,15px)}}
 @media(max-width:760px){.satellite-tv strong{top:12%;font-size:13px;line-height:1.15}.satellite-label .satellite-label-text{font-size:13px}}
 @media(min-width:761px){.hero-actions .button{font-size:14px;padding:13px 22px;gap:16px}}
-/* Como funciona: as artes ficam sem rótulos; o texto é o dos três passos. */
+/* Como funciona: três passos de até três linhas; embaixo, o que entra no ar (chips) e o que muda (uma frase), sem cartão. */
 ol.how-flow{list-style:none;padding:0}
 .how-refresh .how-demo{padding-bottom:0}
 .how-file-line{display:block;height:6px;width:86px;border-radius:3px;background:#143e3240}
 small.how-file-line{width:58px;height:5px;margin:7px 0 12px;background:#526d5f33}
 .how-screen .how-remote{position:absolute;right:12px;bottom:10px;left:auto;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#0c252ee6;border:1px solid #8bebcf55;color:var(--mint);box-shadow:0 6px 18px #0006}
 .how-screen .how-remote svg{width:20px;height:20px}
-/* Pra quem: quatro cartões; no celular, empilhados com a foto ao lado. */
+.how-refresh .section-heading>p{max-width:390px;line-height:1.45}
+.how-refresh .how-card h3{margin:16px 0 10px}
+.how-refresh .how-card p{font-size:15px;line-height:1.45}
+.how-extra{max-width:1200px;margin:36px auto 0;padding-top:30px;border-top:1px solid #87c9b626;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:26px 56px}
+.how-extra h3{font:600 13px/1.3 var(--font);letter-spacing:1.2px;text-transform:uppercase;color:var(--mint)}
+.how-extra h3 span{font-weight:400;letter-spacing:.2px;text-transform:none;color:var(--muted)}
+.how-chips{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.how-chips li{padding:7px 14px;border:1px solid #8bebcf38;border-radius:17px;background:#8bebcf0f;font-size:15px;line-height:1.35;color:var(--paper)}
+.how-muda p{max-width:470px;margin-top:14px;font-size:16px;line-height:1.45;color:var(--muted)}
+.how-muda b{color:var(--paper)}
+/* Até 1000px os passos ficam um embaixo do outro, com a arte ao lado; no celular, só o texto. */
+@media(max-width:1000px) and (min-width:761px){
+ .how-flow{grid-template-columns:1fr;gap:14px}
+ .how-card{display:grid;grid-template-columns:230px minmax(0,1fr);align-items:stretch}
+ .how-demo{height:auto;min-height:176px;border-bottom:0;border-right:1px solid #87c9b61c}
+ .how-card-copy{align-self:center;padding:24px 28px}
+ .how-refresh .how-card h3{font-size:21px;margin:12px 0 8px}
+ .how-card:not(:last-child):after{display:none}
+ .how-extra{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ .how-refresh{padding:48px 20px 52px}
+ .how-refresh .section-heading>p{font-size:15px}
+ .how-card{display:block}
+ .how-demo{display:none}
+ .how-card-copy{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:12px;padding:18px 18px 20px}
+ .how-refresh .how-card h3{margin:0;font-size:18px}
+ .how-refresh .how-card p{grid-column:1/-1;margin-top:8px;font-size:15px}
+ .how-extra{grid-template-columns:1fr;gap:26px;margin-top:28px;padding-top:26px}
+ .how-chips li{padding:6px 12px}
+ .how-muda p{margin-top:12px;font-size:15px}
+}
+/* Pra quem: quatro cartões só com o nome e o parágrafo; o nome leva à página do segmento. No celular, empilhados. */
 .nichos h2,.fases h2,.rede h2,.fecha h2{text-wrap:balance}
 .nichos{background:var(--paper);color:var(--ink);padding:95px max(6vw,24px) 80px}
-.nichos .section-heading>p{max-width:320px}
-.nichos-lista{list-style:none;padding:0;margin:42px auto 0;max-width:1200px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.nicho{position:relative;display:flex;flex-direction:column;background:white;border:1px solid #0c252e12;border-radius:18px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+.nichos .section-heading>p{max-width:400px;line-height:1.45}
+.nichos-lista{list-style:none;padding:0;margin:42px auto 0;max-width:1200px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.nicho{position:relative;padding:26px 28px 28px;background:white;border:1px solid #0c252e12;border-radius:18px;transition:border-color .2s,box-shadow .2s,transform .2s}
 .nicho:hover{border-color:#1d6b5a55;box-shadow:0 12px 30px #0c252e14;transform:translateY(-2px)}
 .nicho.is-targeted{border-color:var(--mint-dark);box-shadow:0 0 0 3px #1d6b5a33}
 .nicho:has(a:focus-visible){outline:2px solid var(--mint-dark);outline-offset:3px}
-.nicho-foto{display:block;aspect-ratio:4/3;overflow:hidden;background:#c4d2ce}
-.nicho-foto img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.8)}
-.nicho-texto{padding:20px 20px 24px}
-.nicho h3{font-size:20px;font-weight:500;letter-spacing:-.5px;line-height:1.2}
+.nicho h3{font-size:21px;font-weight:500;letter-spacing:-.5px;line-height:1.2}
 .nicho h3 a{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .nicho h3 a:after{content:'';position:absolute;inset:0}
 .nicho h3 a:focus-visible{outline:none}
 .nicho h3 svg{flex-shrink:0;margin-top:3px;color:var(--mint-dark)}
-.nicho p{margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted-dark)}
-@media(max-width:1000px){.nichos-lista{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.nicho p{max-width:520px;margin-top:10px;font-size:16px;line-height:1.45;color:var(--muted-dark)}
 @media(max-width:760px){
- .nichos{padding:55px 20px 50px}
- .nichos .section-heading>p{font-size:15px;margin-top:14px}
- .nichos-lista{grid-template-columns:1fr;gap:12px;margin-top:27px}
- .nicho{flex-direction:row;align-items:stretch;min-height:112px}
- .nicho-foto{flex:0 0 112px;aspect-ratio:auto}
- .nicho-texto{padding:16px 16px 18px;min-width:0}
+ .nichos{padding:52px 20px 50px}
+ .nichos .section-heading>p{font-size:15px}
+ .nichos-lista{grid-template-columns:1fr;gap:12px;margin-top:24px}
+ .nicho{padding:18px 18px 20px;border-radius:16px}
  .nicho h3{font-size:18px}
- .nicho p{margin-top:6px;font-size:14px}
+ .nicho p{margin-top:8px;font-size:15px}
 }
 @media(prefers-reduced-motion:reduce){.nicho{transition:none}.nicho:hover{transform:none}}
-/* Sua TV corporativa: cartão próprio, escuro sobre o papel, com 3 benefícios e o CTA B2B. */
+/* Sua TV corporativa: cartão próprio, escuro sobre o papel; pra quem é, os quatro itens em lista vertical e o CTA B2B à parte. */
 .rede{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 95px}
 .rede-card{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding:56px;border-radius:24px;background:radial-gradient(ellipse at 78% 50%,#1b4b4a99,transparent 60%),var(--ink);color:var(--paper);overflow:hidden}
 .rede h2{margin-top:0}
-.rede-sub{max-width:470px;margin-top:18px;font-size:17px;line-height:1.55;color:var(--muted)}
-.rede-beneficios{list-style:none;padding:0;margin:30px 0 34px;max-width:500px;counter-reset:beneficio}
-.rede-beneficios li{counter-increment:beneficio;display:flex;align-items:baseline;gap:16px;padding:15px 0;border-top:1px solid #ffffff1a;font:500 17px/1.4 var(--font);letter-spacing:-.2px}
+.rede-sub{max-width:540px;margin-top:18px;font-size:17px;line-height:1.5;color:var(--muted)}
+.rede-pra-quem{max-width:540px;margin-top:16px;font-size:16px;line-height:1.45;color:var(--muted)}
+.rede-pra-quem strong{font-family:var(--font);font-weight:600;color:var(--mint)}
+.rede-resolve{margin-top:28px;font:600 13px/1.3 var(--font);letter-spacing:1.2px;text-transform:uppercase;color:var(--mint)}
+.rede-beneficios{list-style:none;padding:0;margin:12px 0 32px;max-width:560px;counter-reset:beneficio}
+.rede-beneficios li{counter-increment:beneficio;display:flex;align-items:baseline;gap:16px;padding:14px 0;border-top:1px solid #ffffff1a;font-size:16px;line-height:1.45;color:var(--muted)}
 .rede-beneficios li:last-child{border-bottom:1px solid #ffffff1a}
 .rede-beneficios li:before{content:counter(beneficio,decimal-leading-zero);min-width:22px;font:500 12px var(--font);letter-spacing:1.2px;color:var(--mint)}
+.rede-beneficios strong{font-family:var(--font);font-weight:600;color:var(--paper)}
 .rede-cta{gap:14px;border:0;background:var(--mint);color:var(--ink);font-weight:600}
 .rede-cta:hover{background:#b3f5e1}
 .rede-cta:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
@@ -801,61 +831,89 @@ small.how-file-line{width:58px;height:5px;margin:7px 0 12px;background:#526d5f33
 .rede-tv.t1{left:18%;top:19.4%}.rede-tv.t2{left:82%;top:19.4%}.rede-tv.t3{left:18%;top:81.9%}.rede-tv.t4{left:82%;top:81.9%}
 @media(max-width:1000px){.rede-card{grid-template-columns:1fr;padding:40px 36px;gap:8px}.rede-art{order:-1;height:220px}}
 @media(max-width:760px){
- .rede{padding:0 20px 55px}
- .rede-card{grid-template-columns:1fr;gap:6px;padding:30px 22px 26px;border-radius:20px}
- .rede-art{order:-1;height:170px;margin:0 -6px}
+ .rede{padding:0 20px 52px}
+ .rede-card{grid-template-columns:1fr;gap:6px;padding:30px 20px 24px;border-radius:20px}
+ .rede-art{order:-1;height:150px;margin:0 -6px}
  .rede-centro{width:112px;height:70px;border-radius:14px}.rede-centro img{width:80px}
  .rede-tv{width:62px;height:40px;border-width:2px;border-bottom-width:4px}
- .rede-sub{font-size:15px;margin-top:14px}
- .rede-beneficios{margin:22px 0 26px}
- .rede-beneficios li{font-size:16px;gap:12px;padding:13px 0}
+ .rede-sub{font-size:15px;line-height:1.45;margin-top:12px}
+ .rede-pra-quem{font-size:15px;margin-top:12px}
+ .rede-resolve{margin-top:22px}
+ .rede-beneficios{margin:8px 0 24px}
+ .rede-beneficios li{font-size:15px;gap:12px;padding:12px 0}
  .rede-cta{width:100%;justify-content:center;padding:15px 18px;font-size:14px;text-align:center}
 }
-/* Também pode ir além: dois degraus verticais, o segundo mais recuado; nada de colunas iguais. */
+/* Upgrade de possibilidades: dois degraus verticais, o segundo mais recuado; nada de colunas iguais.
+   Em cada degrau, "O que sobe", "Pra quem" e "Como encaixa" são linhas com rótulo, não cartões. Sem preço. */
 .fases{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 90px}
-.fases .section-heading>p{max-width:300px}
+.fases .section-heading>p{max-width:380px;line-height:1.45}
 .fases-degraus{position:relative;list-style:none;margin:44px auto 0;max-width:1200px;padding:0 0 0 34px;display:grid;gap:18px}
-.degrau{--recuo:0px;position:relative;display:flex;align-items:flex-start;gap:20px;max-width:640px;margin-left:var(--recuo);padding:28px 30px;background:white;border:1px solid #0c252e12;border-radius:18px}
+.degrau{--recuo:0px;position:relative;display:flex;align-items:flex-start;gap:20px;max-width:720px;margin-left:var(--recuo);padding:28px 30px;background:white;border:1px solid #0c252e12;border-radius:18px}
 .degrau+.degrau{--recuo:clamp(0px,12vw,160px);border-color:#1d6b5a40}
 .degrau:before{content:'';position:absolute;top:38px;left:calc(-34px - var(--recuo));width:13px;height:13px;border-radius:50%;background:var(--paper);border:2px solid var(--mint-dark);z-index:1}
 /* Cotovelo do trilho: o traço até o cartão e, menos no último, a descida até o próximo marcador (18px de vão + 44px). */
 .degrau:after{content:'';position:absolute;top:44px;bottom:-62px;left:calc(-28px - var(--recuo));width:calc(28px + var(--recuo));border-top:1px solid #1d6b5a66;border-left:1px solid #1d6b5a66}
 .degrau:last-child:after{bottom:auto;height:0;border-left:0}
 .degrau-icone{flex-shrink:0;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#e1eee4;color:var(--mint-dark)}
-.degrau h3{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:24px;font-weight:500;letter-spacing:-.7px;line-height:1.2}
-.degrau p{max-width:470px;margin-top:10px;font-size:16px;line-height:1.55;color:var(--muted-dark)}
+.degrau-corpo{min-width:0}
+.degrau h3{font-size:24px;font-weight:500;letter-spacing:-.7px;line-height:1.2;text-wrap:balance}
+.degrau-plano{font-weight:400;color:var(--muted-dark)}
+.degrau .confirmar{margin-top:10px}
+.degrau-itens{margin:16px 0 0}
+.degrau-itens>div{padding:10px 0;border-top:1px solid #0c252e14;font-size:16px;line-height:1.45;color:var(--muted-dark)}
+.degrau-itens>div:last-child{padding-bottom:0}
+.degrau-itens dt{display:inline;font-family:var(--font);font-weight:600;color:var(--ink)}
+.degrau-itens dd{display:inline;margin:0}
+.degrau-itens strong{color:var(--ink)}
+/* Sob os degraus: a microcopy e os três CTAs, que levam ao formulário (#pedido) sem formulário aqui. */
+.fases-fecho{max-width:1200px;margin:34px auto 0}
+.fases-micro{max-width:560px;font-size:16px;line-height:1.45;color:var(--muted-dark)}
+.fases-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.fases-cta{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 18px;border:1px solid #1d6b5a59;border-radius:999px;background:white;color:var(--mint-dark);font:600 14px var(--font);transition:background .2s,border-color .2s}
+.fases-cta:hover{background:#e1eee4;border-color:var(--mint-dark)}
+.fases-cta:focus-visible{outline:2px solid var(--mint-dark);outline-offset:3px}
+.fases-cta svg{flex-shrink:0}
 @media(max-width:760px){
- .fases{padding:0 20px 50px}
- .fases .section-heading>p{font-size:15px;margin-top:14px}
- .fases-degraus{margin-top:27px;padding-left:26px;gap:12px}
+ .fases{padding:0 20px 52px}
+ .fases .section-heading>p{font-size:15px}
+ .fases-degraus{margin-top:24px;padding-left:26px;gap:12px}
  .degrau,.degrau+.degrau{--recuo:0px}
- .degrau{flex-direction:column;gap:14px;padding:22px 20px}
+ .degrau{flex-direction:column;gap:12px;padding:20px 18px}
  .degrau:before{left:-26px;top:32px;width:11px;height:11px}
  .degrau:after{left:-20px;top:37px;bottom:-49px;width:20px}
  .degrau:last-child:after{bottom:auto}
- .degrau-icone{width:42px;height:42px}
- .degrau h3{font-size:21px}
- .degrau p{font-size:15px}
+ .degrau-icone{width:36px;height:36px;border-radius:11px}
+ .degrau-icone svg{width:20px;height:20px}
+ .degrau h3{font-size:19px;letter-spacing:-.4px}
+ .degrau-itens{margin-top:12px}
+ .degrau-itens>div{font-size:15px}
+ .fases-fecho{margin-top:26px}
+ .fases-micro{font-size:15px}
+ .fases-cta{width:100%;justify-content:space-between;min-height:48px}
 }
-/* Prova leve: lista simples, sem grade de três nem número inventado. */
+@media(prefers-reduced-motion:reduce){.fases-cta{transition:none}}
+/* O que muda no dia a dia: quatro linhas empilhadas, sem cartão, depoimento ou número. */
 .prova{background:var(--paper);color:var(--ink);padding:0 max(6vw,24px) 95px}
 .prova-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-top:56px;border-top:1px solid #0c252e1a}
 .prova h2{text-wrap:balance;margin-top:0;font-size:clamp(30px,3.2vw,44px);letter-spacing:-1.8px}
+.prova-texto p{max-width:420px;margin-top:16px;font-size:16px;line-height:1.45;color:var(--muted-dark)}
 .prova-lista{list-style:none;padding:0;margin:0}
-.prova-lista li{display:flex;align-items:flex-start;gap:14px;padding:18px 0;border-bottom:1px solid #0c252e14;font-size:18px;line-height:1.45}
+.prova-lista li{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid #0c252e14;font-size:16px;line-height:1.45;color:var(--muted-dark)}
 .prova-lista li:first-child{padding-top:4px}
-.prova-lista li:before{content:'';flex-shrink:0;width:24px;height:24px;margin-top:1px;border-radius:50%;background:#e1eee4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d6b5a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.prova-lista li:before{content:'';flex-shrink:0;width:24px;height:24px;margin-top:0;border-radius:50%;background:#e1eee4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d6b5a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.prova-lista strong{font-family:var(--font);font-weight:600;color:var(--ink)}
 @media(max-width:760px){
- .prova{padding:0 20px 55px}
+ .prova{padding:0 20px 52px}
  .prova-inner{grid-template-columns:1fr;gap:20px;padding-top:40px}
- .prova h2{font-size:30px;letter-spacing:-1.2px}
- .prova-lista li{font-size:16px;padding:15px 0}
+ .prova-texto p{margin-top:12px;font-size:15px}
+ .prova-lista li{font-size:15px;padding:14px 0}
 }
 /* Fecha: nome, WhatsApp, cidade e o que pediu; aviso de dados só com Box AI. */
 .fecha{padding:90px max(6vw,24px);background:radial-gradient(ellipse at 80% 60%,#1b4b4a44,transparent 65%),var(--night);scroll-margin-top:24px}
 .fecha-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
 .fecha h2{margin-top:0}
-.fecha-texto p{max-width:380px;margin-top:18px;font-size:17px;line-height:1.55;color:var(--muted)}
+.fecha-texto p{max-width:420px;margin-top:18px;font-size:17px;line-height:1.55;color:var(--muted)}
+.fecha-texto .fecha-micro{margin-top:22px;padding-left:14px;border-left:2px solid #8bebcf59;font-size:15px;line-height:1.45;color:var(--paper)}
 .contato-form{background:var(--paper);color:var(--ink);border-radius:21px;padding:32px;scroll-margin-top:24px}
 .contato-etapa[hidden],.contato-resultado[hidden]{display:none}
 .contato-campos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -893,12 +951,19 @@ small.how-file-line{width:58px;height:5px;margin:7px 0 12px;background:#526d5f33
 .contato-copia-status textarea{width:100%;min-height:130px;margin-top:6px;padding:10px;border:1px solid #c9d9cd;border-radius:8px;font:400 14px/1.4 var(--body)}
 @media(max-width:1000px){.fecha-inner{grid-template-columns:1fr;gap:28px}}
 @media(max-width:760px){
- .fecha{padding:55px 20px}
- .fecha-texto p{font-size:15px;margin-top:14px}
+ .fecha{padding:52px 20px}
+ .fecha-texto p{font-size:15px;line-height:1.45;margin-top:12px}
+ .fecha-texto .fecha-micro{margin-top:16px}
  .contato-form{padding:22px 18px;border-radius:18px}
  .contato-campos{grid-template-columns:1fr;gap:14px}
  .contato-enviar{width:100%;justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){.contato-opcoes span{transition:none}}
+/* Seções 2 a 7 no celular: títulos de 24px e texto corrido de 15px (Design: 22–24px a 390, corpo 15–16px / 1,45). */
+@media(max-width:1100px){.how-refresh .section-heading>p,.nichos .section-heading>p,.fases .section-heading>p{font-size:15px}}
+@media(max-width:760px){
+ .how-refresh .section-heading h2,.nichos h2,.rede h2,.fases h2,.prova h2,.fecha h2{font-size:24px;line-height:1.15;letter-spacing:-.6px}
+ .how-refresh .section-heading>p,.nichos .section-heading>p,.fases .section-heading>p{margin-top:10px;line-height:1.45}
+}
 /* Rodapé: sem assinatura nem dados de outra empresa; a política espera a URL. */
 .footer-policy.footer-policy-pendente{flex-wrap:wrap;gap:8px;margin:0;border-bottom:0;color:var(--muted);font-size:14px}

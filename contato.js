@@ -1,6 +1,6 @@
 // "Fale com a gente" (#pedido), a captura que fecha a home.
 // Campos mínimos da copy: nome, WhatsApp, cidade e o que pediu
-// (só Box AI | TV corporativa | Interativa | acesso). A origem vai junto:
+// (só Box AI | TV corporativa | Interativa | acesso | ambos). A origem vai junto:
 // página, UTMs, a página de segmento de onde a pessoa veio e o ?segmento= dela.
 // Envia para o mesmo endpoint do montador antigo, com origem 'home'.
 const CONTATO_ENDPOINT='https://assistente-site.condlink.com.br/api/lead';
@@ -17,7 +17,7 @@ const CONTATO_ORIGEM_KEY='boxai:pagina_origem';
 const CONTATO_SEGMENTO_KEY='boxai:segmento_pagina';
 // Apelidos aceitos no ?segmento= das páginas de segmento, com os mesmos valores do montador antigo.
 const CONTATO_SEGMENTO_PARAM={'lojas-autonomas':'Lojas autônomas','loja-autonoma':'Lojas autônomas','lojas':'Loja','loja':'Loja','clinicas':'Clínica','clinica':'Clínica','academias':'Academia','academia':'Academia','condominios':'Condomínio','condominio':'Condomínio','empresas':'Empresa','empresa':'Empresa','franquias':'Franquia ou rede','franquia':'Franquia ou rede'};
-const CONTATO_PEDIDOS=['só Box AI','TV corporativa','Interativa','acesso'];
+const CONTATO_PEDIDOS=['só Box AI','TV corporativa','Interativa','acesso','ambos'];
 const CONTATO_CAMPOS=['nome','whatsapp','cidade','o_que_pediu'];
 const CONTATO_MENSAGENS={nome:'Preencha seu nome.',whatsapp:'Confira o WhatsApp com DDD. Exemplo: (11) 91234-5678.',cidade:'Informe a cidade.',o_que_pediu:'Escolha uma opção.'};
 let contatoEnviando=false;
@@ -70,7 +70,8 @@ async function enviarContato(){
 }
 
 // Os CTAs da página já dizem o que a pessoa pediu: o do topo marca "só Box AI",
-// o da TV corporativa marca "TV corporativa". Ela pode trocar no formulário.
+// o da TV corporativa marca "TV corporativa" e os do upgrade marcam "Interativa",
+// "acesso" ou "ambos". Ela pode trocar no formulário.
 function marcarPedido(valor){const opcao=opcoesDoPedido().find(input=>input.value===valor);if(!opcao)return;opcao.checked=true;limparErro('o_que_pediu')}
 document.querySelectorAll('a[data-pedido]').forEach(link=>link.addEventListener('click',()=>marcarPedido(link.dataset.pedido)));
 
