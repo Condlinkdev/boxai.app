@@ -1,0 +1,41 @@
+/* Página /vendas (26/11/2026): kits e preços da Box AI. Usa as cores e fontes do style.css
+   (--night, --ink, --mint, --paper, --muted, --amber) e o cabeçalho/rodapé das páginas de segmento. */
+.vendas{max-width:1200px;margin:auto;padding:0 clamp(20px,5vw,64px) 40px}
+.vendas section{padding:56px 0}
+.vendas section+section{border-top:1px solid #ffffff15}
+.vendas h1{font-size:clamp(40px,5vw,68px);letter-spacing:-2.5px;margin:18px 0 14px}
+.vendas h2{font-size:clamp(30px,3.6vw,46px);letter-spacing:-1.6px;margin-top:14px}
+.vendas h3{font-size:20px;font-weight:600;letter-spacing:-.4px}
+.vendas .lead{font-size:17px;line-height:1.55;color:var(--muted);margin-top:14px;max-width:68ch}
+.vendas .pilares{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.vendas .pilar{border:1px solid #8bebcf55;color:var(--mint);border-radius:999px;padding:6px 14px;font:600 14px var(--font)}
+.vendas .acoes{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.vendas figure{margin:0}
+.vendas figure img{width:100%;height:auto;border-radius:12px;display:block}
+.vendas figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.vendas .grade4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
+.vendas .grade5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:22px}
+.vendas .grade5 img{aspect-ratio:4/3;object-fit:cover}
+.vendas .grade3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.vendas .grade2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.vendas .vselo{display:inline-block;margin-top:18px;border:1px solid var(--mint);color:var(--mint);border-radius:10px;padding:8px 12px;font-size:15px}
+.vendas .cartao{background:#102d35;border:1px solid #739b9d37;border-radius:16px;padding:22px;display:grid;gap:8px;align-content:start;min-width:0}
+.vendas .cartao p{color:var(--muted);font-size:15px;line-height:1.5}
+.vendas .num{font:700 22px var(--font);color:var(--mint)}
+.vendas .tag{font:700 12px var(--font);letter-spacing:1.2px;text-transform:uppercase;color:var(--mint)}
+.vendas .fluxo{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:20px;color:var(--muted);font-size:15px}
+.vendas .fluxo b{color:var(--paper);background:#102d35;border:1px solid #739b9d37;border-radius:10px;padding:8px 12px;font-weight:700}
+.vendas .nota{font-size:14px;color:var(--muted);margin-top:14px}
+.vendas .vpreco{font:800 32px var(--font);letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.vendas .vpreco small{font:500 14px var(--body);color:var(--muted);letter-spacing:0}
+.vendas .cartao ul{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:15px;line-height:1.5}
+.vendas .incl{font:700 13px var(--font);color:var(--mint)}
+/* Kits: mesma altura de título, preço e lista nos quatro; cor por kit com faixa à direita e embaixo */
+.vendas .kits4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:24px}
+.vendas .kits4 .cartao{grid-row:span 5;grid-template-rows:subgrid;row-gap:8px;border-right:6px solid var(--kc);border-bottom:6px solid var(--kc);background:linear-gradient(180deg,color-mix(in srgb,var(--kc) 22%,#102d35) 0%,#102d35 55%)}
+.vendas .kits4 .tag{color:var(--kc)}
+.vendas .kits4 h3{white-space:nowrap}
+.vendas .k1{--kc:#38bdf8}.vendas .k1v{--kc:#8bebcf}.vendas .k2{--kc:#f5b83d}.vendas .k3{--kc:#a78bfa}
+.vendas .consulta{color:var(--amber)}
+@media(max-width:900px){.vendas .kits4,.vendas .grade4{grid-template-columns:repeat(2,minmax(0,1fr))}.vendas .grade3,.vendas .grade2{grid-template-columns:1fr}.vendas .grade5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.vendas .kits4{grid-template-columns:1fr}.vendas .kits4 h3{white-space:normal}}
