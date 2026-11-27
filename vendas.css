@@ -39,3 +39,47 @@
 .vendas .consulta{color:var(--amber)}
 @media(max-width:900px){.vendas .kits4,.vendas .grade4{grid-template-columns:repeat(2,minmax(0,1fr))}.vendas .grade3,.vendas .grade2{grid-template-columns:1fr}.vendas .grade5{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.vendas .kits4{grid-template-columns:1fr}.vendas .kits4 h3{white-space:normal}}
+/* 27/11/2026: cabeçalho e rodapé próprios (nada leva ao site principal), etiqueta de kit por seção,
+   facial → TV na chegada, três kits e o formulário que abre o WhatsApp */
+.vcab .brand{cursor:default}
+.vcab-acoes{display:flex;gap:12px;align-items:center}
+.vzap{font-size:14px;font-weight:600;border:1px solid var(--mint);color:var(--mint);padding:11px 18px;border-radius:30px}
+.vzap:hover{background:var(--mint);color:var(--ink)}
+.vendas .vsec{border:1px solid #ffffff40;color:var(--paper)}
+.vendas .vsec:hover{background:#ffffff14}
+.vendas .vkit{display:inline-block;font:700 14px var(--font);letter-spacing:.6px;text-transform:uppercase;color:var(--kc);border:1px solid var(--kc);border-radius:999px;padding:7px 14px;margin-bottom:16px}
+.vendas .vchegada{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.vendas .vfacial{display:flex;gap:16px;align-items:center;background:#102d35;border:2px solid var(--mint);border-radius:16px;padding:14px 18px}
+.vendas .vfacial img{width:92px;border-radius:8px}
+.vendas .vfacial figcaption{font-size:15px;line-height:1.6;color:var(--paper);margin:0;max-width:230px}
+.vendas .vfacial b{color:var(--mint)}
+.vendas .vsetas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px;text-align:center;color:var(--mint);font:700 28px var(--font);line-height:1}
+.vendas .vgrade-tv{margin-top:6px}
+.vendas .kits3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:24px}
+.vendas .kits3 .cartao{grid-row:span 6;grid-template-rows:subgrid;row-gap:8px;border-right:6px solid var(--kc);border-bottom:6px solid var(--kc);background:linear-gradient(180deg,color-mix(in srgb,var(--kc) 22%,#102d35) 0%,#102d35 55%)}
+.vendas .kits3 .tag{color:var(--kc)}
+.vendas .vdesc{color:var(--kc)!important;font-weight:700}
+.vendas .vform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px;max-width:760px;background:#102d35;border:1px solid #739b9d37;border-radius:16px;padding:24px}
+.vendas .vform label{display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.vendas .vform input,.vendas .vform select{width:100%;min-width:0;border:1px solid #739b9d60;background:var(--night);color:var(--paper);border-radius:8px;padding:12px;font:16px var(--body)}
+.vendas .vform .button{grid-column:1/-1;justify-self:start;border:0}
+.vendas .verro{grid-column:1/-1;color:#ffb4a8;font-size:14px}
+.vrod{max-width:1200px;margin:auto;padding:36px clamp(20px,5vw,64px) 48px;border-top:1px solid #ffffff15;display:grid;gap:10px;color:var(--muted);font-size:14px}
+.vrod .brand-logo{width:150px;height:auto}
+.vrod a{color:var(--mint)}
+@media(max-width:900px){.vendas .kits3{grid-template-columns:1fr}.vendas .vchegada{grid-template-columns:1fr}.vendas .vsetas{grid-template-columns:repeat(2,minmax(0,1fr))}.vendas .vsetas span:nth-child(n+3){display:none}
+ /* celular: a 5ª tela de "Uma TV, qualquer negócio" fica centralizada, na largura de uma coluna */
+ .vendas .grade5 figure:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 5px)}}
+@media(max-width:560px){.vendas .vform{grid-template-columns:1fr}.vcab-acoes{gap:8px}.vzap{font-size:12px;padding:8px 11px}.vcab .nav-cta{font-size:12px;padding:8px 11px}}
+/* ícone do WhatsApp nos botões "Fale com a gente" (27/11) */
+.vico{flex-shrink:0}
+.vzap{display:inline-flex;align-items:center;gap:8px}
+.vendas .button:has(.vico){gap:10px}
+
+.vrod a{display:inline-flex;align-items:center;gap:8px}
+.vendas .vok{grid-column:1/-1;color:var(--mint);font-size:15px;font-weight:700}
+/* Kit 2 (27/11): texto à esquerda, ilustração da entrada à direita */
+.vendas .vkit2{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.vendas .vkit2 img{max-height:460px;object-fit:cover}
+.vendas .vlista{margin:18px 0 0;padding-left:20px;color:var(--paper);font-size:16px;line-height:1.8}
+@media(max-width:900px){.vendas .vkit2{grid-template-columns:1fr}}
